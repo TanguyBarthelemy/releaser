@@ -1,11 +1,14 @@
 Package: releaser
-Title: What the Package Does (One Line, Title Case)
+Title: Help with preparing a version of an R package
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: Helps to prepare a release. Before releasing an R pacakge it is important to update the DESCRIPTION file and the NEWS.md file. This package prepares these files and also tunes the versions according to the branches. It relies heavily on the ‘desc’ packages.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Imports: 
+    gh, 
+    desc, 
+    base64enc
