@@ -47,15 +47,15 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 }
 
 #' @export
-update_news_md <- function(new_version, file, pkg) {
-    changelog <- readLines(con = file.path(file, "NEWS.md"))
+update_news_md <- function(new_version, pkg_dir, github_url) {
+    changelog <- readLines(con = file.path(pkg_dir, "NEWS.md"))
 
     line_number <- which(changelog == "## [Unreleased]")
     new_line <- paste0("## [", new_version, "] - ", Sys.Date())
     changelog <- c(changelog[seq_len(line_number)], "", new_line, "", changelog[-seq_len(line_number)])
 
     line_footer <- grepl(
-        pattern = paste0("^\\[Unreleased\\]: https:\\/\\/github\\.com\\/rjdverse\\/", pkg, "\\/compare\\/.*\\.\\.\\.HEAD$"),
+        pattern = paste0("^\\[Unreleased\\]: ", github_url, "\\/compare\\/.*\\.\\.\\.HEAD$"),
         x = changelog
     ) |>
         which()
