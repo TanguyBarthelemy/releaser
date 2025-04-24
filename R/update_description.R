@@ -82,6 +82,6 @@ update_news_md <- function(new_version, pkg_dir, github_url) {
         changelog[-seq_len(line_footer)]
     )
 
-    writeLines(text = changelog, con = file.path(file, "NEWS.md"))
+    writeLines(text = changelog, con = file.path(pkg_dir, "NEWS.md"))
     return(invisible(TRUE))
 }
