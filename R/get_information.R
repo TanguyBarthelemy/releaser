@@ -57,13 +57,13 @@ get_latest_version <- function(gh_repo = "rjdverse/rjd3toolkit", verbose = TRUE)
 }
 
 #' @export
-get_last_changes <- function(path, new_version) {
+get_changes <- function(path, version) {
     changelog <- readLines(con = file.path(path, "NEWS.md"))
 
-    start <- grep(pattern = "^## \\[0.2.1\\]", x = changelog) + 1L
+    start <- grep(pattern = paste0("^## \\[", version, "\\]"), x = changelog) + 1L
     end <- grep(pattern = "^## \\[", x = changelog)
     end <- min(end[end > start]) - 1L
-    ref <- grep(pattern = "^\\[0.2.1\\]", x = changelog)
+    ref <- grep(pattern = paste0("^\\[", version, "\\]"), x = changelog)
 
     # Extraire les lignes du bloc
     changes <- changelog[start:end]
