@@ -47,8 +47,8 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 }
 
 #' @export
-update_news_md <- function(new_version, pkg_dir, github_url) {
-    changelog <- readLines(con = file.path(pkg_dir, "NEWS.md"))
+update_news_md <- function(new_version, path, github_url) {
+    changelog <- readLines(con = file.path(path, "NEWS.md"))
 
     line_number <- which(changelog == "## [Unreleased]")
     new_line <- paste0("## [", new_version, "] - ", Sys.Date())
@@ -82,6 +82,6 @@ update_news_md <- function(new_version, pkg_dir, github_url) {
         changelog[-seq_len(line_footer)]
     )
 
-    writeLines(text = changelog, con = file.path(pkg_dir, "NEWS.md"))
+    writeLines(text = changelog, con = file.path(path, "NEWS.md"))
     return(invisible(TRUE))
 }

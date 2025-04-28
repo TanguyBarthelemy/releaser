@@ -1,6 +1,6 @@
 Package: releaser
 Title: Help with preparing a version of an R package
-Version: 0.0.0.9000
+Version: 0.0.1.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
 Description: Helps to prepare a release. Before releasing an R pacakge it is important to update the DESCRIPTION file and the NEWS.md file. This package prepares these files and also tunes the versions according to the branches. It relies heavily on the ‘desc’ packages.
