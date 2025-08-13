@@ -1,0 +1,45 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# {releaser}
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/TanguyBarthelemy/releaser/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/releaser)
+<!-- badges: end -->
+
+{relaser} helps the developer to release their package and update informations (DESCRIPTION, CHANGELOG...) of the package.
+
+## Installation
+
+You can install the development version of {releaser} from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("TanguyBarthelemy/releaser")
+```
+
+## Usage
+
+```{r loading-releaser}
+library("releaser")
+```
+
+You can extract the latest version of a package on GitHub and display the different future version:
+
+```{r get-latest-version}
+version <- get_latest_version("rjdverse/rjd3toolkit")
+get_different_future_version(version)
+```
