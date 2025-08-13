@@ -1,3 +1,3 @@
 # releaser (development version)
 
-* Initial CRAN submission.
+* Add files and function to extract information from description (based on {desc})
