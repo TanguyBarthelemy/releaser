@@ -2,12 +2,11 @@
 #' @export
 #' @importFrom desc description
 #'
-get_different_future_version <- function(path) {
+get_different_future_version <- function(version) {
+    all_versions <- c(current_version = version)
 
-    all_versions <- NULL
-    all_versions <- c(all_versions, current_version = desc::desc_get_version(path) |> as.character())
+    tmp <- desc::description$new(text = paste0("Version: ", version))
 
-    tmp <- desc::description$new(path)
     tmp$bump_version(which = 3) |> invisible()
     all_versions <- c(all_versions, future_patch_version = tmp$get(keys = "Version") |> as.character())
     tmp$bump_version(which = 2) |> invisible()
@@ -20,12 +19,18 @@ get_different_future_version <- function(path) {
 
 #' @importFrom gh gh
 #' @importFrom base64enc base64decode
-get_version_from_branch <- function(gh_repo, branch) {
+get_version_from_branch <- function(gh_repo = "rjdverse/rjd3toolkit", branch = "main") {
     description <- gh::gh(paste0("/repos/", gh_repo, "/contents/DESCRIPTION"),
                           ref = branch)
     content <- rawToChar(base64enc::base64decode(description$content))
     nb_version <- read.dcf(textConnection(content))[, "Version"]
     return(nb_version)
+}
+
+#' @importFrom desc desc_get_version
+get_version_from_local <- function(path) {
+    version <- desc::desc_get_version(path) |> as.character()
+    return(version)
 }
 
 #' @importFrom gh gh
