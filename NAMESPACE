@@ -3,6 +3,7 @@
 export(change_remotes_field)
 export(get_changes)
 export(get_different_future_version)
+export(get_github_branches)
 export(get_latest_version)
 export(set_latest_deps_version)
 export(update_news_md)

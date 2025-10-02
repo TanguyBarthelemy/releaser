@@ -11,6 +11,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * Add files and function to extract information from description (based on {desc})
+* Add function to extract version from GitHub or from an R package
 
 
 [Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/main...HEAD

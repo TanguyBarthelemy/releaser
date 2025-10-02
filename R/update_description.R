@@ -1,3 +1,25 @@
+#' @title Change the `Remotes` field in DESCRIPTION
+#'
+#' @description
+#' Update the `Remotes` field of a package DESCRIPTION file so that
+#' dependencies point to specific development targets
+#' (`develop`, `snapshot`, or `main`).
+#'
+#' @param path [\link[base]{character}] Path to the package root directory
+#' containing a `DESCRIPTION` file (default: `"."`).
+#' @param verbose [\link[base]{logical}] Whether to print current and new
+#' remote fields (default: `TRUE`).
+#' @param target [\link[base]{character}] Target branch or type of remote:
+#' must be one of `"develop"`, `"snapshot"`, or `"main"`.
+#'
+#' @return Invisibly returns the new vector of remote specifications
+#' (character).
+#'
+#' @examples
+#' \dontrun{
+#' change_remotes_field(path = ".", target = "develop")
+#' }
+#'
 #' @export
 #' @importFrom desc desc_get_remotes desc_set_remotes
 change_remotes_field <- function(path = ".", verbose = TRUE, target = c("develop", "snapshot", "main")) {
@@ -27,6 +49,24 @@ change_remotes_field <- function(path = ".", verbose = TRUE, target = c("develop
     return(invisible(new_remotes))
 }
 
+#' @title Set latest versions for `rjd3*` dependencies
+#'
+#' @description
+#' Update the `DESCRIPTION` file of a package so that all dependencies
+#' beginning with `"rjd3"` require the latest released version from GitHub.
+#'
+#' @param path [\link[base]{character}] Path to the package root directory
+#' (default: `"."`).
+#' @param verbose [\link[base]{logical}] Whether to print progress messages
+#' (default: `TRUE`).
+#'
+#' @return Invisibly updates the `DESCRIPTION` file in place.
+#'
+#' @examples
+#' \dontrun{
+#' set_latest_deps_version(path = ".")
+#' }
+#'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep
 set_latest_deps_version <- function(path = ".", verbose = TRUE) {
@@ -46,6 +86,27 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
     }
 }
 
+#' @title Update `NEWS.md` for a new release
+#'
+#' @description
+#' Modify the `NEWS.md` file of a package to replace the `"Unreleased"`
+#' section with a new version heading and update GitHub comparison links.
+#'
+#' @param new_version [\link[base]{character}] The new version number (e.g. `"1.2.3"`).
+#' @param path [\link[base]{character}] Path to the package root directory
+#' containing `NEWS.md`.
+#' @param github_url [\link[base]{character}] Base URL of the package GitHub
+#' repository (e.g. `"https://github.com/owner/repo"`).
+#'
+#' @return Invisibly returns `TRUE` if the file was successfully updated.
+#'
+#' @examples
+#' \dontrun{
+#' update_news_md(new_version = "1.2.3",
+#'                path = ".",
+#'                github_url = "https://github.com/rjdverse/rjd3toolkit")
+#' }
+#'
 #' @export
 update_news_md <- function(new_version, path, github_url) {
     changelog <- readLines(con = file.path(path, "NEWS.md"))
