@@ -35,7 +35,7 @@ change_remotes_field <- function(path = ".", verbose = TRUE, target = c("develop
         switch(
             EXPR = target,
             develop = "develop",
-            main ="*release",
+            main = "*release",
             snapshot = "snapshot"
         )
     )

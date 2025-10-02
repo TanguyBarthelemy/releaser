@@ -54,7 +54,7 @@ get_different_future_version <- function(version) {
 #' @importFrom gh gh
 #' @importFrom base64enc base64decode
 #' @keywords internal
-get_version_from_branch <- function(gh_repo = "rjdverse/rjd3toolkit", branch = "main") {
+get_version_from_branch <- function(gh_repo = file.path("rjdverse", "rjd3toolkit"), branch = "main") {
     description <- gh::gh(file.path("/repos", gh_repo, "contents", "DESCRIPTION"),
                           ref = branch)
     content <- rawToChar(base64enc::base64decode(description$content))
@@ -101,7 +101,7 @@ get_version_from_local <- function(path) {
 #'
 #' @importFrom gh gh
 #' @export
-get_latest_version <- function(gh_repo = "rjdverse/rjd3toolkit", verbose = TRUE) {
+get_latest_version <- function(gh_repo = file.path("rjdverse", "rjd3toolkit"), verbose = TRUE) {
     release <- gh::gh(file.path("/repos", gh_repo, "releases", ref = "latest"))
     version_release <- get_version_from_branch(gh_repo, release$tag_name)
     if (verbose) {
@@ -170,7 +170,7 @@ get_changes <- function(path, version) {
 #'
 #' @importFrom gh gh
 #' @export
-get_github_branches <- function(repo = "rjdverse/rjd3toolkit") {
+get_github_branches <- function(repo = file.path("rjdverse", "rjd3toolkit")) {
     res <- gh::gh("GET /repos/{repo}/branches", repo = repo)
     branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1L))
     return(branches)

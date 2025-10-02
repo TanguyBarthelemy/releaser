@@ -4,7 +4,6 @@ linters: lintr::all_linters(
         return_linter = NULL,
         nonportable_path_linter = NULL,
         fixed_regex_linter = NULL,
-        infix_spaces_linter = NULL,
         undesirable_operator_linter = NULL
     )
 encoding: "UTF-8"
