@@ -55,7 +55,7 @@ get_different_future_version <- function(version) {
 #' @importFrom base64enc base64decode
 #' @keywords internal
 get_version_from_branch <- function(gh_repo = "rjdverse/rjd3toolkit", branch = "main") {
-    description <- gh::gh(paste0("/repos/", gh_repo, "/contents/DESCRIPTION"),
+    description <- gh::gh(file.path("/repos", gh_repo, "contents", "DESCRIPTION"),
                           ref = branch)
     content <- rawToChar(base64enc::base64decode(description$content))
     nb_version <- read.dcf(textConnection(content))[, "Version"]
@@ -102,7 +102,7 @@ get_version_from_local <- function(path) {
 #' @importFrom gh gh
 #' @export
 get_latest_version <- function(gh_repo = "rjdverse/rjd3toolkit", verbose = TRUE) {
-    release <- gh::gh(paste0("/repos/", gh_repo, "/releases/latest"))
+    release <- gh::gh(file.path("/repos", gh_repo, "releases", ref = "latest"))
     version_release <- get_version_from_branch(gh_repo, release$tag_name)
     if (verbose) {
         cat("Derni\u00e8re release :", version_release, "\n")
