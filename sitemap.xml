@@ -5,6 +5,15 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/news/index.html</loc></url>
+<url><loc>/reference/change_remotes_field.html</loc></url>
+<url><loc>/reference/get_changes.html</loc></url>
+<url><loc>/reference/get_different_future_version.html</loc></url>
+<url><loc>/reference/get_github_branches.html</loc></url>
+<url><loc>/reference/get_latest_version.html</loc></url>
+<url><loc>/reference/get_version_from_branch.html</loc></url>
+<url><loc>/reference/get_version_from_local.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/set_latest_deps_version.html</loc></url>
+<url><loc>/reference/update_news_md.html</loc></url>
 </urlset>
 
