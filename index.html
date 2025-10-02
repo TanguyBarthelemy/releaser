@@ -63,6 +63,8 @@
 </h1></div>
 <!-- badges: start -->
 
+<p><a href="https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://app.codecov.io/gh/TanguyBarthelemy/releaser?branch=main" class="external-link"><img src="https://codecov.io/gh/TanguyBarthelemy/releaser/branch/main/graph/badge.svg" alt="Test coverage"></a> <a href="https://www.codefactor.io/repository/github/tanguybarthelemy/releaser/overview/main" class="external-link"><img src="https://www.codefactor.io/repository/github/tanguybarthelemy/releaser/badge/main" alt="CodeFactor"></a> <a href="https://app.codacy.com/gh/TanguyBarthelemy/releaser/dashboard?utm_source=gh&amp;utm_medium=referral&amp;utm_content=&amp;utm_campaign=Badge_grade" class="external-link"><img src="https://app.codacy.com/project/badge/Grade/d5265973b095439e815a1bd64e5bbb00" alt="Codacy Badge"></a> <a href="https://github.com/TanguyBarthelemy/releaser/actions/workflows/lint.yaml" class="external-link"><img src="https://github.com/TanguyBarthelemy/releaser/actions/workflows/lint.yaml/badge.svg" alt="lint"></a></p>
+<p><a href="https://github.com/TanguyBarthelemy/releaser/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/TanguyBarthelemy/releaser/actions/workflows/pkgdown.yaml/badge.svg" alt="GH Pages built"></a> <!-- badges: end --></p>
 <p>{relaser} helps the developer to release their package and update informations (DESCRIPTION, CHANGELOG…) of the package.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -81,8 +83,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">version</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_latest_version.html">get_latest_version</a></span><span class="op">(</span><span class="st">"rjdverse/rjd3toolkit"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Dernière release : 3.5.1 </span></span>
-<span><span class="co">#&gt; Version sur main : 3.5.1 </span></span>
-<span><span class="co">#&gt; Version sur develop : 3.5.1.9000</span></span>
+<span><span class="co">#&gt; Version sur develop  : 3.5.2 </span></span>
+<span><span class="co">#&gt; Version sur main  : 3.5.1 </span></span>
+<span><span class="co">#&gt; Version sur snapshot  : 3.5.1.9500</span></span>
 <span><span class="fu"><a href="reference/get_different_future_version.html">get_different_future_version</a></span><span class="op">(</span><span class="va">version</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Package version bumped from '3.5.1' to '3.5.2'</span></span>
 <span><span class="co">#&gt; Package version bumped from '3.5.2' to '3.6.0'</span></span>
@@ -122,8 +125,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/TanguyBarthelemy/releaser" class="external-link"><img src="https://codecov.io/gh/TanguyBarthelemy/releaser/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=releaser" class="external-link"><img src="https://www.r-pkg.org/badges/version/releaser" alt="CRAN status"></a></li>
 </ul>
 </div>
 
