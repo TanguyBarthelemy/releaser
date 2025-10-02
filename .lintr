@@ -11,7 +11,7 @@ linters: lintr::all_linters(
         object_usage_linter = NULL,
         object_name_linter = NULL,
         commented_code_linter = NULL,
-        implicit_integer_linter = NULL,
+        #implicit_integer_linter = NULL,
         object_overwrite_linter = NULL,
         fixed_regex_linter = NULL,
         paste_linter = NULL,

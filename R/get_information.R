@@ -25,11 +25,11 @@ get_different_future_version <- function(version) {
 
     tmp <- desc::description$new(text = paste0("Version: ", version))
 
-    tmp$bump_version(which = 3) |> invisible()
+    tmp$bump_version(which = 3L) |> invisible()
     all_versions <- c(all_versions, future_patch_version = tmp$get(keys = "Version") |> as.character())
-    tmp$bump_version(which = 2) |> invisible()
+    tmp$bump_version(which = 2L) |> invisible()
     all_versions <- c(all_versions, future_minor_version = tmp$get(keys = "Version") |> as.character())
-    tmp$bump_version(which = 1) |> invisible()
+    tmp$bump_version(which = 1L) |> invisible()
     all_versions <- c(all_versions, future_major_version = tmp$get(keys = "Version") |> as.character())
 
     return(all_versions)
@@ -172,6 +172,6 @@ get_changes <- function(path, version) {
 #' @export
 get_github_branches <- function(repo = "rjdverse/rjd3toolkit") {
     res <- gh::gh("GET /repos/{repo}/branches", repo = repo)
-    branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1))
+    branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1L))
     return(branches)
 }

@@ -24,7 +24,7 @@
 #' @importFrom desc desc_get_remotes desc_set_remotes
 change_remotes_field <- function(path = ".", verbose = TRUE, target = c("develop", "snapshot", "main")) {
     remotes <- desc::desc_get_remotes(path)
-    if (length(remotes) == 0) return(NULL)
+    if (length(remotes) == 0L) return(NULL)
 
     basic_remotes <- remotes |> strsplit("@") |> sapply(`[`, 1L)
 
@@ -125,8 +125,8 @@ update_news_md <- function(new_version, path, github_url) {
     pattern <- "v[0-9]+\\.[0-9]+\\.[0-9]+"
 
     # Get version number
-    matches <- regmatches(old_compare_HEAD, gregexpr(pattern, old_compare_HEAD))[[1]]
-    old_version <- matches[1]
+    matches <- regmatches(old_compare_HEAD, gregexpr(pattern, old_compare_HEAD))[[1L]]
+    old_version <- matches[1L]
 
     # New line comparison HEAD
     new_compare_HEAD <- gsub(pattern = pattern, replacement = paste0("v", new_version), x = old_compare_HEAD)
@@ -137,7 +137,7 @@ update_news_md <- function(new_version, path, github_url) {
         gsub(pattern = "HEAD", replacement = paste0("v", new_version))
 
     changelog <- c(
-        changelog[seq_len(line_footer - 1)],
+        changelog[seq_len(line_footer - 1L)],
         new_compare_HEAD,
         new_compare_old_version,
         changelog[-seq_len(line_footer)]
