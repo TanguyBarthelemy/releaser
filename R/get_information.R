@@ -151,7 +151,7 @@ get_changes <- function(path, version) {
     changes <- changelog[starting_line:ending_line]
 
     # Remettre en forme
-    return(paste0(c("## Changes", changes, changelog[ref]), collapse = "\n"))
+    return(paste(c("## Changes", changes, changelog[ref]), collapse = "\n"))
 }
 
 #' @title List GitHub repository branches

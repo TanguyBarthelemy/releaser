@@ -77,7 +77,7 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
     for (idx in row_rjdverse) {
         pkg <- cur_deps$package[idx]
         pkg_type <- cur_deps$type[idx]
-        latest_version <- get_latest_version(gh_repo = paste0("rjdverse/", pkg))
+        latest_version <- get_latest_version(gh_repo = file.path("rjdverse", pkg))
         desc::desc_set_dep(
             package = pkg,
             version = paste(">=", latest_version),

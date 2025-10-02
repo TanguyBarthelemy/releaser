@@ -3,9 +3,7 @@ linters: lintr::all_linters(
         lintr::line_length_linter(115L),
         return_linter = NULL,
         nonportable_path_linter = NULL,
-        #undesirable_function_linter = NULL,
         fixed_regex_linter = NULL,
-        paste_linter = NULL,
         infix_spaces_linter = NULL,
         undesirable_operator_linter = NULL
     )
