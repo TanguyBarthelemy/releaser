@@ -4,16 +4,17 @@
 \alias{update_news_md}
 \title{Update \code{NEWS.md} for a new release}
 \usage{
-update_news_md(new_version, path, github_url)
+update_news_md(new_version, path, gh_repo)
 }
 \arguments{
-\item{new_version}{[\link[base]{character}] The new version number (e.g. \code{"1.2.3"}).}
+\item{new_version}{[\link[base]{character}] The new version number (e.g.
+\code{"1.2.3"}).}
 
 \item{path}{[\link[base]{character}] Path to the package root directory
-containing \code{NEWS.md}.}
+(default: \code{"."}).}
 
-\item{github_url}{[\link[base]{character}] Base URL of the package GitHub
-repository (e.g. \code{"https://github.com/owner/repo"}).}
+\item{gh_repo}{[\link[base]{character}] GitHub repository in the format
+\code{"owner/repo"}.}
 }
 \value{
 Invisibly returns \code{TRUE} if the file was successfully updated.
@@ -26,7 +27,7 @@ section with a new version heading and update GitHub comparison links.
 \dontrun{
 update_news_md(new_version = "1.2.3",
                path = ".",
-               github_url = "https://github.com/rjdverse/rjd3toolkit")
+               gh_repo = "rjdverse/rjd3toolkit")
 }
 
 }

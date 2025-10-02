@@ -7,7 +7,8 @@
 get_version_from_local(path)
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to a local package directory.}
+\item{path}{[\link[base]{character}] Path to the package root directory
+(default: \code{"."}).}
 }
 \value{
 A single character string with the package version.

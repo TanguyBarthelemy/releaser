@@ -4,15 +4,18 @@
 \alias{get_changes}
 \title{Extract changelog entries for a given version}
 \usage{
-get_changes(path, version)
+get_changes(path, version_number)
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory.}
+\item{path}{[\link[base]{character}] Path to the package root directory
+(default: \code{"."}).}
 
-\item{version}{[\link[base]{character}] Version to extract (must exist in \code{NEWS.md}).}
+\item{version_number}{[\link[base]{character}] Current version number string
+(e.g. \code{"1.2.3"}).}
 }
 \value{
-A character string containing the formatted changelog for the given version.
+A character string containing the formatted changelog for the given
+version.
 }
 \description{
 Extracts the section of \code{NEWS.md} corresponding to a given version.

@@ -4,10 +4,11 @@
 \alias{get_github_branches}
 \title{List GitHub repository branches}
 \usage{
-get_github_branches(repo = "rjdverse/rjd3toolkit")
+get_github_branches(gh_repo = file.path("rjdverse", "rjd3toolkit"))
 }
 \arguments{
-\item{repo}{[\link[base]{character}] GitHub repository (\code{"owner/repo"}).}
+\item{gh_repo}{[\link[base]{character}] GitHub repository in the format
+\code{"owner/repo"}.}
 }
 \value{
 A character vector with branch names.

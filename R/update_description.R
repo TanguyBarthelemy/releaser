@@ -6,7 +6,7 @@
 #' (`develop`, `snapshot`, or `main`).
 #'
 #' @param path [\link[base]{character}] Path to the package root directory
-#' containing a `DESCRIPTION` file (default: `"."`).
+#' (default: `"."`).
 #' @param verbose [\link[base]{logical}] Whether to print current and new
 #' remote fields (default: `TRUE`).
 #' @param target [\link[base]{character}] Target branch or type of remote:
@@ -64,10 +64,7 @@ change_remotes_field <- function(
 #' Update the `DESCRIPTION` file of a package so that all dependencies
 #' beginning with `"rjd3"` require the latest released version from GitHub.
 #'
-#' @param path [\link[base]{character}] Path to the package root directory
-#' (default: `"."`).
-#' @param verbose [\link[base]{logical}] Whether to print progress messages
-#' (default: `TRUE`).
+#' @inheritParams change_remotes_field
 #'
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
@@ -103,11 +100,11 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #' Modify the `NEWS.md` file of a package to replace the `"Unreleased"`
 #' section with a new version heading and update GitHub comparison links.
 #'
-#' @param new_version [\link[base]{character}] The new version number (e.g. `"1.2.3"`).
-#' @param path [\link[base]{character}] Path to the package root directory
-#' containing `NEWS.md`.
-#' @param github_url [\link[base]{character}] Base URL of the package GitHub
-#' repository (e.g. `"https://github.com/owner/repo"`).
+#' @param new_version [\link[base]{character}] The new version number (e.g.
+#' `"1.2.3"`).
+#' @param gh_repo [\link[base]{character}] GitHub repository in the format
+#' `"owner/repo"`.
+#' @inheritParams change_remotes_field
 #'
 #' @return Invisibly returns `TRUE` if the file was successfully updated.
 #'
@@ -115,12 +112,13 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #' \dontrun{
 #' update_news_md(new_version = "1.2.3",
 #'                path = ".",
-#'                github_url = "https://github.com/rjdverse/rjd3toolkit")
+#'                gh_repo = "rjdverse/rjd3toolkit")
 #' }
 #'
 #' @export
-update_news_md <- function(new_version, path, github_url) {
+update_news_md <- function(new_version, path, gh_repo) {
     changelog <- readLines(con = file.path(path, "NEWS.md"))
+    github_url <- file.path("https://github.com", gh_repo)
 
     line_number <- which(changelog == "## [Unreleased]")
     new_line <- paste0("## [", new_version, "] - ", Sys.Date())

@@ -4,7 +4,8 @@
 #' Given a current package version, compute the potential next
 #' patch, minor, and major versions following semantic versioning rules.
 #'
-#' @param version [\link[base]{character}] Current version string (e.g. `"1.2.3"`).
+#' @param version_number [\link[base]{character}] Current version number string
+#' (e.g. `"1.2.3"`).
 #'
 #' @return A named character vector with:
 #' \itemize{
@@ -20,10 +21,10 @@
 #' @export
 #' @importFrom desc description
 #'
-get_different_future_version <- function(version) {
-    all_versions <- c(current_version = version)
+get_different_future_version <- function(version_number) {
+    all_versions <- c(current_version = version_number)
 
-    tmp <- desc::description$new(text = paste0("Version: ", version))
+    tmp <- desc::description$new(text = paste0("Version: ", version_number))
 
     tmp$bump_version(which = 3L) |> invisible()
     all_versions <- c(
@@ -50,7 +51,7 @@ get_different_future_version <- function(version) {
 #' Retrieve the `Version` field from the DESCRIPTION file
 #' of a GitHub repository at a specific branch.
 #'
-#' @param gh_repo [\link[base]{character}] GitHub repository in the format `"owner/repo"`.
+#' @inheritParams update_news_md
 #' @param branch [\link[base]{character}] Branch name (default: `"main"`).
 #'
 #' @return A single character string with the package version.
@@ -81,7 +82,7 @@ get_version_from_branch <- function(
 #' @description
 #' Read the `Version` field from a local package DESCRIPTION file.
 #'
-#' @param path [\link[base]{character}] Path to a local package directory.
+#' @inheritParams change_remotes_field
 #'
 #' @return A single character string with the package version.
 #'
@@ -103,8 +104,7 @@ get_version_from_local <- function(path) {
 #' Retrieve the version number of the latest GitHub release for a repository
 #' and optionally print versions found across all branches.
 #'
-#' @param gh_repo [\link[base]{character}] GitHub repository (`"owner/repo"`).
-#' @param verbose [\link[base]{logical}] Whether to print information (default: `TRUE`).
+#' @inheritParams update_news_md
 #'
 #' @return A character string with the version of the latest release.
 #'
@@ -145,10 +145,11 @@ get_latest_version <- function(
 #' @description
 #' Extracts the section of `NEWS.md` corresponding to a given version.
 #'
-#' @param path [\link[base]{character}] Path to the package root directory.
-#' @param version [\link[base]{character}] Version to extract (must exist in `NEWS.md`).
+#' @inheritParams change_remotes_field
+#' @inheritParams get_different_future_version
 #'
-#' @return A character string containing the formatted changelog for the given version.
+#' @return A character string containing the formatted changelog for the given
+#' version.
 #'
 #' @examples
 #' \dontrun{
@@ -156,17 +157,17 @@ get_latest_version <- function(
 #' }
 #'
 #' @export
-get_changes <- function(path, version) {
+get_changes <- function(path, version_number) {
     changelog <- readLines(con = file.path(path, "NEWS.md"))
 
     starting_line <- grep(
-        pattern = paste0("^## \\[", version, "\\]"),
+        pattern = paste0("^## \\[", version_number, "\\]"),
         x = changelog
     ) +
         1L
     ending_line <- grep(pattern = "^## \\[", x = changelog)
     ending_line <- min(ending_line[ending_line > starting_line]) - 1L
-    ref <- grep(pattern = paste0("^\\[", version, "\\]"), x = changelog)
+    ref <- grep(pattern = paste0("^\\[", version_number, "\\]"), x = changelog)
 
     # Extraire les lignes du bloc
     changes <- changelog[starting_line:ending_line]
@@ -180,7 +181,7 @@ get_changes <- function(path, version) {
 #' @description
 #' Retrieve all branch names from a GitHub repository.
 #'
-#' @param repo [\link[base]{character}] GitHub repository (`"owner/repo"`).
+#' @inheritParams update_news_md
 #'
 #' @return A character vector with branch names.
 #'
@@ -191,8 +192,10 @@ get_changes <- function(path, version) {
 #'
 #' @importFrom gh gh
 #' @export
-get_github_branches <- function(repo = file.path("rjdverse", "rjd3toolkit")) {
-    res <- gh::gh("GET /repos/{repo}/branches", repo = repo)
+get_github_branches <- function(
+    gh_repo = file.path("rjdverse", "rjd3toolkit")
+) {
+    res <- gh::gh("GET /repos/{repo}/branches", repo = gh_repo)
     branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1L))
     return(branches)
 }

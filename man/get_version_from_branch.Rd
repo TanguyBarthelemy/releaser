@@ -4,10 +4,14 @@
 \alias{get_version_from_branch}
 \title{Get package version from a GitHub branch}
 \usage{
-get_version_from_branch(gh_repo = "rjdverse/rjd3toolkit", branch = "main")
+get_version_from_branch(
+  gh_repo = file.path("rjdverse", "rjd3toolkit"),
+  branch = "main"
+)
 }
 \arguments{
-\item{gh_repo}{[\link[base]{character}] GitHub repository in the format \code{"owner/repo"}.}
+\item{gh_repo}{[\link[base]{character}] GitHub repository in the format
+\code{"owner/repo"}.}
 
 \item{branch}{[\link[base]{character}] Branch name (default: \code{"main"}).}
 }

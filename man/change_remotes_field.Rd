@@ -12,7 +12,7 @@ change_remotes_field(
 }
 \arguments{
 \item{path}{[\link[base]{character}] Path to the package root directory
-containing a \code{DESCRIPTION} file (default: \code{"."}).}
+(default: \code{"."}).}
 
 \item{verbose}{[\link[base]{logical}] Whether to print current and new
 remote fields (default: \code{TRUE}).}

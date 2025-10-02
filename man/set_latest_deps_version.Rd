@@ -10,8 +10,8 @@ set_latest_deps_version(path = ".", verbose = TRUE)
 \item{path}{[\link[base]{character}] Path to the package root directory
 (default: \code{"."}).}
 
-\item{verbose}{[\link[base]{logical}] Whether to print progress messages
-(default: \code{TRUE}).}
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 Invisibly updates the \code{DESCRIPTION} file in place.
