@@ -5,9 +5,19 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/releaser)](https://CRAN.R-project.org/package=releaser)
+
 [![R-CMD-check](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/TanguyBarthelemy/releaser/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/releaser)
+[![Test
+coverage](https://codecov.io/gh/TanguyBarthelemy/releaser/branch/main/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/releaser?branch=main)
+[![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/releaser/badge/main)](https://www.codefactor.io/repository/github/tanguybarthelemy/releaser/overview/main)
+[![Codacy
+Badge](https://app.codacy.com/project/badge/Grade/d5265973b095439e815a1bd64e5bbb00)](https://app.codacy.com/gh/TanguyBarthelemy/releaser/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![lint](https://github.com/TanguyBarthelemy/releaser/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/lint.yaml)
+
+[![GH Pages
+built](https://github.com/TanguyBarthelemy/releaser/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 {relaser} helps the developer to release their package and update
@@ -35,8 +45,9 @@ the different future version:
 ``` r
 version <- get_latest_version("rjdverse/rjd3toolkit")
 #> Dernière release : 3.5.1 
-#> Version sur main : 3.5.1 
-#> Version sur develop : 3.5.1.9000
+#> Version sur develop  : 3.5.2 
+#> Version sur main  : 3.5.1 
+#> Version sur snapshot  : 3.5.1.9500
 get_different_future_version(version)
 #> Package version bumped from '3.5.1' to '3.5.2'
 #> Package version bumped from '3.5.2' to '3.6.0'
