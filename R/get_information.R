@@ -114,7 +114,7 @@ get_latest_version <- function(gh_repo = "rjdverse/rjd3toolkit", verbose = TRUE)
     )
     for (branche in branches) {
         try({
-            version_number <- releaser:::get_version_from_branch(gh_repo, branche)
+            version_number <- get_version_from_branch(gh_repo, branche)
             if (verbose) {
                 cat("Version sur", branche, " :", version_number, "\n")
             }
