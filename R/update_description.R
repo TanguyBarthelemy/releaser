@@ -121,12 +121,9 @@ update_news_md <- function(new_version, path, github_url) {
     ) |>
         which()
 
+    # Get line comparison Unreleased
     old_compare_HEAD <- changelog[line_footer]
     pattern <- "v[0-9]+\\.[0-9]+\\.[0-9]+"
-
-    # Get version number
-    matches <- regmatches(old_compare_HEAD, gregexpr(pattern, old_compare_HEAD))[[1L]]
-    old_version <- matches[1L]
 
     # New line comparison HEAD
     new_compare_HEAD <- gsub(pattern = pattern, replacement = paste0("v", new_version), x = old_compare_HEAD)
