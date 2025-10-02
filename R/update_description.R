@@ -26,7 +26,9 @@ change_remotes_field <- function(path = ".", verbose = TRUE, target = c("develop
     remotes <- desc::desc_get_remotes(path)
     if (length(remotes) == 0L) return(NULL)
 
-    basic_remotes <- remotes |> strsplit("@") |> sapply(`[`, 1L)
+    basic_remotes <- remotes |>
+        strsplit(split = "@") |>
+        vapply(FUN = `[`, 1L, FUN.VALUE = character(1L))
 
     new_remotes <-  paste0(
         basic_remotes, "@",
