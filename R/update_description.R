@@ -27,7 +27,7 @@ change_remotes_field <- function(path = ".", verbose = TRUE, target = c("develop
     if (length(remotes) == 0L) return(NULL)
 
     basic_remotes <- remotes |>
-        strsplit(split = "@") |>
+        strsplit(split = "@", fixed = TRUE) |>
         vapply(FUN = `[`, 1L, FUN.VALUE = character(1L))
 
     new_remotes <-  paste0(
@@ -132,8 +132,8 @@ update_news_md <- function(new_version, path, github_url) {
 
     # New comparison old version
     new_compare_old_version <- old_compare_head |>
-        gsub(pattern = "Unreleased", replacement = new_version) |>
-        gsub(pattern = "HEAD", replacement = paste0("v", new_version))
+        gsub(pattern = "Unreleased", replacement = new_version, fixed = TRUE) |>
+        gsub(pattern = "HEAD", replacement = paste0("v", new_version), fixed = TRUE)
 
     changelog <- c(
         changelog[seq_len(line_footer - 1L)],
