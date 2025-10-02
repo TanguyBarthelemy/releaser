@@ -49,7 +49,7 @@ section with a new version heading and update GitHub comparison links.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">update_news_md</span><span class="op">(</span><span class="va">new_version</span>, <span class="va">path</span>, <span class="va">github_url</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">update_news_md</span><span class="op">(</span><span class="va">new_version</span>, <span class="va">path</span>, <span class="va">gh_repo</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -57,17 +57,18 @@ section with a new version heading and update GitHub comparison links.</p>
 
 
 <dl><dt id="arg-new-version">new_version<a class="anchor" aria-label="anchor" href="#arg-new-version"></a></dt>
-<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] The new version number (e.g. <code>"1.2.3"</code>).</p></dd>
+<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] The new version number (e.g.
+<code>"1.2.3"</code>).</p></dd>
 
 
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
 <dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] Path to the package root directory
-containing <code>NEWS.md</code>.</p></dd>
+(default: <code>"."</code>).</p></dd>
 
 
-<dt id="arg-github-url">github_url<a class="anchor" aria-label="anchor" href="#arg-github-url"></a></dt>
-<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] Base URL of the package GitHub
-repository (e.g. <code>"https://github.com/owner/repo"</code>).</p></dd>
+<dt id="arg-gh-repo">gh_repo<a class="anchor" aria-label="anchor" href="#arg-gh-repo"></a></dt>
+<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] GitHub repository in the format
+<code>"owner/repo"</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -80,7 +81,7 @@ repository (e.g. <code>"https://github.com/owner/repo"</code>).</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu">update_news_md</span><span class="op">(</span>new_version <span class="op">=</span> <span class="st">"1.2.3"</span>,</span></span>
 <span class="r-in"><span>               path <span class="op">=</span> <span class="st">"."</span>,</span></span>
-<span class="r-in"><span>               github_url <span class="op">=</span> <span class="st">"https://github.com/rjdverse/rjd3toolkit"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>               gh_repo <span class="op">=</span> <span class="st">"rjdverse/rjd3toolkit"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

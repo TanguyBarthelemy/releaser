@@ -47,7 +47,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_changes</span><span class="op">(</span><span class="va">path</span>, <span class="va">version</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_changes</span><span class="op">(</span><span class="va">path</span>, <span class="va">version_number</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -55,16 +55,19 @@
 
 
 <dl><dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
-<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] Path to the package root directory.</p></dd>
+<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] Path to the package root directory
+(default: <code>"."</code>).</p></dd>
 
 
-<dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] Version to extract (must exist in <code>NEWS.md</code>).</p></dd>
+<dt id="arg-version-number">version_number<a class="anchor" aria-label="anchor" href="#arg-version-number"></a></dt>
+<dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] Current version number string
+(e.g. <code>"1.2.3"</code>).</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A character string containing the formatted changelog for the given version.</p>
+    <p>A character string containing the formatted changelog for the given
+version.</p>
     </div>
 
     <div id="ref-examples">
