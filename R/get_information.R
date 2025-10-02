@@ -79,8 +79,8 @@ get_version_from_branch <- function(gh_repo = "rjdverse/rjd3toolkit", branch = "
 #' @importFrom desc desc_get_version
 #' @keywords internal
 get_version_from_local <- function(path) {
-    version <- desc::desc_get_version(path) |> as.character()
-    return(version)
+    version_number <- desc::desc_get_version(path) |> as.character()
+    return(version_number)
 }
 
 #' @title Get latest GitHub release version
@@ -114,9 +114,9 @@ get_latest_version <- function(gh_repo = "rjdverse/rjd3toolkit", verbose = TRUE)
     )
     for (branche in branches) {
         try({
-            version <- releaser:::get_version_from_branch(gh_repo, branche)
+            version_number <- releaser:::get_version_from_branch(gh_repo, branche)
             if (verbose) {
-                cat("Version sur", branche, " :", version, "\n")
+                cat("Version sur", branche, " :", version_number, "\n")
             }
         })
     }
@@ -142,13 +142,13 @@ get_latest_version <- function(gh_repo = "rjdverse/rjd3toolkit", verbose = TRUE)
 get_changes <- function(path, version) {
     changelog <- readLines(con = file.path(path, "NEWS.md"))
 
-    start <- grep(pattern = paste0("^## \\[", version, "\\]"), x = changelog) + 1L
-    end <- grep(pattern = "^## \\[", x = changelog)
-    end <- min(end[end > start]) - 1L
+    starting_line <- grep(pattern = paste0("^## \\[", version, "\\]"), x = changelog) + 1L
+    ending_line <- grep(pattern = "^## \\[", x = changelog)
+    ending_line <- min(ending_line[ending_line > starting_line]) - 1L
     ref <- grep(pattern = paste0("^\\[", version, "\\]"), x = changelog)
 
     # Extraire les lignes du bloc
-    changes <- changelog[start:end]
+    changes <- changelog[starting_line:ending_line]
 
     # Remettre en forme
     return(paste0(c("## Changes", changes, changelog[ref]), collapse = "\n"))
