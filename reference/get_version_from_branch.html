@@ -51,7 +51,8 @@ of a GitHub repository at a specific branch.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_version_from_branch</span><span class="op">(</span></span>
 <span>  gh_repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"rjdverse"</span>, <span class="st">"rjd3toolkit"</span><span class="op">)</span>,</span>
-<span>  branch <span class="op">=</span> <span class="st">"main"</span></span>
+<span>  branch <span class="op">=</span> <span class="st">"main"</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -66,6 +67,11 @@ of a GitHub repository at a specific branch.</p>
 
 <dt id="arg-branch">branch<a class="anchor" aria-label="anchor" href="#arg-branch"></a></dt>
 <dd><p>[<a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>] Branch name (default: <code>"main"</code>).</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>[<a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a>] Whether to print current and new
+remote fields (default: <code>TRUE</code>).</p></dd>
 
 </dl></div>
     <div id="value">
