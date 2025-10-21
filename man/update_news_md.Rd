@@ -4,7 +4,7 @@
 \alias{update_news_md}
 \title{Update \code{NEWS.md} for a new release}
 \usage{
-update_news_md(new_version, path, gh_repo)
+update_news_md(new_version, path = ".", gh_repo, verbose = TRUE)
 }
 \arguments{
 \item{new_version}{[\link[base]{character}] The new version number (e.g.
@@ -15,6 +15,9 @@ update_news_md(new_version, path, gh_repo)
 
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format
 \code{"owner/repo"}.}
+
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 Invisibly returns \code{TRUE} if the file was successfully updated.

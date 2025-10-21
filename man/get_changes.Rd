@@ -4,7 +4,7 @@
 \alias{get_changes}
 \title{Extract changelog entries for a given version}
 \usage{
-get_changes(path, version_number)
+get_changes(path = ".", version_number, verbose = TRUE)
 }
 \arguments{
 \item{path}{[\link[base]{character}] Path to the package root directory
@@ -12,6 +12,9 @@ get_changes(path, version_number)
 
 \item{version_number}{[\link[base]{character}] Current version number string
 (e.g. \code{"1.2.3"}).}
+
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 A character string containing the formatted changelog for the given

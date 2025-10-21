@@ -4,11 +4,17 @@
 \alias{get_github_branches}
 \title{List GitHub repository branches}
 \usage{
-get_github_branches(gh_repo = file.path("rjdverse", "rjd3toolkit"))
+get_github_branches(
+  gh_repo = file.path("rjdverse", "rjd3toolkit"),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format
 \code{"owner/repo"}.}
+
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 A character vector with branch names.

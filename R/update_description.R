@@ -116,7 +116,8 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #' }
 #'
 #' @export
-update_news_md <- function(new_version, path, gh_repo) {
+update_news_md <- function(new_version, path = ".", gh_repo, verbose = TRUE) {
+    if (verbose) message("Updating NEWS.md for version: ", new_version)
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     github_url <- file.path("https://github.com", gh_repo)
 
@@ -129,6 +130,7 @@ update_news_md <- function(new_version, path, gh_repo) {
         "",
         changelog[-seq_len(line_number)]
     )
+    if (verbose) message("Inserted new version header after 'Unreleased' section.")
 
     line_footer <- grepl(
         pattern = paste0(
@@ -137,21 +139,16 @@ update_news_md <- function(new_version, path, gh_repo) {
             "\\/compare\\/.*\\.\\.\\.HEAD$"
         ),
         x = changelog
-    ) |>
-        which()
+    ) |> which()
 
-    # Get line comparison Unreleased
     old_compare_head <- changelog[line_footer]
     pattern <- "v[0-9]+\\.[0-9]+\\.[0-9]+"
 
-    # New line comparison HEAD
     new_compare_head <- gsub(
         pattern = pattern,
         replacement = paste0("v", new_version),
         x = old_compare_head
     )
-
-    # New comparison old version
     new_compare_old_version <- old_compare_head |>
         gsub(pattern = "Unreleased", replacement = new_version, fixed = TRUE) |>
         gsub(
@@ -168,5 +165,6 @@ update_news_md <- function(new_version, path, gh_repo) {
     )
 
     writeLines(text = changelog, con = file.path(path, "NEWS.md"))
+    if (verbose) message("NEWS.md successfully updated and written to disk.")
     return(invisible(TRUE))
 }

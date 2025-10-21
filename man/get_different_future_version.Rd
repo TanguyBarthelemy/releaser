@@ -4,11 +4,14 @@
 \alias{get_different_future_version}
 \title{Compute possible future semantic versions}
 \usage{
-get_different_future_version(version_number)
+get_different_future_version(version_number, verbose = TRUE)
 }
 \arguments{
 \item{version_number}{[\link[base]{character}] Current version number string
 (e.g. \code{"1.2.3"}).}
+
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 A named character vector with:

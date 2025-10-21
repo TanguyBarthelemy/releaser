@@ -6,7 +6,8 @@
 \usage{
 get_version_from_branch(
   gh_repo = file.path("rjdverse", "rjd3toolkit"),
-  branch = "main"
+  branch = "main",
+  verbose = TRUE
 )
 }
 \arguments{
@@ -14,6 +15,9 @@ get_version_from_branch(
 \code{"owner/repo"}.}
 
 \item{branch}{[\link[base]{character}] Branch name (default: \code{"main"}).}
+
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 A single character string with the package version.

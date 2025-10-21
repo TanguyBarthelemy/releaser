@@ -6,6 +6,7 @@
 #'
 #' @param version_number [\link[base]{character}] Current version number string
 #' (e.g. `"1.2.3"`).
+#' @inheritParams change_remotes_field
 #'
 #' @return A named character vector with:
 #' \itemize{
@@ -21,7 +22,7 @@
 #' @export
 #' @importFrom desc description
 #'
-get_different_future_version <- function(version_number) {
+get_different_future_version <- function(version_number, verbose = TRUE) {
     all_versions <- c(current_version = version_number)
 
     tmp <- desc::description$new(text = paste0("Version: ", version_number))
@@ -31,16 +32,21 @@ get_different_future_version <- function(version_number) {
         all_versions,
         future_patch_version = tmp$get(keys = "Version") |> as.character()
     )
+    if (verbose) message("Future patch version: ", all_versions["future_patch_version"])
+
     tmp$bump_version(which = 2L) |> invisible()
     all_versions <- c(
         all_versions,
         future_minor_version = tmp$get(keys = "Version") |> as.character()
     )
+    if (verbose) message("Future minor version: ", all_versions["future_minor_version"])
+
     tmp$bump_version(which = 1L) |> invisible()
     all_versions <- c(
         all_versions,
         future_major_version = tmp$get(keys = "Version") |> as.character()
     )
+    if (verbose) message("Future major version: ", all_versions["future_major_version"])
 
     return(all_versions)
 }
@@ -52,6 +58,7 @@ get_different_future_version <- function(version_number) {
 #' of a GitHub repository at a specific branch.
 #'
 #' @inheritParams update_news_md
+#' @inheritParams change_remotes_field
 #' @param branch [\link[base]{character}] Branch name (default: `"main"`).
 #'
 #' @return A single character string with the package version.
@@ -65,17 +72,21 @@ get_different_future_version <- function(version_number) {
 #' @importFrom base64enc base64decode
 #' @keywords internal
 get_version_from_branch <- function(
-    gh_repo = file.path("rjdverse", "rjd3toolkit"),
-    branch = "main"
+        gh_repo = file.path("rjdverse", "rjd3toolkit"),
+        branch = "main",
+        verbose = TRUE
 ) {
     description <- gh::gh(
         file.path("/repos", gh_repo, "contents", "DESCRIPTION"),
         ref = branch
     )
+    if (verbose) message("Fetched DESCRIPTION from branch: ", branch)
     content <- rawToChar(base64enc::base64decode(description$content))
     nb_version <- read.dcf(textConnection(content))[, "Version"]
+    if (verbose) message("Version found on branch ", branch, ": ", nb_version)
     return(nb_version)
 }
+
 
 #' @title Get package version from a local DESCRIPTION
 #'
@@ -93,8 +104,9 @@ get_version_from_branch <- function(
 #'
 #' @importFrom desc desc_get_version
 #' @keywords internal
-get_version_from_local <- function(path) {
+get_version_from_local <- function(path = ".", verbose = TRUE) {
     version_number <- desc::desc_get_version(path) |> as.character()
+    if (verbose) message("Local version at '", path, "': ", version_number)
     return(version_number)
 }
 
@@ -157,24 +169,27 @@ get_latest_version <- function(
 #' }
 #'
 #' @export
-get_changes <- function(path, version_number) {
+get_changes <- function(path = ".", version_number, verbose = TRUE) {
     changelog <- readLines(con = file.path(path, "NEWS.md"))
+    if (verbose) message("Reading NEWS.md from: ", path)
 
     starting_line <- grep(
         pattern = paste0("^## \\[", version_number, "\\]"),
         x = changelog
-    ) +
-        1L
+    ) + 1L
     ending_line <- grep(pattern = "^## \\[", x = changelog)
     ending_line <- min(ending_line[ending_line > starting_line]) - 1L
     ref <- grep(pattern = paste0("^\\[", version_number, "\\]"), x = changelog)
 
-    # Extraire les lignes du bloc
-    changes <- changelog[starting_line:ending_line]
+    if (verbose) message("Extracting changes for version: ", version_number)
 
-    # Remettre en forme
-    return(paste(c("## Changes", changes, changelog[ref]), collapse = "\n"))
+    changes <- changelog[starting_line:ending_line]
+    result <- paste(c("## Changes", changes, changelog[ref]), collapse = "\n")
+
+    if (verbose) message("Successfully extracted ", length(changes), " lines of changes.")
+    return(result)
 }
+
 
 #' @title List GitHub repository branches
 #'
@@ -182,6 +197,7 @@ get_changes <- function(path, version_number) {
 #' Retrieve all branch names from a GitHub repository.
 #'
 #' @inheritParams update_news_md
+#' @inheritParams change_remotes_field
 #'
 #' @return A character vector with branch names.
 #'
@@ -193,9 +209,12 @@ get_changes <- function(path, version_number) {
 #' @importFrom gh gh
 #' @export
 get_github_branches <- function(
-    gh_repo = file.path("rjdverse", "rjd3toolkit")
+        gh_repo = file.path("rjdverse", "rjd3toolkit"),
+        verbose = TRUE
 ) {
+    if (verbose) message("Fetching branches from repository: ", gh_repo)
     res <- gh::gh("GET /repos/{repo}/branches", repo = gh_repo)
     branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1L))
+    if (verbose) message("Found branches: ", paste(branches, collapse = ", "))
     return(branches)
 }

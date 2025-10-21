@@ -4,11 +4,14 @@
 \alias{get_version_from_local}
 \title{Get package version from a local DESCRIPTION}
 \usage{
-get_version_from_local(path)
+get_version_from_local(path = ".", verbose = TRUE)
 }
 \arguments{
 \item{path}{[\link[base]{character}] Path to the package root directory
 (default: \code{"."}).}
+
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 A single character string with the package version.
