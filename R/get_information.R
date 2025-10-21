@@ -32,21 +32,27 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
         all_versions,
         future_patch_version = tmp$get(keys = "Version") |> as.character()
     )
-    if (verbose) message("Future patch version: ", all_versions["future_patch_version"])
+    if (verbose) {
+        message("Future patch version: ", all_versions["future_patch_version"])
+    }
 
     tmp$bump_version(which = 2L) |> invisible()
     all_versions <- c(
         all_versions,
         future_minor_version = tmp$get(keys = "Version") |> as.character()
     )
-    if (verbose) message("Future minor version: ", all_versions["future_minor_version"])
+    if (verbose) {
+        message("Future minor version: ", all_versions["future_minor_version"])
+    }
 
     tmp$bump_version(which = 1L) |> invisible()
     all_versions <- c(
         all_versions,
         future_major_version = tmp$get(keys = "Version") |> as.character()
     )
-    if (verbose) message("Future major version: ", all_versions["future_major_version"])
+    if (verbose) {
+        message("Future major version: ", all_versions["future_major_version"])
+    }
 
     return(all_versions)
 }
@@ -72,18 +78,22 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #' @importFrom base64enc base64decode
 #' @keywords internal
 get_version_from_branch <- function(
-        gh_repo = file.path("rjdverse", "rjd3toolkit"),
-        branch = "main",
-        verbose = TRUE
+    gh_repo = file.path("rjdverse", "rjd3toolkit"),
+    branch = "main",
+    verbose = TRUE
 ) {
     description <- gh::gh(
         file.path("/repos", gh_repo, "contents", "DESCRIPTION"),
         ref = branch
     )
-    if (verbose) message("Fetched DESCRIPTION from branch: ", branch)
+    if (verbose) {
+        message("Fetched DESCRIPTION from branch: ", branch)
+    }
     content <- rawToChar(base64enc::base64decode(description$content))
     nb_version <- read.dcf(textConnection(content))[, "Version"]
-    if (verbose) message("Version found on branch ", branch, ": ", nb_version)
+    if (verbose) {
+        message("Version found on branch ", branch, ": ", nb_version)
+    }
     return(nb_version)
 }
 
@@ -106,7 +116,9 @@ get_version_from_branch <- function(
 #' @keywords internal
 get_version_from_local <- function(path = ".", verbose = TRUE) {
     version_number <- desc::desc_get_version(path) |> as.character()
-    if (verbose) message("Local version at '", path, "': ", version_number)
+    if (verbose) {
+        message("Local version at '", path, "': ", version_number)
+    }
     return(version_number)
 }
 
@@ -171,22 +183,33 @@ get_latest_version <- function(
 #' @export
 get_changes <- function(path = ".", version_number, verbose = TRUE) {
     changelog <- readLines(con = file.path(path, "NEWS.md"))
-    if (verbose) message("Reading NEWS.md from: ", path)
+    if (verbose) {
+        message("Reading NEWS.md from: ", path)
+    }
 
     starting_line <- grep(
         pattern = paste0("^## \\[", version_number, "\\]"),
         x = changelog
-    ) + 1L
+    ) +
+        1L
     ending_line <- grep(pattern = "^## \\[", x = changelog)
     ending_line <- min(ending_line[ending_line > starting_line]) - 1L
     ref <- grep(pattern = paste0("^\\[", version_number, "\\]"), x = changelog)
 
-    if (verbose) message("Extracting changes for version: ", version_number)
+    if (verbose) {
+        message("Extracting changes for version: ", version_number)
+    }
 
     changes <- changelog[starting_line:ending_line]
     result <- paste(c("## Changes", changes, changelog[ref]), collapse = "\n")
 
-    if (verbose) message("Successfully extracted ", length(changes), " lines of changes.")
+    if (verbose) {
+        message(
+            "Successfully extracted ",
+            length(changes),
+            " lines of changes."
+        )
+    }
     return(result)
 }
 
@@ -209,12 +232,16 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
 #' @importFrom gh gh
 #' @export
 get_github_branches <- function(
-        gh_repo = file.path("rjdverse", "rjd3toolkit"),
-        verbose = TRUE
+    gh_repo = file.path("rjdverse", "rjd3toolkit"),
+    verbose = TRUE
 ) {
-    if (verbose) message("Fetching branches from repository: ", gh_repo)
+    if (verbose) {
+        message("Fetching branches from repository: ", gh_repo)
+    }
     res <- gh::gh("GET /repos/{repo}/branches", repo = gh_repo)
     branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1L))
-    if (verbose) message("Found branches: ", paste(branches, collapse = ", "))
+    if (verbose) {
+        message("Found branches: ", toString(branches))
+    }
     return(branches)
 }
