@@ -102,8 +102,6 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #'
 #' @param new_version [\link[base]{character}] The new version number (e.g.
 #' `"1.2.3"`).
-#' @param gh_repo [\link[base]{character}] GitHub repository in the format
-#' `"owner/repo"`.
 #' @inheritParams change_remotes_field
 #'
 #' @return Invisibly returns `TRUE` if the file was successfully updated.
@@ -116,12 +114,16 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #' }
 #'
 #' @export
-update_news_md <- function(new_version, path = ".", gh_repo, verbose = TRUE) {
+update_news_md <- function(new_version, path = ".", verbose = TRUE) {
     if (verbose) {
         message("Updating NEWS.md for version: ", new_version)
     }
     changelog <- readLines(con = file.path(path, "NEWS.md"))
-    github_url <- file.path("https://github.com", gh_repo)
+    urls <- regmatches(
+        changelog ,
+        regexpr("https://github\\.com/[^/]+/[^/]+", changelog )
+    )
+    github_url <- unique(urls)
 
     line_number <- which(changelog == "## [Unreleased]")
     new_line <- paste0("## [", new_version, "] - ", Sys.Date())

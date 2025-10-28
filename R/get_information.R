@@ -63,7 +63,8 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #' Retrieve the `Version` field from the DESCRIPTION file
 #' of a GitHub repository at a specific branch.
 #'
-#' @inheritParams update_news_md
+#' @param gh_repo [\link[base]{character}] GitHub repository in the format
+#' `"owner/repo"`.
 #' @inheritParams change_remotes_field
 #' @param branch [\link[base]{character}] Branch name (default: `"main"`).
 #'
@@ -76,7 +77,10 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #'
 #' @importFrom gh gh
 #' @importFrom base64enc base64decode
+#'
 #' @keywords internal
+#' @noRd
+#'
 get_version_from_branch <- function(
     gh_repo = file.path("rjdverse", "rjd3toolkit"),
     branch = "main",
@@ -113,7 +117,10 @@ get_version_from_branch <- function(
 #' }
 #'
 #' @importFrom desc desc_get_version
+#'
 #' @keywords internal
+#' @noRd
+#'
 get_version_from_local <- function(path = ".", verbose = TRUE) {
     version_number <- desc::desc_get_version(path) |> as.character()
     if (verbose) {
@@ -128,7 +135,7 @@ get_version_from_local <- function(path = ".", verbose = TRUE) {
 #' Retrieve the version number of the latest GitHub release for a repository
 #' and optionally print versions found across all branches.
 #'
-#' @inheritParams update_news_md
+#' @inheritParams get_version_from_branch
 #'
 #' @return A character string with the version of the latest release.
 #'
@@ -219,7 +226,7 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
 #' @description
 #' Retrieve all branch names from a GitHub repository.
 #'
-#' @inheritParams update_news_md
+#' @inheritParams get_version_from_branch
 #' @inheritParams change_remotes_field
 #'
 #' @return A character vector with branch names.
