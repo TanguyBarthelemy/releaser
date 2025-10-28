@@ -109,8 +109,7 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #' @examples
 #' \dontrun{
 #' update_news_md(new_version = "1.2.3",
-#'                path = ".",
-#'                gh_repo = "rjdverse/rjd3toolkit")
+#'                path = ".")
 #' }
 #'
 #' @export
@@ -120,8 +119,8 @@ update_news_md <- function(new_version, path = ".", verbose = TRUE) {
     }
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     urls <- regmatches(
-        changelog ,
-        regexpr("https://github\\.com/[^/]+/[^/]+", changelog )
+        x = changelog,
+        regexpr(pattern = "https://github\\.com/[^/]+/[^/]+", text = changelog)
     )
     github_url <- unique(urls)
 

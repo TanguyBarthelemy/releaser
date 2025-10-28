@@ -4,7 +4,7 @@
 \alias{update_news_md}
 \title{Update \code{NEWS.md} for a new release}
 \usage{
-update_news_md(new_version, path = ".", gh_repo, verbose = TRUE)
+update_news_md(new_version, path = ".", verbose = TRUE)
 }
 \arguments{
 \item{new_version}{[\link[base]{character}] The new version number (e.g.
@@ -12,9 +12,6 @@ update_news_md(new_version, path = ".", gh_repo, verbose = TRUE)
 
 \item{path}{[\link[base]{character}] Path to the package root directory
 (default: \code{"."}).}
-
-\item{gh_repo}{[\link[base]{character}] GitHub repository in the format
-\code{"owner/repo"}.}
 
 \item{verbose}{[\link[base]{logical}] Whether to print current and new
 remote fields (default: \code{TRUE}).}
@@ -29,8 +26,7 @@ section with a new version heading and update GitHub comparison links.
 \examples{
 \dontrun{
 update_news_md(new_version = "1.2.3",
-               path = ".",
-               gh_repo = "rjdverse/rjd3toolkit")
+               path = ".")
 }
 
 }

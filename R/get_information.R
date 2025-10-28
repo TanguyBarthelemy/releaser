@@ -63,9 +63,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #' Retrieve the `Version` field from the DESCRIPTION file
 #' of a GitHub repository at a specific branch.
 #'
-#' @param gh_repo [\link[base]{character}] GitHub repository in the format
-#' `"owner/repo"`.
-#' @inheritParams change_remotes_field
+#' @inheritParams get_latest_version
 #' @param branch [\link[base]{character}] Branch name (default: `"main"`).
 #'
 #' @return A single character string with the package version.
@@ -135,7 +133,9 @@ get_version_from_local <- function(path = ".", verbose = TRUE) {
 #' Retrieve the version number of the latest GitHub release for a repository
 #' and optionally print versions found across all branches.
 #'
-#' @inheritParams get_version_from_branch
+#' @param gh_repo [\link[base]{character}] GitHub repository in the format
+#' `"owner/repo"`.
+#' @inheritParams change_remotes_field
 #'
 #' @return A character string with the version of the latest release.
 #'
@@ -226,8 +226,7 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
 #' @description
 #' Retrieve all branch names from a GitHub repository.
 #'
-#' @inheritParams get_version_from_branch
-#' @inheritParams change_remotes_field
+#' @inheritParams get_latest_version
 #'
 #' @return A character vector with branch names.
 #'

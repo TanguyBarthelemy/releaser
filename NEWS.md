@@ -8,8 +8,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Removed
 
-## [1.0.0] - 2025-10-22
+* argument `gh_repo` from `update_news_md()`
+
 
 ### Added
 
