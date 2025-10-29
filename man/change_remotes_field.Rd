@@ -30,7 +30,13 @@ dependencies point to specific development targets
 (\code{develop}, \code{snapshot}, or \code{main}).
 }
 \examples{
-path_pluma <- system.file("pluma", package = "releaser")
-change_remotes_field(path = path_pluma, target = "develop")
+path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+file.copy(
+    from = system.file("rjd3workspace", package = "releaser"),
+    to = dirname(path_rjd3workspace),
+    recursive = TRUE
+)
+
+change_remotes_field(path = path_rjd3workspace, target = "develop")
 
 }

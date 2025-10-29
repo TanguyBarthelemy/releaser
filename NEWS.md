@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [1.0.0] - 2025-10-29
 
+### Changed
+
+* order of the argument
+* Add {rjd3workspace} DESCRIPTION and NEWS.md as example
+
 ### Removed
 
 * argument `gh_repo` from `update_news_md()`

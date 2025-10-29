@@ -21,7 +21,13 @@ Update the \code{DESCRIPTION} file of a package so that all dependencies
 beginning with \code{"rjd3"} require the latest released version from GitHub.
 }
 \examples{
-path_pluma <- system.file("pluma", package = "releaser")
-set_latest_deps_version(path = path_pluma)
+path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+file.copy(
+    from = system.file("rjd3workspace", package = "releaser"),
+    to = dirname(path_rjd3workspace),
+    recursive = TRUE
+)
+
+set_latest_deps_version(path = path_rjd3workspace)
 
 }

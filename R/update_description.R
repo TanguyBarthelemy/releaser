@@ -13,8 +13,14 @@
 #' (character).
 #'
 #' @examples
-#' path_pluma <- system.file("pluma", package = "releaser")
-#' change_remotes_field(path = path_pluma, target = "develop")
+#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+#' file.copy(
+#'     from = system.file("rjd3workspace", package = "releaser"),
+#'     to = dirname(path_rjd3workspace),
+#'     recursive = TRUE
+#' )
+#'
+#' change_remotes_field(path = path_rjd3workspace, target = "develop")
 #'
 #' @export
 #' @importFrom desc desc_get_remotes desc_set_remotes
@@ -68,8 +74,14 @@ change_remotes_field <- function(
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
 #' @examples
-#' path_pluma <- system.file("pluma", package = "releaser")
-#' set_latest_deps_version(path = path_pluma)
+#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+#' file.copy(
+#'     from = system.file("rjd3workspace", package = "releaser"),
+#'     to = dirname(path_rjd3workspace),
+#'     recursive = TRUE
+#' )
+#'
+#' set_latest_deps_version(path = path_rjd3workspace)
 #'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep
@@ -106,10 +118,15 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #' The argument `version_number` is the new version number to update the
 #' changelog.
 #'
-#'
 #' @examples
-#' path_pluma <- system.file("pluma", package = "releaser")
-#' update_news_md(path = path_pluma, version_number = "1.2.3")
+#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+#' file.copy(
+#'     from = system.file("rjd3workspace", package = "releaser"),
+#'     to = dirname(path_rjd3workspace),
+#'     recursive = TRUE
+#' )
+#'
+#' update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
 #'
 #' @export
 update_news_md <- function(path = ".", version_number, verbose = TRUE) {

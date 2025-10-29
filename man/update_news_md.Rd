@@ -28,7 +28,13 @@ The argument \code{version_number} is the new version number to update the
 changelog.
 }
 \examples{
-path_pluma <- system.file("pluma", package = "releaser")
-update_news_md(path = path_pluma, version_number = "1.2.3")
+path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+file.copy(
+    from = system.file("rjd3workspace", package = "releaser"),
+    to = dirname(path_rjd3workspace),
+    recursive = TRUE
+)
+
+update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
 
 }

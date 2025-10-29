@@ -110,8 +110,9 @@ get_version_from_branch <- function(
 #' @return A single character string with the package version.
 #'
 #' @examples
-#' path_pluma <- system.file("pluma", package = "releaser")
-#' get_version_from_local(path = path_pluma)
+#' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
+#'
+#' get_version_from_local(path = path_rjd3workspace)
 #'
 #' @importFrom desc desc_get_version
 #'
@@ -182,13 +183,15 @@ get_latest_version <- function(
 #' version.
 #'
 #' @examples
-#' path_pluma <- system.file("pluma", package = "releaser")
-#' get_changes(path = path_pluma, version_number = "Unreleased")
-#' get_changes(path = path_pluma, version_number = "0.1.0")
-#' get_changes(path = path_pluma, version_number = "0.2.0")
+#' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
+#'
+#' get_changes(path = path_rjd3workspace, version_number = "Unreleased")
+#' get_changes(path = path_rjd3workspace, version_number = "3.2.4")
+#' get_changes(path = path_rjd3workspace, version_number = "3.5.1")
 #'
 #' @export
 get_changes <- function(path = ".", version_number, verbose = TRUE) {
+    path <- normalizePath(path, mustWork = TRUE)
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     if (verbose) {
         message("Reading NEWS.md from: ", path)
@@ -199,6 +202,10 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
         x = changelog
     ) +
         1L
+
+    if (length(starting_line) == 0L) {
+        stop("Version ", version_number, " doesn't exist for ", path)
+    }
 
     ending_line <- c(
         grep(pattern = "^## \\[", x = changelog),
