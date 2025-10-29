@@ -74,6 +74,7 @@ change_remotes_field <- function(
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
 #' @examples
+#' \donttest{
 #' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 #' file.copy(
 #'     from = system.file("rjd3workspace", package = "releaser"),
@@ -82,6 +83,7 @@ change_remotes_field <- function(
 #' )
 #'
 #' set_latest_deps_version(path = path_rjd3workspace)
+#' }
 #'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep
