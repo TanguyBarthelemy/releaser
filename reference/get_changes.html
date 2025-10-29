@@ -83,10 +83,22 @@ version.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path_pluma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"inst"</span>, <span class="st">"pluma"</span>, package <span class="op">=</span> <span class="st">"releaser"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">get_changes</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_pluma</span>, version_number <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/NEWS.md': No such file or directory</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(con, "r"):</span> cannot open the connection</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path_pluma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"pluma"</span>, package <span class="op">=</span> <span class="st">"releaser"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_changes</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_pluma</span>, version_number <span class="op">=</span> <span class="st">"Unreleased"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading NEWS.md from: /home/runner/work/_temp/Library/releaser/pluma</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting changes for version: Unreleased</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Successfully extracted 6 lines of changes.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "## Changes\n\n### Added\n\n- Bug in `pluma::draft()` when document are not aligned\n\n\n[Unreleased]: https://github.com/fictive-lab/pluma/compare/v1.2.3...HEAD"</span>
+<span class="r-in"><span><span class="fu">get_changes</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_pluma</span>, version_number <span class="op">=</span> <span class="st">"0.1.0"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading NEWS.md from: /home/runner/work/_temp/Library/releaser/pluma</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting changes for version: 0.1.0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Successfully extracted 8 lines of changes.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "## Changes\n\n### Added\n- Initial release of  {pluma}.\n- Basic HTML rendering from code blocks.\n- Support for embedded R and Python snippets.\n- Minimal CLI tool: `pluma render input.Rmd -o output.html`.\n\n\n[0.1.0]: https://github.com/fictive-lab/pluma/releases/tag/v0.1.0"</span>
+<span class="r-in"><span><span class="fu">get_changes</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_pluma</span>, version_number <span class="op">=</span> <span class="st">"0.2.0"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading NEWS.md from: /home/runner/work/_temp/Library/releaser/pluma</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting changes for version: 0.2.0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Successfully extracted 14 lines of changes.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "## Changes\n\n### Added\n- Support for PDF output using `tinytex`.\n- New YAML options: `title`, `author`, `theme`, `output_format`.\n- Added unit tests for rendering pipeline.\n\n### Changed\n- Default output format is now HTML.\n- Refactored `pluma_render()` for cleaner output logging.\n\n### Deprecated\n- Deprecated `pluma_convert()` in favor of `pluma_render()`.\n\n\n[0.2.0]: https://github.com/fictive-lab/pluma/compare/v0.1.0...v0.2.0"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
