@@ -9,6 +9,6 @@ test_that("multiplication works", {
         object = get_different_future_version("1.2.3"),
         expected = expected_output
     )
-    expect_message(object = {get_different_future_version("1.2.3", verbose = TRUE)})
+    expect_message(object = get_different_future_version("1.2.3", verbose = TRUE))
     # expect_no_message(object = {get_different_future_version("1.2.3", verbose = FALSE)})
 })
