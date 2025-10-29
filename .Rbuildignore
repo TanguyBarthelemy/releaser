@@ -6,3 +6,5 @@
 ^[.]?air[.]toml$
 ^\.vscode$
 ^\.lintr$
+
+^why\.md$

@@ -6,19 +6,19 @@
 \usage{
 change_remotes_field(
   path = ".",
-  verbose = TRUE,
-  target = c("develop", "snapshot", "main")
+  target = c("develop", "snapshot", "main"),
+  verbose = TRUE
 )
 }
 \arguments{
 \item{path}{[\link[base]{character}] Path to the package root directory
 (default: \code{"."}).}
 
-\item{verbose}{[\link[base]{logical}] Whether to print current and new
-remote fields (default: \code{TRUE}).}
-
 \item{target}{[\link[base]{character}] Target branch or type of remote:
 must be one of \code{"develop"}, \code{"snapshot"}, or \code{"main"}.}
+
+\item{verbose}{[\link[base]{logical}] Whether to print current and new
+remote fields (default: \code{TRUE}).}
 }
 \value{
 Invisibly returns the new vector of remote specifications
@@ -30,8 +30,7 @@ dependencies point to specific development targets
 (\code{develop}, \code{snapshot}, or \code{main}).
 }
 \examples{
-\dontrun{
-change_remotes_field(path = ".", target = "develop")
-}
+path_releaser <- system.file("inst", "pluma", package = "releaser")
+change_remotes_field(path = path_releaser, target = "develop")
 
 }

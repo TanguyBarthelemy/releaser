@@ -1,0 +1,37 @@
+Type: Package
+Package: pluma
+Title: Lightweight Code and Document Renderer
+Version: 0.3.0
+Authors@R: 
+    person("Aline", "Moreau", , "aline.moreau@example.org", role = c("aut", "cre"))
+Description: 'pluma' is a lightweight rendering engine that converts code
+    and text snippets into beautiful documents (HTML, PDF, DOCX).  It aims
+    to be a minimal alternative to RMarkdown, offering modular output
+    formatting, syntax highlighting, and flexible styling via templates.
+    Designed for automation, scripting, and seamless integration in data
+    pipelines.
+License: MIT + file LICENSE
+URL: https://github.com/fictive-lab/pluma
+BugReports: https://github.com/fictive-lab/pluma/issues
+Depends: 
+    R (>= 4.2.0)
+Imports:
+    cli,
+    fs,
+    glue,
+    knitr,
+    rjd3toolkit (>= 3.5.1),
+    rmarkdown,
+    stringr,
+    xml2
+Suggests:
+    covr,
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Remotes: 
+    github::rjdverse/rjd3toolkit@develop
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3

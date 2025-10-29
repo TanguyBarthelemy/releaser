@@ -24,8 +24,7 @@ version.
 Extracts the section of \code{NEWS.md} corresponding to a given version.
 }
 \examples{
-\dontrun{
-get_changes(".", "1.0.0")
-}
+path_releaser <- system.file("inst", "pluma", package = "releaser")
+get_changes(path = path_releaser, version_number = "1.0.0")
 
 }

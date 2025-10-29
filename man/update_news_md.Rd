@@ -4,14 +4,14 @@
 \alias{update_news_md}
 \title{Update \code{NEWS.md} for a new release}
 \usage{
-update_news_md(new_version, path = ".", verbose = TRUE)
+update_news_md(path = ".", version_number, verbose = TRUE)
 }
 \arguments{
-\item{new_version}{[\link[base]{character}] The new version number (e.g.
-\code{"1.2.3"}).}
-
 \item{path}{[\link[base]{character}] Path to the package root directory
 (default: \code{"."}).}
+
+\item{version_number}{[\link[base]{character}] Current version number string
+(e.g. \code{"1.2.3"}).}
 
 \item{verbose}{[\link[base]{logical}] Whether to print current and new
 remote fields (default: \code{TRUE}).}
@@ -23,10 +23,12 @@ Invisibly returns \code{TRUE} if the file was successfully updated.
 Modify the \code{NEWS.md} file of a package to replace the \code{"Unreleased"}
 section with a new version heading and update GitHub comparison links.
 }
-\examples{
-\dontrun{
-update_news_md(new_version = "1.2.3",
-               path = ".")
+\details{
+The argument \code{version_number} is the new version number to update the
+changelog.
 }
+\examples{
+path_releaser <- system.file("inst", "pluma", package = "releaser")
+update_news_md(path = path_releaser, version_number = "1.2.3")
 
 }

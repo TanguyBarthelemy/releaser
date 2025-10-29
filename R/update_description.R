@@ -5,10 +5,7 @@
 #' dependencies point to specific development targets
 #' (`develop`, `snapshot`, or `main`).
 #'
-#' @param path [\link[base]{character}] Path to the package root directory
-#' (default: `"."`).
-#' @param verbose [\link[base]{logical}] Whether to print current and new
-#' remote fields (default: `TRUE`).
+#' @inheritParams set_latest_deps_version
 #' @param target [\link[base]{character}] Target branch or type of remote:
 #' must be one of `"develop"`, `"snapshot"`, or `"main"`.
 #'
@@ -16,16 +13,15 @@
 #' (character).
 #'
 #' @examples
-#' \dontrun{
-#' change_remotes_field(path = ".", target = "develop")
-#' }
+#' path_releaser <- system.file("inst", "pluma", package = "releaser")
+#' change_remotes_field(path = path_releaser, target = "develop")
 #'
 #' @export
 #' @importFrom desc desc_get_remotes desc_set_remotes
 change_remotes_field <- function(
     path = ".",
-    verbose = TRUE,
-    target = c("develop", "snapshot", "main")
+    target = c("develop", "snapshot", "main"),
+    verbose = TRUE
 ) {
     remotes <- desc::desc_get_remotes(path)
     if (length(remotes) == 0L) {
@@ -64,14 +60,16 @@ change_remotes_field <- function(
 #' Update the `DESCRIPTION` file of a package so that all dependencies
 #' beginning with `"rjd3"` require the latest released version from GitHub.
 #'
-#' @inheritParams change_remotes_field
+#' @param path [\link[base]{character}] Path to the package root directory
+#' (default: `"."`).
+#' @param verbose [\link[base]{logical}] Whether to print current and new
+#' remote fields (default: `TRUE`).
 #'
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
 #' @examples
-#' \dontrun{
-#' set_latest_deps_version(path = ".")
-#' }
+#' path_releaser <- system.file("inst", "pluma", package = "releaser")
+#' set_latest_deps_version(path = path_releaser)
 #'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep
@@ -100,22 +98,23 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #' Modify the `NEWS.md` file of a package to replace the `"Unreleased"`
 #' section with a new version heading and update GitHub comparison links.
 #'
-#' @param new_version [\link[base]{character}] The new version number (e.g.
-#' `"1.2.3"`).
-#' @inheritParams change_remotes_field
+#' @inheritParams get_changes
 #'
 #' @return Invisibly returns `TRUE` if the file was successfully updated.
 #'
+#' @details
+#' The argument `version_number` is the new version number to update the
+#' changelog.
+#'
+#'
 #' @examples
-#' \dontrun{
-#' update_news_md(new_version = "1.2.3",
-#'                path = ".")
-#' }
+#' path_releaser <- system.file("inst", "pluma", package = "releaser")
+#' update_news_md(path = path_releaser, version_number = "1.2.3")
 #'
 #' @export
-update_news_md <- function(new_version, path = ".", verbose = TRUE) {
+update_news_md <- function(path = ".", version_number, verbose = TRUE) {
     if (verbose) {
-        message("Updating NEWS.md for version: ", new_version)
+        message("Updating NEWS.md for version: ", version_number)
     }
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     urls <- regmatches(
@@ -125,7 +124,7 @@ update_news_md <- function(new_version, path = ".", verbose = TRUE) {
     github_url <- unique(urls)
 
     line_number <- which(changelog == "## [Unreleased]")
-    new_line <- paste0("## [", new_version, "] - ", Sys.Date())
+    new_line <- paste0("## [", version_number, "] - ", Sys.Date())
     changelog <- c(
         changelog[seq_len(line_number)],
         "",
@@ -152,14 +151,18 @@ update_news_md <- function(new_version, path = ".", verbose = TRUE) {
 
     new_compare_head <- gsub(
         pattern = pattern,
-        replacement = paste0("v", new_version),
+        replacement = paste0("v", version_number),
         x = old_compare_head
     )
     new_compare_old_version <- old_compare_head |>
-        gsub(pattern = "Unreleased", replacement = new_version, fixed = TRUE) |>
+        gsub(
+            pattern = "Unreleased",
+            replacement = version_number,
+            fixed = TRUE
+        ) |>
         gsub(
             pattern = "HEAD",
-            replacement = paste0("v", new_version),
+            replacement = paste0("v", version_number),
             fixed = TRUE
         )
 

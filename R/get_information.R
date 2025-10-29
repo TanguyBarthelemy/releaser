@@ -69,9 +69,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #' @return A single character string with the package version.
 #'
 #' @examples
-#' \dontrun{
 #' get_version_from_branch("r-lib/usethis", branch = "main")
-#' }
 #'
 #' @importFrom gh gh
 #' @importFrom base64enc base64decode
@@ -110,9 +108,8 @@ get_version_from_branch <- function(
 #' @return A single character string with the package version.
 #'
 #' @examples
-#' \dontrun{
-#' get_version_from_local(".")
-#' }
+#' path_releaser <- system.file("inst", "pluma", package = "releaser")
+#' get_version_from_local(path = path_releaser)
 #'
 #' @importFrom desc desc_get_version
 #'
@@ -140,9 +137,7 @@ get_version_from_local <- function(path = ".", verbose = TRUE) {
 #' @return A character string with the version of the latest release.
 #'
 #' @examples
-#' \dontrun{
 #' get_latest_version("r-lib/usethis")
-#' }
 #'
 #' @importFrom gh gh
 #' @export
@@ -183,9 +178,8 @@ get_latest_version <- function(
 #' version.
 #'
 #' @examples
-#' \dontrun{
-#' get_changes(".", "1.0.0")
-#' }
+#' path_releaser <- system.file("inst", "pluma", package = "releaser")
+#' get_changes(path = path_releaser, version_number = "1.0.0")
 #'
 #' @export
 get_changes <- function(path = ".", version_number, verbose = TRUE) {
@@ -231,9 +225,7 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
 #' @return A character vector with branch names.
 #'
 #' @examples
-#' \dontrun{
 #' get_github_branches("r-lib/usethis")
-#' }
 #'
 #' @importFrom gh gh
 #' @export
