@@ -13,7 +13,7 @@
 #' (character).
 #'
 #' @examples
-#' path_pluma <- system.file("inst", "pluma", package = "releaser")
+#' path_pluma <- system.file("pluma", package = "releaser")
 #' change_remotes_field(path = path_pluma, target = "develop")
 #'
 #' @export
@@ -68,7 +68,7 @@ change_remotes_field <- function(
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
 #' @examples
-#' path_pluma <- system.file("inst", "pluma", package = "releaser")
+#' path_pluma <- system.file("pluma", package = "releaser")
 #' set_latest_deps_version(path = path_pluma)
 #'
 #' @export
@@ -108,7 +108,7 @@ set_latest_deps_version <- function(path = ".", verbose = TRUE) {
 #'
 #'
 #' @examples
-#' path_pluma <- system.file("inst", "pluma", package = "releaser")
+#' path_pluma <- system.file("pluma", package = "releaser")
 #' update_news_md(path = path_pluma, version_number = "1.2.3")
 #'
 #' @export

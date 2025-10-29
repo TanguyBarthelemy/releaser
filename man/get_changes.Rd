@@ -24,7 +24,9 @@ version.
 Extracts the section of \code{NEWS.md} corresponding to a given version.
 }
 \examples{
-path_pluma <- system.file("inst", "pluma", package = "releaser")
-get_changes(path = path_pluma, version_number = "1.0.0")
+path_pluma <- system.file("pluma", package = "releaser")
+get_changes(path = path_pluma, version_number = "Unreleased")
+get_changes(path = path_pluma, version_number = "0.1.0")
+get_changes(path = path_pluma, version_number = "0.2.0")
 
 }

@@ -108,7 +108,7 @@ get_version_from_branch <- function(
 #' @return A single character string with the package version.
 #'
 #' @examples
-#' path_pluma <- system.file("inst", "pluma", package = "releaser")
+#' path_pluma <- system.file("pluma", package = "releaser")
 #' get_version_from_local(path = path_pluma)
 #'
 #' @importFrom desc desc_get_version
@@ -178,8 +178,10 @@ get_latest_version <- function(
 #' version.
 #'
 #' @examples
-#' path_pluma <- system.file("inst", "pluma", package = "releaser")
-#' get_changes(path = path_pluma, version_number = "1.0.0")
+#' path_pluma <- system.file("pluma", package = "releaser")
+#' get_changes(path = path_pluma, version_number = "Unreleased")
+#' get_changes(path = path_pluma, version_number = "0.1.0")
+#' get_changes(path = path_pluma, version_number = "0.2.0")
 #'
 #' @export
 get_changes <- function(path = ".", version_number, verbose = TRUE) {
@@ -193,7 +195,12 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
         x = changelog
     ) +
         1L
-    ending_line <- grep(pattern = "^## \\[", x = changelog)
+
+    ending_line <- c(
+        grep(pattern = "^## \\[", x = changelog),
+        grep("^\\[Unreleased\\]", changelog),
+        length(changelog)
+    )
     ending_line <- min(ending_line[ending_line > starting_line]) - 1L
     ref <- grep(pattern = paste0("^\\[", version_number, "\\]"), x = changelog)
 

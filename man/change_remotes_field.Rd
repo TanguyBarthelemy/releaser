@@ -30,7 +30,7 @@ dependencies point to specific development targets
 (\code{develop}, \code{snapshot}, or \code{main}).
 }
 \examples{
-path_pluma <- system.file("inst", "pluma", package = "releaser")
+path_pluma <- system.file("pluma", package = "releaser")
 change_remotes_field(path = path_pluma, target = "develop")
 
 }
