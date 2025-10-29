@@ -24,6 +24,8 @@ Retrieve the version number of the latest GitHub release for a repository
 and optionally print versions found across all branches.
 }
 \examples{
+\donttest{
 get_latest_version("r-lib/usethis")
+}
 
 }
