@@ -28,7 +28,7 @@ The argument \code{version_number} is the new version number to update the
 changelog.
 }
 \examples{
-path_releaser <- system.file("inst", "pluma", package = "releaser")
-update_news_md(path = path_releaser, version_number = "1.2.3")
+path_pluma <- system.file("inst", "pluma", package = "releaser")
+update_news_md(path = path_pluma, version_number = "1.2.3")
 
 }

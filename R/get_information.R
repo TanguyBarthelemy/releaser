@@ -108,8 +108,8 @@ get_version_from_branch <- function(
 #' @return A single character string with the package version.
 #'
 #' @examples
-#' path_releaser <- system.file("inst", "pluma", package = "releaser")
-#' get_version_from_local(path = path_releaser)
+#' path_pluma <- system.file("inst", "pluma", package = "releaser")
+#' get_version_from_local(path = path_pluma)
 #'
 #' @importFrom desc desc_get_version
 #'
@@ -178,8 +178,8 @@ get_latest_version <- function(
 #' version.
 #'
 #' @examples
-#' path_releaser <- system.file("inst", "pluma", package = "releaser")
-#' get_changes(path = path_releaser, version_number = "1.0.0")
+#' path_pluma <- system.file("inst", "pluma", package = "releaser")
+#' get_changes(path = path_pluma, version_number = "1.0.0")
 #'
 #' @export
 get_changes <- function(path = ".", version_number, verbose = TRUE) {
