@@ -91,12 +91,19 @@ remote fields (default: <code>TRUE</code>).</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path_pluma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"pluma"</span>, package <span class="op">=</span> <span class="st">"releaser"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">change_remotes_field</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_pluma</span>, target <span class="op">=</span> <span class="st">"develop"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path_rjd3workspace</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"rjd3workspace"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"rjd3workspace"</span>, package <span class="op">=</span> <span class="st">"releaser"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">dirname</a></span><span class="op">(</span><span class="va">path_rjd3workspace</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    recursive <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">change_remotes_field</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_rjd3workspace</span>, target <span class="op">=</span> <span class="st">"develop"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Current remotes fields :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> github::rjdverse/rjd3toolkit@develop </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> github::rjdverse/rjd3providers@develop github::rjdverse/rjd3toolkit@develop github::rjdverse/rjd3tramoseats@develop github::rjdverse/rjd3x13@develop </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> New remotes fields :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> github::rjdverse/rjd3toolkit@develop </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> github::rjdverse/rjd3providers@develop github::rjdverse/rjd3toolkit@develop github::rjdverse/rjd3tramoseats@develop github::rjdverse/rjd3x13@develop </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
