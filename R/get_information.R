@@ -204,7 +204,8 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
         1L
 
     if (length(starting_line) == 0L) {
-        stop("Version ", version_number, " doesn't exist for ", path)
+        stop("Version ", version_number, " doesn't exist for ", path,
+             call. = FALSE)
     }
 
     ending_line <- c(
