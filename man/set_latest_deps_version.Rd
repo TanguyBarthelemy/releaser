@@ -4,11 +4,10 @@
 \alias{set_latest_deps_version}
 \title{Set latest versions for \verb{rjd3*} dependencies}
 \usage{
-set_latest_deps_version(path = ".", verbose = TRUE)
+set_latest_deps_version(path, verbose = TRUE)
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory
-(default: \code{"."}).}
+\item{path}{[\link[base]{character}] Path to the package root directory.}
 
 \item{verbose}{[\link[base]{logical}] Whether to print current and new
 remote fields (default: \code{TRUE}).}
@@ -21,6 +20,7 @@ Update the \code{DESCRIPTION} file of a package so that all dependencies
 beginning with \code{"rjd3"} require the latest released version from GitHub.
 }
 \examples{
+\donttest{
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 file.copy(
     from = system.file("rjd3workspace", package = "releaser"),
@@ -29,5 +29,6 @@ file.copy(
 )
 
 set_latest_deps_version(path = path_rjd3workspace)
+}
 
 }

@@ -5,14 +5,13 @@
 \title{Change the \code{Remotes} field in DESCRIPTION}
 \usage{
 change_remotes_field(
-  path = ".",
+  path,
   target = c("develop", "snapshot", "main"),
   verbose = TRUE
 )
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory
-(default: \code{"."}).}
+\item{path}{[\link[base]{character}] Path to the package root directory.}
 
 \item{target}{[\link[base]{character}] Target branch or type of remote:
 must be one of \code{"develop"}, \code{"snapshot"}, or \code{"main"}.}

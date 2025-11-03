@@ -119,7 +119,7 @@ get_version_from_branch <- function(
 #' @keywords internal
 #' @noRd
 #'
-get_version_from_local <- function(path = ".", verbose = TRUE) {
+get_version_from_local <- function(path, verbose = TRUE) {
     version_number <- desc::desc_get_version(path) |> as.character()
     if (verbose) {
         message("Local version at '", path, "': ", version_number)
@@ -190,7 +190,7 @@ get_latest_version <- function(
 #' get_changes(path = path_rjd3workspace, version_number = "3.5.1")
 #'
 #' @export
-get_changes <- function(path = ".", version_number, verbose = TRUE) {
+get_changes <- function(path, version_number, verbose = TRUE) {
     path <- normalizePath(path, mustWork = TRUE)
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     if (verbose) {
