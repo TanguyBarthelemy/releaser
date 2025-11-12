@@ -4,11 +4,10 @@
 \alias{update_news_md}
 \title{Update \code{NEWS.md} for a new release}
 \usage{
-update_news_md(path = ".", version_number, verbose = TRUE)
+update_news_md(path, version_number, verbose = TRUE)
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory
-(default: \code{"."}).}
+\item{path}{[\link[base]{character}] Path to the package root directory.}
 
 \item{version_number}{[\link[base]{character}] Current version number string
 (e.g. \code{"1.2.3"}).}
@@ -28,7 +27,13 @@ The argument \code{version_number} is the new version number to update the
 changelog.
 }
 \examples{
-path_pluma <- system.file("pluma", package = "releaser")
-update_news_md(path = path_pluma, version_number = "1.2.3")
+path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+file.copy(
+    from = system.file("rjd3workspace", package = "releaser"),
+    to = dirname(path_rjd3workspace),
+    recursive = TRUE
+)
+
+update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
 
 }
