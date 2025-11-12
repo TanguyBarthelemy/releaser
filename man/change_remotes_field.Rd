@@ -5,14 +5,13 @@
 \title{Change the \code{Remotes} field in DESCRIPTION}
 \usage{
 change_remotes_field(
-  path = ".",
+  path,
   target = c("develop", "snapshot", "main"),
   verbose = TRUE
 )
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory
-(default: \code{"."}).}
+\item{path}{[\link[base]{character}] Path to the package root directory.}
 
 \item{target}{[\link[base]{character}] Target branch or type of remote:
 must be one of \code{"develop"}, \code{"snapshot"}, or \code{"main"}.}
@@ -30,7 +29,13 @@ dependencies point to specific development targets
 (\code{develop}, \code{snapshot}, or \code{main}).
 }
 \examples{
-path_pluma <- system.file("pluma", package = "releaser")
-change_remotes_field(path = path_pluma, target = "develop")
+path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+file.copy(
+    from = system.file("rjd3workspace", package = "releaser"),
+    to = dirname(path_rjd3workspace),
+    recursive = TRUE
+)
+
+change_remotes_field(path = path_rjd3workspace, target = "develop")
 
 }

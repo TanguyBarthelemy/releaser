@@ -4,11 +4,10 @@
 \alias{get_changes}
 \title{Extract changelog entries for a given version}
 \usage{
-get_changes(path = ".", version_number, verbose = TRUE)
+get_changes(path, version_number, verbose = TRUE)
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory
-(default: \code{"."}).}
+\item{path}{[\link[base]{character}] Path to the package root directory.}
 
 \item{version_number}{[\link[base]{character}] Current version number string
 (e.g. \code{"1.2.3"}).}
@@ -24,9 +23,10 @@ version.
 Extracts the section of \code{NEWS.md} corresponding to a given version.
 }
 \examples{
-path_pluma <- system.file("pluma", package = "releaser")
-get_changes(path = path_pluma, version_number = "Unreleased")
-get_changes(path = path_pluma, version_number = "0.1.0")
-get_changes(path = path_pluma, version_number = "0.2.0")
+path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
+
+get_changes(path = path_rjd3workspace, version_number = "Unreleased")
+get_changes(path = path_rjd3workspace, version_number = "3.2.4")
+get_changes(path = path_rjd3workspace, version_number = "3.5.1")
 
 }

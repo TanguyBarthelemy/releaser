@@ -69,7 +69,9 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #' @return A single character string with the package version.
 #'
 #' @examples
+#' \donttest{
 #' get_version_from_branch("r-lib/usethis", branch = "main")
+#' }
 #'
 #' @importFrom gh gh
 #' @importFrom base64enc base64decode
@@ -108,15 +110,16 @@ get_version_from_branch <- function(
 #' @return A single character string with the package version.
 #'
 #' @examples
-#' path_pluma <- system.file("pluma", package = "releaser")
-#' get_version_from_local(path = path_pluma)
+#' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
+#'
+#' get_version_from_local(path = path_rjd3workspace)
 #'
 #' @importFrom desc desc_get_version
 #'
 #' @keywords internal
 #' @noRd
 #'
-get_version_from_local <- function(path = ".", verbose = TRUE) {
+get_version_from_local <- function(path, verbose = TRUE) {
     version_number <- desc::desc_get_version(path) |> as.character()
     if (verbose) {
         message("Local version at '", path, "': ", version_number)
@@ -137,7 +140,9 @@ get_version_from_local <- function(path = ".", verbose = TRUE) {
 #' @return A character string with the version of the latest release.
 #'
 #' @examples
+#' \donttest{
 #' get_latest_version("r-lib/usethis")
+#' }
 #'
 #' @importFrom gh gh
 #' @export
@@ -178,13 +183,15 @@ get_latest_version <- function(
 #' version.
 #'
 #' @examples
-#' path_pluma <- system.file("pluma", package = "releaser")
-#' get_changes(path = path_pluma, version_number = "Unreleased")
-#' get_changes(path = path_pluma, version_number = "0.1.0")
-#' get_changes(path = path_pluma, version_number = "0.2.0")
+#' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
+#'
+#' get_changes(path = path_rjd3workspace, version_number = "Unreleased")
+#' get_changes(path = path_rjd3workspace, version_number = "3.2.4")
+#' get_changes(path = path_rjd3workspace, version_number = "3.5.1")
 #'
 #' @export
-get_changes <- function(path = ".", version_number, verbose = TRUE) {
+get_changes <- function(path, version_number, verbose = TRUE) {
+    path <- normalizePath(path, mustWork = TRUE)
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     if (verbose) {
         message("Reading NEWS.md from: ", path)
@@ -195,6 +202,11 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
         x = changelog
     ) +
         1L
+
+    if (length(starting_line) == 0L) {
+        stop("Version ", version_number, " doesn't exist for ", path,
+             call. = FALSE)
+    }
 
     ending_line <- c(
         grep(pattern = "^## \\[", x = changelog),
@@ -232,7 +244,9 @@ get_changes <- function(path = ".", version_number, verbose = TRUE) {
 #' @return A character vector with branch names.
 #'
 #' @examples
+#' \donttest{
 #' get_github_branches("r-lib/usethis")
+#' }
 #'
 #' @importFrom gh gh
 #' @export

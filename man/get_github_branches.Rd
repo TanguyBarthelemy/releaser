@@ -23,6 +23,8 @@ A character vector with branch names.
 Retrieve all branch names from a GitHub repository.
 }
 \examples{
+\donttest{
 get_github_branches("r-lib/usethis")
+}
 
 }
