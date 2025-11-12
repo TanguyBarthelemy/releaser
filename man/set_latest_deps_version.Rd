@@ -21,10 +21,6 @@ beginning with \code{"rjd3"} require the latest released version from GitHub.
 }
 \examples{
 \donttest{
-<<<<<<< HEAD
-path_pluma <- system.file("pluma", package = "releaser")
-set_latest_deps_version(path = path_pluma)
-=======
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 file.copy(
     from = system.file("rjd3workspace", package = "releaser"),
@@ -33,7 +29,6 @@ file.copy(
 )
 
 set_latest_deps_version(path = path_rjd3workspace)
->>>>>>> b23172c34fd504d80ddeff134d91e027020c462b
 }
 
 }
