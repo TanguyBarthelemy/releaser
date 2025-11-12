@@ -68,8 +68,10 @@ change_remotes_field <- function(
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
 #' @examples
+#' \donttest{
 #' path_pluma <- system.file("pluma", package = "releaser")
 #' set_latest_deps_version(path = path_pluma)
+#' }
 #'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep

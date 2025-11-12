@@ -21,7 +21,9 @@ Update the \code{DESCRIPTION} file of a package so that all dependencies
 beginning with \code{"rjd3"} require the latest released version from GitHub.
 }
 \examples{
+\donttest{
 path_pluma <- system.file("pluma", package = "releaser")
 set_latest_deps_version(path = path_pluma)
+}
 
 }
