@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+* url of GitHub repo with desc pkg
+
+
 ## [1.0.0] - 2025-10-29
 
 ### Changed
@@ -18,13 +23,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 * argument `gh_repo` from `update_news_md()`
 
-
 ### Added
 
 * Add files and function to extract information from description (based on {desc}).
 * Add function to extract version from GitHub or from an R package.
 * New functions to modify the DESCRIPTION and NEWS.md files for release
 * Implemented progress and diagnostic messages when `verbose = TRUE` to aid debugging and transparency.
+
 
 [Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/TanguyBarthelemy/releaser/releases/tag/v1.0.0
