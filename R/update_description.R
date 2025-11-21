@@ -138,10 +138,10 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
     }
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     urls <- regmatches(
-        x = desc::desc_get_urls(),
+        x = desc::desc_get_urls(file = path),
         m = regexpr(
             pattern = "https://github\\.com/[^/]+/[^/]+",
-            text = desc::desc_get_urls()
+            text = desc::desc_get_urls(file = path)
         )
     )
     github_url <- unique(urls)
