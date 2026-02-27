@@ -17,7 +17,8 @@ Depends:
 Imports: 
     gh, 
     desc, 
-    base64enc
+    base64enc, 
+    roxygen2
 Suggests:
     rlang,
     spelling,
