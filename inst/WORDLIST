@@ -7,3 +7,5 @@ desc
 CMD
 md
 rjd
+pkg
+roxygen

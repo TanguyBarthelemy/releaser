@@ -369,7 +369,7 @@ print.releaser_doc_check <- function(x, ...) {
         issues <- x[[nm]]
         cat("*", nm, ":\n")
         if (length(issues) == 0L) {
-            cat("  ✓ OK\n\n")
+            cat("\U20 OK\n\n")
         } else {
             display_functions(issues)
             cat("\n")
