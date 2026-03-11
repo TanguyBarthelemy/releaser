@@ -1,5 +1,10 @@
 read_documentation <- function(pkg_dir) {
-    r_files <- list.files(file.path(pkg_dir, "R"), full.names = TRUE, pattern = "\\.R$", recursive = TRUE)
+    r_files <- list.files(
+        path = file.path(pkg_dir, "R"),
+        full.names = TRUE,
+        pattern = "\\.R$",
+        recursive = TRUE
+    )
     blocks <- lapply(r_files, roxygen2::parse_file)
     blocks <- unlist(blocks, recursive = FALSE)
     class(blocks) <- "docblock"
@@ -51,7 +56,7 @@ get_examples.roxy_block <- function(x) {
     }
 
     id_tag_example <- which(get_tag(x) %ino% c("examplesIf", "examples"))
-    example <- paste(
+    my_example <- paste(
         vapply(
             X = id_tag_example,
             FUN = function(k) x$tags[[k]]$val,
@@ -59,8 +64,7 @@ get_examples.roxy_block <- function(x) {
         ),
         collapse = "\n"
     )
-    return(example)
-
+    return(my_example)
 }
 
 #' @exportS3Method get_examples docblock
@@ -77,14 +81,18 @@ get_topics <- function(x) {
 #' @method get_topics roxy_block
 get_topics.roxy_block <- function(x) {
     topic <- x$object$topic
-    if (is.null(topic)) return("")
+    if (is.null(topic)) {
+        return("")
+    }
     return(topic)
 }
 
 #' @exportS3Method get_topics docblock
 #' @method get_topics docblock
 get_topics.docblock <- function(x) {
-    if (length(x) == 0L) return(NULL)
+    if (length(x) == 0L) {
+        return(NULL)
+    }
     sapply(x, FUN = get_topics)
 }
 
@@ -96,7 +104,7 @@ is_not_in_example <- function(x, all_examples) {
 #' @method is_not_in_example roxy_block
 is_not_in_example.roxy_block <- function(x, all_examples) {
     if (missing(all_examples)) {
-        stop("All examples are missing")
+        stop("All examples are missing", call. = FALSE)
     }
     topics <- get_topics(x)
     if (is.null(topics)) {
@@ -139,19 +147,19 @@ has_rdname <- function(x) {
     has_tag(x, "rdname")
 }
 
-is_call <- function(x){
+is_call <- function(x) {
     UseMethod("is_call", x)
 }
 
 #' @exportS3Method is_call roxy_block
 #' @method is_call roxy_block
-is_call.roxy_block <- function(x){
+is_call.roxy_block <- function(x) {
     return(!is.null(x$call) && x$call != "_PACKAGE")
 }
 
 #' @exportS3Method is_call docblock
 #' @method is_call docblock
-is_call.docblock <- function(x){
+is_call.docblock <- function(x) {
     sapply(x, is_call)
 }
 
@@ -164,7 +172,7 @@ is_jd3_utilities <- function(x) {
 is_jd3_utilities.roxy_block <- function(x) {
     tag_list <- get_tag(x)
     id <- which("rdname" == tag_list)
-    if (length(id) > 0) {
+    if (length(id) > 0L) {
         return(x$tags[[id]]$raw == "jd3_utilities")
     }
     return(FALSE)
@@ -190,7 +198,12 @@ get_no_s3_method <- function(x) {
 
 display_functions <- function(x) {
     if (length(x) > 0L) {
-        cat("- [ ] `", paste(sort(x), collapse = "()`\n- [ ] `"), "()`\n", sep = "")
+        cat(
+            "- [ ] `",
+            paste(sort(x), collapse = "()`\n- [ ] `"),
+            "()`\n",
+            sep = ""
+        )
     }
     return(invisible(NULL))
 }
@@ -244,7 +257,9 @@ check_missing_examples_content <- function(pkg_dir) {
     missing_examples_tag <- check_missing_examples_tag(pkg_dir)
 
     list_funs <- blocks |>
-        Filter(f = \(x) is_not_in_example(x, all_examples = get_examples(blocks))) |>
+        Filter(f = \(x) {
+            is_not_in_example(x, all_examples = get_examples(blocks))
+        }) |>
         Filter(f = is_exported) |>
         Filter(f = is_call) |>
         get_topics() |>
@@ -324,18 +339,20 @@ check_missing_returns <- function(pkg_dir) {
 #'
 #' @inheritParams check
 #' @param verbose Logical. If `TRUE`, prints a formatted summary.
-#' @param error_on_fail Logical. If `TRUE`, stops execution if any issue is found.
+#' @param error_on_fail Logical. If `TRUE`, stops execution if any issue is
+#'   found.
 #'
 #' @return An object of class `"releaser_doc_check"` containing
 #' a named list of detected issues.
 #' @export
-check_docs <- function(pkg_dir = ".", verbose = interactive(), error_on_fail = FALSE) {
-
+check_docs <- function(
+    pkg_dir = ".",
+    verbose = interactive(),
+    error_on_fail = FALSE
+) {
     if (!dir.exists(pkg_dir)) {
-        stop("`pkg_dir` does not exist.")
+        stop("`pkg_dir` does not exist.", call. = FALSE)
     }
-
-    blocks <- read_documentation(pkg_dir)
 
     results <- list(
         missing_examples_tag = check_missing_examples_tag(pkg_dir),
@@ -361,7 +378,6 @@ check_docs <- function(pkg_dir = ".", verbose = interactive(), error_on_fail = F
 
 #' @export
 print.releaser_doc_check <- function(x, ...) {
-
     cat("Documentation checks\n")
     cat("====================\n\n")
 
