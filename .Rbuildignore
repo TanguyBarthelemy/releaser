@@ -9,3 +9,5 @@
 
 ^why\.md$
 ^cran-review\.md$
+^CRAN-SUBMISSION$
+^cran-comments\.md$

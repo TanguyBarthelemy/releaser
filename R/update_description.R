@@ -130,14 +130,19 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
 #' update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
 #'
 #' @export
+#' @importFrom desc desc_get_urls
+#'
 update_news_md <- function(path, version_number, verbose = TRUE) {
     if (verbose) {
         message("Updating NEWS.md for version: ", version_number)
     }
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     urls <- regmatches(
-        x = changelog,
-        regexpr(pattern = "https://github\\.com/[^/]+/[^/]+", text = changelog)
+        x = desc::desc_get_urls(file = path),
+        m = regexpr(
+            pattern = "https://github\\.com/[^/]+/[^/]+",
+            text = desc::desc_get_urls(file = path)
+        )
     )
     github_url <- unique(urls)
 
