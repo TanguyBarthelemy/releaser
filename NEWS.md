@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-03-11
+
+
 ### Added
 
 * New functions to check the documentation of a package R
@@ -35,5 +38,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 * Implemented progress and diagnostic messages when `verbose = TRUE` to aid debugging and transparency.
 
 
-[Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/TanguyBarthelemy/releaser/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/TanguyBarthelemy/releaser/releases/tag/v1.0.0
