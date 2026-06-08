@@ -18,9 +18,8 @@ jobs:
 
     steps:
 
-      - uses: TanguyBarthelemy/r-release-action@v1.0.1
+      - uses: TanguyBarthelemy/r-release-action@v1.1.0
         with:
           tag: ${{ github.event.inputs.tag }}
-          gh_repo: "TanguyBarthelemy/releaser"
           main-branch: "main"
           dev-branch: "develop"

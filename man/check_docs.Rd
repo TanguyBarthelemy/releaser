@@ -11,7 +11,8 @@ check_docs(pkg_dir = ".", verbose = interactive(), error_on_fail = FALSE)
 
 \item{verbose}{Logical. If \code{TRUE}, prints a formatted summary.}
 
-\item{error_on_fail}{Logical. If \code{TRUE}, stops execution if any issue is found.}
+\item{error_on_fail}{Logical. If \code{TRUE}, stops execution if any issue is
+found.}
 }
 \value{
 An object of class \code{"releaser_doc_check"} containing
