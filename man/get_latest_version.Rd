@@ -24,7 +24,7 @@ Retrieve the version number of the latest GitHub release for a repository
 and optionally print versions found across all branches.
 }
 \examples{
-\dontshow{if (any(Sys.getenv(c("NOT_CRAN", "IN_PKGDOWN")) == "true")) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 \donttest{
 get_latest_version("r-lib/usethis")
 }

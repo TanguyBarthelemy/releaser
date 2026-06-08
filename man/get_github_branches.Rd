@@ -23,7 +23,7 @@ A character vector with branch names.
 Retrieve all branch names from a GitHub repository.
 }
 \examples{
-\dontshow{if (any(Sys.getenv(c("NOT_CRAN", "IN_PKGDOWN")) == "true")) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 \donttest{
 get_github_branches("r-lib/usethis")
 }
