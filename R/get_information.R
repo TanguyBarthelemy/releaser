@@ -68,7 +68,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #'
 #' @return A single character string with the package version.
 #'
-#' @examplesIf (identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))
+#' @examplesIf any(Sys.getenv(c("NOT_CRAN", "IN_PKGDOWN")) == "true")
 #' \donttest{
 #' get_version_from_branch("r-lib/usethis", branch = "main")
 #' }
@@ -139,7 +139,7 @@ get_version_from_local <- function(path, verbose = TRUE) {
 #'
 #' @return A character string with the version of the latest release.
 #'
-#' @examplesIf (identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))
+#' @examplesIf any(Sys.getenv(c("NOT_CRAN", "IN_PKGDOWN")) == "true")
 #' \donttest{
 #' get_latest_version("r-lib/usethis")
 #' }
@@ -248,7 +248,7 @@ get_changes <- function(path, version_number, verbose = TRUE) {
 #'
 #' @return A character vector with branch names.
 #'
-#' @examplesIf (identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))
+#' @examplesIf any(Sys.getenv(c("NOT_CRAN", "IN_PKGDOWN")) == "true")
 #' \donttest{
 #' get_github_branches("r-lib/usethis")
 #' }
