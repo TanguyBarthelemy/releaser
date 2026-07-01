@@ -50,37 +50,6 @@
 
 <p>Because…</p>
 <p>Un petit document qui expliquent certains choix de développement faits.</p>
-<div class="section level2">
-<h2 id="ordre-des-arguments">Ordre des arguments<a class="anchor" aria-label="anchor" href="#ordre-des-arguments"></a></h2>
-<p>Lorsqu’on écrit une fonction, il faut garantir que l’ordre est cohérent avec les autres fonctions du package. Je propose :</p>
-<ol style="list-style-type: decimal"><li><code>path</code></li>
-<li><code>version_number</code></li>
-<li><code>gh_repo</code></li>
-<li><code>branch</code></li>
-<li><code>target</code></li>
-<li><code>verbose</code></li>
-</ol></div>
-<div class="section level2">
-<h2 id="documentation-et-inheritparams">Documentation et <code>@inheritParams</code>
-<a class="anchor" aria-label="anchor" href="#documentation-et-inheritparams"></a></h2>
-<p>Pour faire des économies de documentation, on recycle les documentations des arguments.</p>
-<p>Ainsi :</p>
-<ul><li>
-<code><a href="reference/set_latest_deps_version.html">set_latest_deps_version()</a></code> documente <code>path</code> et <code>verbose</code>
-</li>
-<li>
-<code><a href="reference/change_remotes_field.html">change_remotes_field()</a></code> documente <code>target</code>
-</li>
-<li>
-<code><a href="reference/get_latest_version.html">get_latest_version()</a></code> documente <code>gh_repo</code>
-</li>
-<li>
-<code>get_version_from_branch()</code> documente <code>branch</code>
-</li>
-<li>
-<code><a href="reference/get_different_future_version.html">get_different_future_version()</a></code> documente <code>version_number</code>
-</li>
-</ul></div>
 </div>
 
   </div>
