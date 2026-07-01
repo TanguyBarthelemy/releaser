@@ -68,7 +68,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #'
 #' @return A single character string with the package version.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' get_version_from_branch("r-lib/usethis", branch = "main")
 #' }
@@ -139,7 +139,7 @@ get_version_from_local <- function(path, verbose = TRUE) {
 #'
 #' @return A character string with the version of the latest release.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' get_latest_version("r-lib/usethis")
 #' }
@@ -204,8 +204,13 @@ get_changes <- function(path, version_number, verbose = TRUE) {
         1L
 
     if (length(starting_line) == 0L) {
-        stop("Version ", version_number, " doesn't exist for ", path,
-             call. = FALSE)
+        stop(
+            "Version ",
+            version_number,
+            " doesn't exist for ",
+            path,
+            call. = FALSE
+        )
     }
 
     ending_line <- c(
@@ -243,7 +248,7 @@ get_changes <- function(path, version_number, verbose = TRUE) {
 #'
 #' @return A character vector with branch names.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' get_github_branches("r-lib/usethis")
 #' }

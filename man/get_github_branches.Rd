@@ -23,8 +23,9 @@ A character vector with branch names.
 Retrieve all branch names from a GitHub repository.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 \donttest{
 get_github_branches("r-lib/usethis")
 }
-
+\dontshow{\}) # examplesIf}
 }
