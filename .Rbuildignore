@@ -31,7 +31,6 @@ cran-comments.md
 
 ^CITATION\.cff$
 ^LICENSE.md$
-^LICENSE$
 
 ^\.httr-oauth$
 ^\.zenodo\.json$

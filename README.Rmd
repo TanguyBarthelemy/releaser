@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml)
 [![Test coverage](https://codecov.io/gh/TanguyBarthelemy/releaser/branch/main/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/releaser?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/releaser/badge/main)](https://www.codefactor.io/repository/github/tanguybarthelemy/releaser/overview/main)
+[![muttest](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TanguyBarthelemy/releaser/badges/.badges/muttest.json)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/test-mutation.yaml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d5265973b095439e815a1bd64e5bbb00)](https://app.codacy.com/gh/TanguyBarthelemy/releaser/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![lint](https://github.com/TanguyBarthelemy/releaser/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/lint.yaml)
 
