@@ -5,7 +5,6 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/news/index.html</loc></url>
-<url><loc>/reference/add_rjdverse_to_remotes.html</loc></url>
 <url><loc>/reference/change_remotes_field.html</loc></url>
 <url><loc>/reference/check.html</loc></url>
 <url><loc>/reference/check_docs.html</loc></url>
@@ -14,8 +13,9 @@
 <url><loc>/reference/get_github_branches.html</loc></url>
 <url><loc>/reference/get_latest_version.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
-<url><loc>/reference/remove_remotes_field.html</loc></url>
+<url><loc>/reference/print.releaser_doc_check.html</loc></url>
 <url><loc>/reference/set_latest_deps_version.html</loc></url>
+<url><loc>/reference/set_rjdverse_remotes.html</loc></url>
 <url><loc>/reference/update_news_md.html</loc></url>
 <url><loc>/why.html</loc></url>
 </urlset>
