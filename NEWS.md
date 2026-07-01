@@ -9,8 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
-* New function `remove_remotes_field()` to clear the Remotes field from rjdverse packages.
-* New function `add_rjdverse_to_remotes()` to add the rjdverse dependencies to the Remotes field.
+* New function `set_rjdverse_remotes()` to clear the Remotes field from rjdverse packages or to add the rjdverse dependencies to the Remotes field.
 
 ### Fixed
 

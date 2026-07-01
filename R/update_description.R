@@ -204,19 +204,22 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
     return(invisible(TRUE))
 }
 
-#' @title Remove rjdverse from Remotes field
+#' @title Enable or disable rjdverse remotes
 #'
 #' @description
-#' Modify the DESCRIPTION file by removing rjdverse packages from the Remotes
-#' field
+#' Add or remove rjdverse packages from the `Remotes` field of the
+#' DESCRIPTION file.
 #'
-#' @inheritParams set_latest_deps_version
+#' When enabled, all dependencies whose package name starts with
+#' `"rjd3"` are added to the `Remotes` field as GitHub remotes.
+#' When disabled, these remotes are removed so that dependencies
+#' are resolved from CRAN instead.
 #'
-#' @details
-#' The goal is to remove the “Remotes” field so that dependencies are fetched
-#' from CRAN instead of GitHub.
+#' @param path Path to the root of the package.
+#' @param enabled Logical. Should rjdverse remotes be enabled?
+#' @param verbose Logical. Should informative messages be displayed?
 #'
-#' @returns invisibly `NULL`
+#' @returns Invisibly the current content of the `Remotes` field.
 #' @export
 #'
 #' @examples
@@ -227,47 +230,27 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 #'     recursive = TRUE
 #' )
 #'
-#' remove_remotes_field(path = path_rjd3workspace)
-remove_remotes_field <- function(path, verbose = TRUE) {
-    desc::desc_del_remotes(file = path, pattern = "rjd3")
-    return(invisible(TRUE))
-}
-
-#' @title Add rjdverse to the Remotes field
+#' set_rjdverse_remotes(path = path_rjd3workspace, enabled = FALSE)
+#' set_rjdverse_remotes(path = path_rjd3workspace, enabled = TRUE)
 #'
-#' @description
-#' Modify the DESCRIPTION file by adding rjdverse packages to the Remotes
-#' field
-#'
-#' @inheritParams set_latest_deps_version
-#'
-#' @details
-#' The goal is to add the rjdverse packages and their dependencies to the
-#' Remotes field so that they are fetched from GitHub instead of CRAN.
-#'
-#' @returns invisibly the new remotes field content
-#' @export
-#'
-#' @examples
-#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
-#' file.copy(
-#'     from = system.file("rjd3workspace", package = "releaser"),
-#'     to = dirname(path_rjd3workspace),
-#'     recursive = TRUE
-#' )
-#'
-#' add_rjdverse_to_remotes(path = path_rjd3workspace)
-add_rjdverse_to_remotes <- function(path, verbose = TRUE) {
-    cur_deps <- desc::desc_get_deps(path)
-    cond_rjdverse <- grepl(
-        x = cur_deps$package,
-        pattern = "^rjd3",
-        fixed = FALSE,
-        perl = TRUE
-    )
-    rjdverse <- cur_deps$package[cond_rjdverse]
-
-    new_remotes <- file.path("github::rjdverse", rjdverse)
-    desc::desc_set_remotes(remotes = new_remotes, file = path)
-    return(invisible(new_remotes))
+set_rjdverse_remotes <- function(path, enabled = TRUE, verbose = TRUE) {
+    if (enabled) {
+        cur_deps <- desc::desc_get_deps(path)
+        rjdverse <- cur_deps$package[grepl("^rjd3", cur_deps$package)]
+        remotes <- file.path("github::rjdverse", rjdverse)
+        desc::desc_set_remotes(remotes = remotes, file = path)
+        if (verbose) {
+            message(
+                "Enabled rjdverse remotes: ",
+                paste(remotes, collapse = ", ")
+            )
+        }
+    } else {
+        desc::desc_del_remotes(file = path, pattern = "^rjd3")
+        remotes <- character()
+        if (verbose) {
+            message("Removed rjdverse from Remotes field.")
+        }
+    }
+    invisible(remotes)
 }

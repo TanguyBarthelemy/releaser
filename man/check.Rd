@@ -47,3 +47,16 @@ example blocks.
 The \verb{@describeIn} tag is generally discouraged in modern roxygen2 workflows.
 The \verb{@return} tag is superseded by \verb{@returns}.
 }
+\examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+my_pkg_dir <- "path/to/my/package"
+
+# Single checks
+check_missing_returns(my_pkg_dir)
+check_return_tag_usage(my_pkg_dir)
+check_describeIn_usage(my_pkg_dir)
+check_missing_examples_tag(my_pkg_dir)
+check_missing_examples_content(my_pkg_dir)
+check_missing_title(my_pkg_dir)
+\dontshow{\}) # examplesIf}
+}

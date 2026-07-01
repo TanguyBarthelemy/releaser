@@ -32,3 +32,11 @@ The following checks are performed:
 \item Missing \verb{@returns}
 }
 }
+\examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+my_pkg_dir <- "path/to/my/package"
+
+# Full check
+results <- check_docs(my_pkg_dir)
+\dontshow{\}) # examplesIf}
+}
