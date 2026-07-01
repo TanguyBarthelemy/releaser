@@ -394,6 +394,10 @@ check_docs <- function(
 }
 
 #' @title Display result of documentation check
+#'
+#' @param x `releaser_doc_check` object
+#' @param ... Not used argument.
+#'
 #' @export
 #' @returns invisibly the object `x`
 print.releaser_doc_check <- function(x, ...) {

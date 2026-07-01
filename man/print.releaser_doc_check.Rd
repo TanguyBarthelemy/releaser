@@ -6,6 +6,11 @@
 \usage{
 \method{print}{releaser_doc_check}(x, ...)
 }
+\arguments{
+\item{x}{\code{releaser_doc_check} object}
+
+\item{...}{Not used argument.}
+}
 \value{
 invisibly the object \code{x}
 }
