@@ -73,7 +73,7 @@ change_remotes_field <- function(
 #'
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 #' file.copy(

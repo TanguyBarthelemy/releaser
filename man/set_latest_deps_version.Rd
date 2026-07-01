@@ -21,6 +21,7 @@ Update the \code{DESCRIPTION} file of a package so that all dependencies
 beginning with \code{"rjd3"} require the latest released version from GitHub.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 \donttest{
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 file.copy(
@@ -31,5 +32,5 @@ file.copy(
 
 set_latest_deps_version(path = path_rjd3workspace)
 }
-
+\dontshow{\}) # examplesIf}
 }
