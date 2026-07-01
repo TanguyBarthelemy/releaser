@@ -229,7 +229,7 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 #'
 #' remove_remotes_field(path = path_rjd3workspace)
 remove_remotes_field <- function(path, verbose = TRUE) {
-    desc::desc_del_remotes(file = desc_file, pattern = "rjd3")
+    desc::desc_del_remotes(file = path, pattern = "rjd3")
     return(invisible(TRUE))
 }
 
@@ -267,7 +267,7 @@ add_rjdverse_to_remotes <- function(path, verbose = TRUE) {
     )
     rjdverse <- cur_deps$package[cond_rjdverse]
 
-    new_remotes <- paste0("github::rjdverse/", rjdverse)
+    new_remotes <- file.path("github::rjdverse", rjdverse)
     desc::desc_set_remotes(remotes = new_remotes, file = path)
     return(invisible(new_remotes))
 }
