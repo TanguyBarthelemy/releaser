@@ -236,14 +236,12 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 set_rjdverse_remotes <- function(path, enabled = TRUE, verbose = TRUE) {
     if (enabled) {
         cur_deps <- desc::desc_get_deps(path)
-        rjdverse <- cur_deps$package[grepl("^rjd3", cur_deps$package)]
+        cond_rjdverse <- startsWith(prefix = "^rjd3", x = cur_deps$package)
+        rjdverse <- cur_deps$package[cond_rjdverse]
         remotes <- file.path("github::rjdverse", rjdverse)
         desc::desc_set_remotes(remotes = remotes, file = path)
         if (verbose) {
-            message(
-                "Enabled rjdverse remotes: ",
-                paste(remotes, collapse = ", ")
-            )
+            message("Enabled rjdverse remotes: ", toString(remotes))
         }
     } else {
         desc::desc_del_remotes(file = path, pattern = "^rjd3")
