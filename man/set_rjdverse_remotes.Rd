@@ -17,13 +17,13 @@ set_rjdverse_remotes(path, enabled = TRUE, verbose = TRUE)
 Invisibly the current content of the \code{Remotes} field.
 }
 \description{
-Add or remove rjdverse packages from the \code{Remotes} field of the
+Add or remove rjdverse packages from the Remotes field of the
 DESCRIPTION file.
 
-When enabled, all dependencies whose package name starts with
-\code{"rjd3"} are added to the \code{Remotes} field as GitHub remotes.
-When disabled, these remotes are removed so that dependencies
-are resolved from CRAN instead.
+When enabled, all dependencies whose package name starts with "rjd3"
+(rjdverse packages) are added to the Remotes field as GitHub remotes.
+When disabled, these remotes are removed so that dependencies are resolved
+from CRAN instead.
 }
 \examples{
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")

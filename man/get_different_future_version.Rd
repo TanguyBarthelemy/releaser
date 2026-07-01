@@ -10,7 +10,7 @@ get_different_future_version(version_number, verbose = TRUE)
 \item{version_number}{[\link[base]{character}] Current version number string
 (e.g. \code{"1.2.3"}).}
 
-\item{verbose}{[\link[base]{logical}] Whether to print additionnal
+\item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}
 }
 \value{

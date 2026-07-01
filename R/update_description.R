@@ -68,7 +68,7 @@ change_remotes_field <- function(
 #'
 #' @param path [\link[base]{character}] Path to the package root directory (or
 #'   to the DESCRIPTION / NEWS.md file).
-#' @param verbose [\link[base]{logical}] Whether to print additionnal
+#' @param verbose [\link[base]{logical}] Whether to print additional
 #'   information (default: `TRUE`).
 #'
 #' @returns Invisibly updates the `DESCRIPTION` file in place.
@@ -207,13 +207,13 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 #' @title Enable or disable rjdverse remotes
 #'
 #' @description
-#' Add or remove rjdverse packages from the `Remotes` field of the
+#' Add or remove rjdverse packages from the Remotes field of the
 #' DESCRIPTION file.
 #'
-#' When enabled, all dependencies whose package name starts with
-#' `"rjd3"` are added to the `Remotes` field as GitHub remotes.
-#' When disabled, these remotes are removed so that dependencies
-#' are resolved from CRAN instead.
+#' When enabled, all dependencies whose package name starts with "rjd3"
+#' (rjdverse packages) are added to the Remotes field as GitHub remotes.
+#' When disabled, these remotes are removed so that dependencies are resolved
+#' from CRAN instead.
 #'
 #' @param path Path to the root of the package.
 #' @param enabled Logical. Should rjdverse remotes be enabled?

@@ -17,7 +17,7 @@ to the DESCRIPTION / NEWS.md file).}
 \item{target}{[\link[base]{character}] Target branch or type of remote:
 must be one of \code{"develop"}, \code{"snapshot"}, or \code{"main"}.}
 
-\item{verbose}{[\link[base]{logical}] Whether to print additionnal
+\item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}
 }
 \value{

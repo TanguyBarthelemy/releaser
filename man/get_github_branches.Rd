@@ -13,7 +13,7 @@ get_github_branches(
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format
 \code{"owner/repo"}.}
 
-\item{verbose}{[\link[base]{logical}] Whether to print additionnal
+\item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}
 }
 \value{

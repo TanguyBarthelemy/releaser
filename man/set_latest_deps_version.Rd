@@ -10,7 +10,7 @@ set_latest_deps_version(path, verbose = TRUE)
 \item{path}{[\link[base]{character}] Path to the package root directory (or
 to the DESCRIPTION / NEWS.md file).}
 
-\item{verbose}{[\link[base]{logical}] Whether to print additionnal
+\item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}
 }
 \value{
