@@ -342,7 +342,7 @@ check_missing_returns <- function(pkg_dir) {
 #' @param error_on_fail Logical. If `TRUE`, stops execution if any issue is
 #'   found.
 #'
-#' @return An object of class `"releaser_doc_check"` containing
+#' @returns An object of class `"releaser_doc_check"` containing
 #' a named list of detected issues.
 #' @export
 check_docs <- function(

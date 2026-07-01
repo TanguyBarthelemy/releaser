@@ -9,7 +9,7 @@
 #' @param target [\link[base]{character}] Target branch or type of remote:
 #' must be one of `"develop"`, `"snapshot"`, or `"main"`.
 #'
-#' @return Invisibly returns the new vector of remote specifications
+#' @returns Invisibly returns the new vector of remote specifications
 #' (character).
 #'
 #' @examples
@@ -71,7 +71,7 @@ change_remotes_field <- function(
 #' @param verbose [\link[base]{logical}] Whether to print additionnal
 #'   information (default: `TRUE`).
 #'
-#' @return Invisibly updates the `DESCRIPTION` file in place.
+#' @returns Invisibly updates the `DESCRIPTION` file in place.
 #'
 #' @examplesIf FALSE
 #' \donttest{
@@ -114,7 +114,7 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
 #'
 #' @inheritParams get_changes
 #'
-#' @return Invisibly returns `TRUE` if the file was successfully updated.
+#' @returns Invisibly returns `TRUE` if the file was successfully updated.
 #'
 #' @details
 #' The argument `version_number` is the new version number to update the
