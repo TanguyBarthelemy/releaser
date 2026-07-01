@@ -66,9 +66,10 @@ change_remotes_field <- function(
 #' Update the `DESCRIPTION` file of a package so that all dependencies
 #' beginning with `"rjd3"` require the latest released version from GitHub.
 #'
-#' @param path [\link[base]{character}] Path to the package root directory.
-#' @param verbose [\link[base]{logical}] Whether to print current and new
-#' remote fields (default: `TRUE`).
+#' @param path [\link[base]{character}] Path to the package root directory (or
+#'   to the DESCRIPTION / NEWS.md file).
+#' @param verbose [\link[base]{logical}] Whether to print additionnal
+#'   information (default: `TRUE`).
 #'
 #' @return Invisibly updates the `DESCRIPTION` file in place.
 #'
@@ -201,4 +202,72 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
         message("NEWS.md successfully updated and written to disk.")
     }
     return(invisible(TRUE))
+}
+
+#' @title Remove rjdverse from Remotes field
+#'
+#' @description
+#' Modify the DESCRIPTION file by removing rjdverse packages from the Remotes
+#' field
+#'
+#' @inheritParams set_latest_deps_version
+#'
+#' @details
+#' The goal is to remove the “Remotes” field so that dependencies are fetched
+#' from CRAN instead of GitHub.
+#'
+#' @returns invisibly `NULL`
+#' @export
+#'
+#' @examples
+#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+#' file.copy(
+#'     from = system.file("rjd3workspace", package = "releaser"),
+#'     to = dirname(path_rjd3workspace),
+#'     recursive = TRUE
+#' )
+#'
+#' remove_remotes_field(path = path_rjd3workspace)
+remove_remotes_field <- function(path, verbose = TRUE) {
+    desc::desc_del_remotes(file = desc_file, pattern = "rjd3")
+    return(invisible(TRUE))
+}
+
+#' @title Add rjdverse to the Remotes field
+#'
+#' @description
+#' Modify the DESCRIPTION file by adding rjdverse packages to the Remotes
+#' field
+#'
+#' @inheritParams set_latest_deps_version
+#'
+#' @details
+#' The goal is to add the rjdverse packages and their dependencies to the
+#' Remotes field so that they are fetched from GitHub instead of CRAN.
+#'
+#' @returns invisibly the new remotes field content
+#' @export
+#'
+#' @examples
+#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+#' file.copy(
+#'     from = system.file("rjd3workspace", package = "releaser"),
+#'     to = dirname(path_rjd3workspace),
+#'     recursive = TRUE
+#' )
+#'
+#' add_rjdverse_to_remotes(path = path_rjd3workspace)
+add_rjdverse_to_remotes <- function(path, verbose = TRUE) {
+    cur_deps <- desc::desc_get_deps(path)
+    cond_rjdverse <- grepl(
+        x = cur_deps$package,
+        pattern = "^rjd3",
+        fixed = FALSE,
+        perl = TRUE
+    )
+    rjdverse <- cur_deps$package[cond_rjdverse]
+
+    new_remotes <- paste0("github::rjdverse/", rjdverse)
+    desc::desc_set_remotes(remotes = new_remotes, file = path)
+    return(invisible(new_remotes))
 }

@@ -13,8 +13,8 @@ get_github_branches(
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format
 \code{"owner/repo"}.}
 
-\item{verbose}{[\link[base]{logical}] Whether to print current and new
-remote fields (default: \code{TRUE}).}
+\item{verbose}{[\link[base]{logical}] Whether to print additionnal
+information (default: \code{TRUE}).}
 }
 \value{
 A character vector with branch names.

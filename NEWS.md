@@ -7,20 +7,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+* New function `remove_remotes_field()` to clear the Remotes field from rjdverse packages.
+* New function `add_rjdverse_to_remotes()` to add the rjdverse dependencies to the Remotes field.
+
 ### Fixed
 
-* Remove examples tested if PAT not provided
+* Remove examples tested if PAT not provided.
 
 
 ## [1.1.0] - 2026-03-11
 
 ### Added
 
-* New functions to check the documentation of a package R
+* New functions to check the documentation of a package R.
 
 ### Fixed
 
-* url of GitHub repo with desc pkg
+* url of GitHub repo with desc pkg.
 
 
 ## [1.0.0] - 2025-10-29
