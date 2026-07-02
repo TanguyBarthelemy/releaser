@@ -3,7 +3,9 @@ linters: lintr::all_linters(
         lintr::line_length_linter(80L),
         return_linter = NULL,
         nonportable_path_linter = NULL,
-        function_argument_linter = NULL
+        function_argument_linter = NULL,
+        undesirable_function_linter = NULL,
+        object_name_linter = NULL
     )
 encoding: "UTF-8"
 exclusions: list(

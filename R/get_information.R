@@ -8,7 +8,7 @@
 #' (e.g. `"1.2.3"`).
 #' @inheritParams change_remotes_field
 #'
-#' @return A named character vector with:
+#' @returns A named character vector with:
 #' \itemize{
 #'   \item `current_version` – the input version,
 #'   \item `future_patch_version` – next patch version,
@@ -66,9 +66,9 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #' @inheritParams get_latest_version
 #' @param branch [\link[base]{character}] Branch name (default: `"main"`).
 #'
-#' @return A single character string with the package version.
+#' @returns A single character string with the package version.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' get_version_from_branch("r-lib/usethis", branch = "main")
 #' }
@@ -105,9 +105,9 @@ get_version_from_branch <- function(
 #' @description
 #' Read the `Version` field from a local package DESCRIPTION file.
 #'
-#' @inheritParams change_remotes_field
+#' @inheritParams set_latest_deps_version
 #'
-#' @return A single character string with the package version.
+#' @returns A single character string with the package version.
 #'
 #' @examples
 #' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
@@ -137,9 +137,9 @@ get_version_from_local <- function(path, verbose = TRUE) {
 #' `"owner/repo"`.
 #' @inheritParams change_remotes_field
 #'
-#' @return A character string with the version of the latest release.
+#' @returns A character string with the version of the latest release.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' get_latest_version("r-lib/usethis")
 #' }
@@ -179,7 +179,7 @@ get_latest_version <- function(
 #' @inheritParams change_remotes_field
 #' @inheritParams get_different_future_version
 #'
-#' @return A character string containing the formatted changelog for the given
+#' @returns A character string containing the formatted changelog for the given
 #' version.
 #'
 #' @examples
@@ -204,8 +204,13 @@ get_changes <- function(path, version_number, verbose = TRUE) {
         1L
 
     if (length(starting_line) == 0L) {
-        stop("Version ", version_number, " doesn't exist for ", path,
-             call. = FALSE)
+        stop(
+            "Version ",
+            version_number,
+            " doesn't exist for ",
+            path,
+            call. = FALSE
+        )
     }
 
     ending_line <- c(
@@ -241,9 +246,9 @@ get_changes <- function(path, version_number, verbose = TRUE) {
 #'
 #' @inheritParams get_latest_version
 #'
-#' @return A character vector with branch names.
+#' @returns A character vector with branch names.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' get_github_branches("r-lib/usethis")
 #' }

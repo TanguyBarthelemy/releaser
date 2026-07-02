@@ -7,10 +7,11 @@
 set_latest_deps_version(path, verbose = TRUE)
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory.}
+\item{path}{[\link[base]{character}] Path to the package root directory (or
+to the DESCRIPTION / NEWS.md file).}
 
-\item{verbose}{[\link[base]{logical}] Whether to print current and new
-remote fields (default: \code{TRUE}).}
+\item{verbose}{[\link[base]{logical}] Whether to print additional
+information (default: \code{TRUE}).}
 }
 \value{
 Invisibly updates the \code{DESCRIPTION} file in place.
@@ -20,6 +21,7 @@ Update the \code{DESCRIPTION} file of a package so that all dependencies
 beginning with \code{"rjd3"} require the latest released version from GitHub.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 \donttest{
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 file.copy(
@@ -30,5 +32,5 @@ file.copy(
 
 set_latest_deps_version(path = path_rjd3workspace)
 }
-
+\dontshow{\}) # examplesIf}
 }

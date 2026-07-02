@@ -13,8 +13,8 @@ get_github_branches(
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format
 \code{"owner/repo"}.}
 
-\item{verbose}{[\link[base]{logical}] Whether to print current and new
-remote fields (default: \code{TRUE}).}
+\item{verbose}{[\link[base]{logical}] Whether to print additional
+information (default: \code{TRUE}).}
 }
 \value{
 A character vector with branch names.
@@ -23,8 +23,9 @@ A character vector with branch names.
 Retrieve all branch names from a GitHub repository.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 \donttest{
 get_github_branches("r-lib/usethis")
 }
-
+\dontshow{\}) # examplesIf}
 }

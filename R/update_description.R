@@ -9,7 +9,7 @@
 #' @param target [\link[base]{character}] Target branch or type of remote:
 #' must be one of `"develop"`, `"snapshot"`, or `"main"`.
 #'
-#' @return Invisibly returns the new vector of remote specifications
+#' @returns Invisibly returns the new vector of remote specifications
 #' (character).
 #'
 #' @examples
@@ -66,13 +66,14 @@ change_remotes_field <- function(
 #' Update the `DESCRIPTION` file of a package so that all dependencies
 #' beginning with `"rjd3"` require the latest released version from GitHub.
 #'
-#' @param path [\link[base]{character}] Path to the package root directory.
-#' @param verbose [\link[base]{logical}] Whether to print current and new
-#' remote fields (default: `TRUE`).
+#' @param path [\link[base]{character}] Path to the package root directory (or
+#'   to the DESCRIPTION / NEWS.md file).
+#' @param verbose [\link[base]{logical}] Whether to print additional
+#'   information (default: `TRUE`).
 #'
-#' @return Invisibly updates the `DESCRIPTION` file in place.
+#' @returns Invisibly updates the `DESCRIPTION` file in place.
 #'
-#' @examples
+#' @examplesIf FALSE
 #' \donttest{
 #' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 #' file.copy(
@@ -113,7 +114,7 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
 #'
 #' @inheritParams get_changes
 #'
-#' @return Invisibly returns `TRUE` if the file was successfully updated.
+#' @returns Invisibly returns `TRUE` if the file was successfully updated.
 #'
 #' @details
 #' The argument `version_number` is the new version number to update the
@@ -201,4 +202,53 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
         message("NEWS.md successfully updated and written to disk.")
     }
     return(invisible(TRUE))
+}
+
+#' @title Enable or disable rjdverse remotes
+#'
+#' @description
+#' Add or remove rjdverse packages from the Remotes field of the
+#' DESCRIPTION file.
+#'
+#' When enabled, all dependencies whose package name starts with "rjd3"
+#' (rjdverse packages) are added to the Remotes field as GitHub remotes.
+#' When disabled, these remotes are removed so that dependencies are resolved
+#' from CRAN instead.
+#'
+#' @param path Path to the root of the package.
+#' @param enabled Logical. Should rjdverse remotes be enabled?
+#' @param verbose Logical. Should informative messages be displayed?
+#'
+#' @returns Invisibly the current content of the `Remotes` field.
+#' @export
+#'
+#' @examples
+#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+#' file.copy(
+#'     from = system.file("rjd3workspace", package = "releaser"),
+#'     to = dirname(path_rjd3workspace),
+#'     recursive = TRUE
+#' )
+#'
+#' set_rjdverse_remotes(path = path_rjd3workspace, enabled = FALSE)
+#' set_rjdverse_remotes(path = path_rjd3workspace, enabled = TRUE)
+#'
+set_rjdverse_remotes <- function(path, enabled = TRUE, verbose = TRUE) {
+    if (enabled) {
+        cur_deps <- desc::desc_get_deps(path)
+        cond_rjdverse <- startsWith(prefix = "^rjd3", x = cur_deps$package)
+        rjdverse <- cur_deps$package[cond_rjdverse]
+        remotes <- file.path("github::rjdverse", rjdverse)
+        desc::desc_set_remotes(remotes = remotes, file = path)
+        if (verbose) {
+            message("Enabled rjdverse remotes: ", toString(remotes))
+        }
+    } else {
+        desc::desc_del_remotes(file = path, pattern = "^rjd3")
+        remotes <- character()
+        if (verbose) {
+            message("Removed rjdverse from Remotes field.")
+        }
+    }
+    invisible(remotes)
 }

@@ -7,13 +7,14 @@
 update_news_md(path, version_number, verbose = TRUE)
 }
 \arguments{
-\item{path}{[\link[base]{character}] Path to the package root directory.}
+\item{path}{[\link[base]{character}] Path to the package root directory (or
+to the DESCRIPTION / NEWS.md file).}
 
 \item{version_number}{[\link[base]{character}] Current version number string
 (e.g. \code{"1.2.3"}).}
 
-\item{verbose}{[\link[base]{logical}] Whether to print current and new
-remote fields (default: \code{TRUE}).}
+\item{verbose}{[\link[base]{logical}] Whether to print additional
+information (default: \code{TRUE}).}
 }
 \value{
 Invisibly returns \code{TRUE} if the file was successfully updated.
