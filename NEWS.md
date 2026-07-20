@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+* The argument `enabled` is removed from `set_rjdverse_remotes`. Now the function only enable the Remotes field.
+
+### Deprecated
+
+* `update_news_md` is deprecated. Please use the project [heylogs](https://github.com/nbbrd/heylogs) from the [nbbrd](https://github.com/nbbrd/) instead.
+* `get_changes` is deprecated. Please use the project [heylogs](https://github.com/nbbrd/heylogs) from the [nbbrd](https://github.com/nbbrd/) instead.
+
+
 ## [1.2.0] - 2026-07-02
 
 ### Added
