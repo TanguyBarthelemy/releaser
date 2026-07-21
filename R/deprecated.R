@@ -24,7 +24,6 @@
 #' update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
 #'
 #' @export
-#' @rdname deprecated-releaser
 #' @importFrom desc desc_get_urls
 #'
 update_news_md <- function(path, version_number, verbose = TRUE) {

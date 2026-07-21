@@ -2,14 +2,12 @@
 % Please edit documentation in R/update_description.R
 \name{set_rjdverse_remotes}
 \alias{set_rjdverse_remotes}
-\title{Enable or disable rjdverse remotes}
+\title{Set the rjdverse in the Remotes field}
 \usage{
-set_rjdverse_remotes(path, enabled = TRUE, verbose = TRUE)
+set_rjdverse_remotes(path, verbose = TRUE)
 }
 \arguments{
 \item{path}{Path to the root of the package.}
-
-\item{enabled}{Logical. Should rjdverse remotes be enabled?}
 
 \item{verbose}{Logical. Should informative messages be displayed?}
 }
@@ -19,11 +17,10 @@ Invisibly the current content of the \code{Remotes} field.
 \description{
 Add or remove rjdverse packages from the Remotes field of the
 DESCRIPTION file.
-
-When enabled, all dependencies whose package name starts with "rjd3"
-(rjdverse packages) are added to the Remotes field as GitHub remotes.
-When disabled, these remotes are removed so that dependencies are resolved
-from CRAN instead.
+}
+\details{
+All dependencies whose package name starts with "rjd3" (rjdverse packages)
+are added to the Remotes field as GitHub remotes.
 }
 \examples{
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
@@ -33,7 +30,6 @@ file.copy(
     recursive = TRUE
 )
 
-set_rjdverse_remotes(path = path_rjd3workspace, enabled = FALSE)
-set_rjdverse_remotes(path = path_rjd3workspace, enabled = TRUE)
+set_rjdverse_remotes(path = path_rjd3workspace)
 
 }
