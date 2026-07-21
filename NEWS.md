@@ -54,7 +54,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 * New functions to modify the DESCRIPTION and NEWS.md files for release
 * Implemented progress and diagnostic messages when `verbose = TRUE` to aid debugging and transparency.
 
-[Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/1.2.0...HEAD
-[1.2.0]: https://github.com/TanguyBarthelemy/releaser/compare/v1.1.0...1.2.0
+[Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/TanguyBarthelemy/releaser/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/TanguyBarthelemy/releaser/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/TanguyBarthelemy/releaser/releases/tag/v1.0.0
