@@ -1,31 +1,30 @@
 
-#' @title Update `NEWS.md` for a new release
+#' @title Deprecated functions
 #'
 #' @description
-#' Modify the `NEWS.md` file of a package to replace the `"Unreleased"`
-#' section with a new version heading and update GitHub comparison links.
+#' `update_news_md` modify the `NEWS.md` file of a package to replace the
+#' `"Unreleased"` section with a new version heading and update GitHub
+#' comparison links.
+#' `get_changes` extracts the section of `NEWS.md` corresponding to a given version.
 #'
-#' @inheritParams get_changes
+#' @inheritParams change_remotes_field
+#' @inheritParams get_different_future_version
 #'
-#' @returns Invisibly returns `TRUE` if the file was successfully updated.
+#' @returns `update_news_md` invisibly returns `TRUE` if the file was
+#' successfully updated.
+#' `get_changes` returns a character string containing the formatted changelog
+#' for the given version.
 #'
 #' @details
 #' The argument `version_number` is the new version number to update the
 #' changelog.
 #'
-#' @examples
-#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
-#' file.copy(
-#'     from = system.file("rjd3workspace", package = "releaser"),
-#'     to = dirname(path_rjd3workspace),
-#'     recursive = TRUE
-#' )
-#'
-#' update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
-#'
-#' @export
 #' @importFrom desc desc_get_urls
-#'
+#' @name releaser-deprecated
+NULL
+
+#' @export
+#' @rdname releaser-deprecated
 update_news_md <- function(path, version_number, verbose = TRUE) {
     .Deprecated("Le projet heylogs : https://github.com/nbbrd/heylogs")
     if (verbose) {
@@ -98,25 +97,8 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
     return(invisible(TRUE))
 }
 
-#' @title Extract changelog entries for a given version
-#'
-#' @description
-#' Extracts the section of `NEWS.md` corresponding to a given version.
-#'
-#' @inheritParams change_remotes_field
-#' @inheritParams get_different_future_version
-#'
-#' @returns A character string containing the formatted changelog for the given
-#' version.
-#'
-#' @examples
-#' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
-#'
-#' get_changes(path = path_rjd3workspace, version_number = "Unreleased")
-#' get_changes(path = path_rjd3workspace, version_number = "3.2.4")
-#' get_changes(path = path_rjd3workspace, version_number = "3.5.1")
-#'
 #' @export
+#' @rdname releaser-deprecated
 get_changes <- function(path, version_number, verbose = TRUE) {
     path <- normalizePath(path, mustWork = TRUE)
     changelog <- readLines(con = file.path(path, "NEWS.md"))
