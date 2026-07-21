@@ -33,10 +33,10 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Remotes:  
-    github::rjdverse/rjd3providers@snapshot,
-    github::rjdverse/rjd3toolkit@snapshot,
-    github::rjdverse/rjd3tramoseats@snapshot,
-    github::rjdverse/rjd3x13@snapshot
+    github::rjdverse/rjd3providers,
+    github::rjdverse/rjd3toolkit,
+    github::rjdverse/rjd3tramoseats,
+    github::rjdverse/rjd3x13
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
