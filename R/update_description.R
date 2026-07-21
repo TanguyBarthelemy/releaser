@@ -50,6 +50,13 @@ change_remotes_field <- function(
         )
     )
 
+    if (identical(sort(remotes), sort(new_remotes))) {
+        if (verbose) {
+            message("The remote field is already up to date",
+                    " and will not be changed.")
+        }
+        return(invisible(remotes))
+    }
     if (verbose) {
         cat("Current remotes fields :\n")
         cat(remotes, "\n")
@@ -134,13 +141,23 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
 #' set_rjdverse_remotes(path = path_rjd3workspace)
 #'
 set_rjdverse_remotes <- function(path, verbose = TRUE) {
+    remotes <- desc::desc_get_remotes(path)
     cur_deps <- desc::desc_get_deps(path)
     cond_rjdverse <- startsWith(prefix = "rjd3", x = cur_deps$package)
     rjdverse <- cur_deps$package[cond_rjdverse]
-    remotes <- file.path("github::rjdverse", rjdverse)
-    desc::desc_set_remotes(remotes = remotes, file = path)
-    if (verbose) {
-        message("Enabled rjdverse remotes: ", toString(remotes))
+    new_remotes <- file.path("github::rjdverse", rjdverse)
+
+    if (identical(sort(remotes), sort(new_remotes))) {
+        if (verbose) {
+            message("The remote field is already up to date",
+                    " and will not be changed.")
+        }
+        return(invisible(remotes))
     }
-    invisible(remotes)
+
+    desc::desc_set_remotes(remotes = new_remotes, file = path)
+    if (verbose) {
+        message("Enabled rjdverse remotes: ", toString(new_remotes))
+    }
+    invisible(new_remotes)
 }
