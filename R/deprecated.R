@@ -5,7 +5,8 @@
 #' `update_news_md` modify the `NEWS.md` file of a package to replace the
 #' `"Unreleased"` section with a new version heading and update GitHub
 #' comparison links.
-#' `get_changes` extracts the section of `NEWS.md` corresponding to a given version.
+#' `get_changes` extracts the section of `NEWS.md` corresponding to a given
+#' version.
 #'
 #' @inheritParams change_remotes_field
 #' @inheritParams get_different_future_version
