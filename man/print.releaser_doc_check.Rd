@@ -17,3 +17,11 @@ invisibly the object \code{x}
 \description{
 Display result of documentation check
 }
+\examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+my_pkg_dir <- "path/to/my/package"
+
+# Full check
+results <- check_docs(my_pkg_dir)
+\dontshow{\}) # examplesIf}
+}

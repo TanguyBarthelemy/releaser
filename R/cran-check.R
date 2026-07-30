@@ -400,6 +400,13 @@ check_docs <- function(
 #'
 #' @export
 #' @returns invisibly the object `x`
+#'
+#' @examplesIf FALSE
+#' my_pkg_dir <- "path/to/my/package"
+#'
+#' # Full check
+#' results <- check_docs(my_pkg_dir)
+#'
 print.releaser_doc_check <- function(x, ...) {
     cat("Documentation checks\n")
     cat("====================\n\n")

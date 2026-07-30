@@ -30,9 +30,26 @@ for the given version.
 \code{update_news_md} modify the \code{NEWS.md} file of a package to replace the
 \code{"Unreleased"} section with a new version heading and update GitHub
 comparison links.
-\code{get_changes} extracts the section of \code{NEWS.md} corresponding to a given version.
+\code{get_changes} extracts the section of \code{NEWS.md} corresponding to a given
+version.
 }
 \details{
 The argument \code{version_number} is the new version number to update the
 changelog.
+}
+\examples{
+path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+file.copy(
+    from = system.file("rjd3workspace", package = "releaser"),
+    to = dirname(path_rjd3workspace),
+    recursive = TRUE
+)
+
+update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
+path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
+
+get_changes(path = path_rjd3workspace, version_number = "Unreleased")
+get_changes(path = path_rjd3workspace, version_number = "3.2.4")
+get_changes(path = path_rjd3workspace, version_number = "3.5.1")
+
 }

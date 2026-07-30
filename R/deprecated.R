@@ -25,6 +25,15 @@
 NULL
 
 #' @export
+#' @examples
+#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
+#' file.copy(
+#'     from = system.file("rjd3workspace", package = "releaser"),
+#'     to = dirname(path_rjd3workspace),
+#'     recursive = TRUE
+#' )
+#'
+#' update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
 #' @rdname releaser-deprecated
 update_news_md <- function(path, version_number, verbose = TRUE) {
     .Deprecated("Le projet heylogs : https://github.com/nbbrd/heylogs")
@@ -99,8 +108,16 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 }
 
 #' @export
+#' @examples
+#' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
+#'
+#' get_changes(path = path_rjd3workspace, version_number = "Unreleased")
+#' get_changes(path = path_rjd3workspace, version_number = "3.2.4")
+#' get_changes(path = path_rjd3workspace, version_number = "3.5.1")
+#'
 #' @rdname releaser-deprecated
 get_changes <- function(path, version_number, verbose = TRUE) {
+    .Deprecated("Le projet heylogs : https://github.com/nbbrd/heylogs")
     path <- normalizePath(path, mustWork = TRUE)
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     if (verbose) {
