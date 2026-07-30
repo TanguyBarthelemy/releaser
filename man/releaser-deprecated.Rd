@@ -38,6 +38,7 @@ The argument \code{version_number} is the new version number to update the
 changelog.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 file.copy(
     from = system.file("rjd3workspace", package = "releaser"),
@@ -46,10 +47,12 @@ file.copy(
 )
 
 update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
+\dontshow{\}) # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
 
 get_changes(path = path_rjd3workspace, version_number = "Unreleased")
 get_changes(path = path_rjd3workspace, version_number = "3.2.4")
 get_changes(path = path_rjd3workspace, version_number = "3.5.1")
-
+\dontshow{\}) # examplesIf}
 }

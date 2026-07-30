@@ -25,7 +25,7 @@
 NULL
 
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
 #' file.copy(
 #'     from = system.file("rjd3workspace", package = "releaser"),
@@ -108,7 +108,7 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 }
 
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
 #'
 #' get_changes(path = path_rjd3workspace, version_number = "Unreleased")
