@@ -171,74 +171,6 @@ get_latest_version <- function(
     return(version_release)
 }
 
-#' @title Extract changelog entries for a given version
-#'
-#' @description
-#' Extracts the section of `NEWS.md` corresponding to a given version.
-#'
-#' @inheritParams change_remotes_field
-#' @inheritParams get_different_future_version
-#'
-#' @returns A character string containing the formatted changelog for the given
-#' version.
-#'
-#' @examples
-#' path_rjd3workspace <- system.file("rjd3workspace", package = "releaser")
-#'
-#' get_changes(path = path_rjd3workspace, version_number = "Unreleased")
-#' get_changes(path = path_rjd3workspace, version_number = "3.2.4")
-#' get_changes(path = path_rjd3workspace, version_number = "3.5.1")
-#'
-#' @export
-get_changes <- function(path, version_number, verbose = TRUE) {
-    path <- normalizePath(path, mustWork = TRUE)
-    changelog <- readLines(con = file.path(path, "NEWS.md"))
-    if (verbose) {
-        message("Reading NEWS.md from: ", path)
-    }
-
-    starting_line <- grep(
-        pattern = paste0("^## \\[", version_number, "\\]"),
-        x = changelog
-    ) +
-        1L
-
-    if (length(starting_line) == 0L) {
-        stop(
-            "Version ",
-            version_number,
-            " doesn't exist for ",
-            path,
-            call. = FALSE
-        )
-    }
-
-    ending_line <- c(
-        grep(pattern = "^## \\[", x = changelog),
-        grep("^\\[Unreleased\\]", changelog),
-        length(changelog)
-    )
-    ending_line <- min(ending_line[ending_line > starting_line]) - 1L
-    ref <- grep(pattern = paste0("^\\[", version_number, "\\]"), x = changelog)
-
-    if (verbose) {
-        message("Extracting changes for version: ", version_number)
-    }
-
-    changes <- changelog[starting_line:ending_line]
-    result <- paste(c("## Changes", changes, changelog[ref]), collapse = "\n")
-
-    if (verbose) {
-        message(
-            "Successfully extracted ",
-            length(changes),
-            " lines of changes."
-        )
-    }
-    return(result)
-}
-
-
 #' @title List GitHub repository branches
 #'
 #' @description
@@ -259,6 +191,7 @@ get_github_branches <- function(
     gh_repo = file.path("rjdverse", "rjd3toolkit"),
     verbose = TRUE
 ) {
+    .Deprecated("Le projet heylogs : https://github.com/nbbrd/heylogs")
     if (verbose) {
         message("Fetching branches from repository: ", gh_repo)
     }

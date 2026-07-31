@@ -5,7 +5,8 @@ linters: lintr::all_linters(
         nonportable_path_linter = NULL,
         function_argument_linter = NULL,
         undesirable_function_linter = NULL,
-        object_name_linter = NULL
+        object_name_linter = NULL,
+        namespace_linter = NULL
     )
 encoding: "UTF-8"
 exclusions: list(

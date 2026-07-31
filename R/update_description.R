@@ -23,7 +23,8 @@
 #' change_remotes_field(path = path_rjd3workspace, target = "develop")
 #'
 #' @export
-#' @importFrom desc desc_get_remotes desc_set_remotes
+#' @importFrom desc desc_set_remotes
+#' @importFrom desc desc_get_remotes
 change_remotes_field <- function(
     path,
     target = c("develop", "snapshot", "main"),
@@ -49,6 +50,13 @@ change_remotes_field <- function(
         )
     )
 
+    if (identical(sort(remotes), sort(new_remotes))) {
+        if (verbose) {
+            message("The remote field is already up to date",
+                    " and will not be changed.")
+        }
+        return(invisible(remotes))
+    }
     if (verbose) {
         cat("Current remotes fields :\n")
         cat(remotes, "\n")
@@ -106,117 +114,17 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
     }
 }
 
-#' @title Update `NEWS.md` for a new release
-#'
-#' @description
-#' Modify the `NEWS.md` file of a package to replace the `"Unreleased"`
-#' section with a new version heading and update GitHub comparison links.
-#'
-#' @inheritParams get_changes
-#'
-#' @returns Invisibly returns `TRUE` if the file was successfully updated.
-#'
-#' @details
-#' The argument `version_number` is the new version number to update the
-#' changelog.
-#'
-#' @examples
-#' path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")
-#' file.copy(
-#'     from = system.file("rjd3workspace", package = "releaser"),
-#'     to = dirname(path_rjd3workspace),
-#'     recursive = TRUE
-#' )
-#'
-#' update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
-#'
-#' @export
-#' @importFrom desc desc_get_urls
-#'
-update_news_md <- function(path, version_number, verbose = TRUE) {
-    if (verbose) {
-        message("Updating NEWS.md for version: ", version_number)
-    }
-    changelog <- readLines(con = file.path(path, "NEWS.md"))
-    urls <- regmatches(
-        x = desc::desc_get_urls(file = path),
-        m = regexpr(
-            pattern = "https://github\\.com/[^/]+/[^/]+",
-            text = desc::desc_get_urls(file = path)
-        )
-    )
-    github_url <- unique(urls)
-
-    line_number <- which(changelog == "## [Unreleased]")
-    new_line <- paste0("## [", version_number, "] - ", Sys.Date())
-    changelog <- c(
-        changelog[seq_len(line_number)],
-        "",
-        new_line,
-        "",
-        changelog[-seq_len(line_number)]
-    )
-    if (verbose) {
-        message("Inserted new version header after 'Unreleased' section.")
-    }
-
-    line_footer <- grepl(
-        pattern = paste0(
-            "^\\[Unreleased\\]: ",
-            github_url,
-            "\\/compare\\/.*\\.\\.\\.HEAD$"
-        ),
-        x = changelog
-    ) |>
-        which()
-
-    old_compare_head <- changelog[line_footer]
-    pattern <- "v[0-9]+\\.[0-9]+\\.[0-9]+"
-
-    new_compare_head <- gsub(
-        pattern = pattern,
-        replacement = paste0("v", version_number),
-        x = old_compare_head
-    )
-    new_compare_old_version <- old_compare_head |>
-        gsub(
-            pattern = "Unreleased",
-            replacement = version_number,
-            fixed = TRUE
-        ) |>
-        gsub(
-            pattern = "HEAD",
-            replacement = paste0("v", version_number),
-            fixed = TRUE
-        )
-
-    changelog <- c(
-        changelog[seq_len(line_footer - 1L)],
-        new_compare_head,
-        new_compare_old_version,
-        changelog[-seq_len(line_footer)]
-    )
-
-    writeLines(text = changelog, con = file.path(path, "NEWS.md"))
-    if (verbose) {
-        message("NEWS.md successfully updated and written to disk.")
-    }
-    return(invisible(TRUE))
-}
-
-#' @title Enable or disable rjdverse remotes
+#' @title Set the rjdverse in the Remotes field
 #'
 #' @description
 #' Add or remove rjdverse packages from the Remotes field of the
 #' DESCRIPTION file.
 #'
-#' When enabled, all dependencies whose package name starts with "rjd3"
-#' (rjdverse packages) are added to the Remotes field as GitHub remotes.
-#' When disabled, these remotes are removed so that dependencies are resolved
-#' from CRAN instead.
+#' @details
+#' All dependencies whose package name starts with "rjd3" (rjdverse packages)
+#' are added to the Remotes field as GitHub remotes.
 #'
 #' @param path Path to the root of the package.
-#' @param enabled Logical. Should rjdverse remotes be enabled?
 #' @param verbose Logical. Should informative messages be displayed?
 #'
 #' @returns Invisibly the current content of the `Remotes` field.
@@ -230,25 +138,26 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 #'     recursive = TRUE
 #' )
 #'
-#' set_rjdverse_remotes(path = path_rjd3workspace, enabled = FALSE)
-#' set_rjdverse_remotes(path = path_rjd3workspace, enabled = TRUE)
+#' set_rjdverse_remotes(path = path_rjd3workspace)
 #'
-set_rjdverse_remotes <- function(path, enabled = TRUE, verbose = TRUE) {
-    if (enabled) {
-        cur_deps <- desc::desc_get_deps(path)
-        cond_rjdverse <- startsWith(prefix = "^rjd3", x = cur_deps$package)
-        rjdverse <- cur_deps$package[cond_rjdverse]
-        remotes <- file.path("github::rjdverse", rjdverse)
-        desc::desc_set_remotes(remotes = remotes, file = path)
+set_rjdverse_remotes <- function(path, verbose = TRUE) {
+    remotes <- desc::desc_get_remotes(path)
+    cur_deps <- desc::desc_get_deps(path)
+    cond_rjdverse <- startsWith(prefix = "rjd3", x = cur_deps$package)
+    rjdverse <- cur_deps$package[cond_rjdverse]
+    new_remotes <- file.path("github::rjdverse", rjdverse)
+
+    if (identical(sort(remotes), sort(new_remotes))) {
         if (verbose) {
-            message("Enabled rjdverse remotes: ", toString(remotes))
+            message("The remote field is already up to date",
+                    " and will not be changed.")
         }
-    } else {
-        desc::desc_del_remotes(file = path, pattern = "^rjd3")
-        remotes <- character()
-        if (verbose) {
-            message("Removed rjdverse from Remotes field.")
-        }
+        return(invisible(remotes))
     }
-    invisible(remotes)
+
+    desc::desc_set_remotes(remotes = new_remotes, file = path)
+    if (verbose) {
+        message("Enabled rjdverse remotes: ", toString(new_remotes))
+    }
+    invisible(new_remotes)
 }
