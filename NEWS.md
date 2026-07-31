@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-07-31
+
 ### Changed
 
 * The argument `enabled` is removed from `set_rjdverse_remotes`. Now the function only enable the Remotes field.
@@ -14,7 +16,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 * `update_news_md` is deprecated. Please use the project [heylogs](https://github.com/nbbrd/heylogs) from the [nbbrd](https://github.com/nbbrd/) instead.
 * `get_changes` is deprecated. Please use the project [heylogs](https://github.com/nbbrd/heylogs) from the [nbbrd](https://github.com/nbbrd/) instead.
-
 
 ## [1.2.0] - 2026-07-02
 
@@ -54,7 +55,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 * New functions to modify the DESCRIPTION and NEWS.md files for release
 * Implemented progress and diagnostic messages when `verbose = TRUE` to aid debugging and transparency.
 
-[Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/releaser/compare/1.2.1...HEAD
+[1.2.1]: https://github.com/TanguyBarthelemy/releaser/compare/v1.2.0...1.2.1
 [1.2.0]: https://github.com/TanguyBarthelemy/releaser/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/TanguyBarthelemy/releaser/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/TanguyBarthelemy/releaser/releases/tag/v1.0.0
