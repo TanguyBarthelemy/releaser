@@ -59,7 +59,7 @@ check_missing_returns(x)
 \method{check_missing_returns}{docblock}(x)
 }
 \arguments{
-\item{pkg_dir}{Path to the R package.}
+\item{x}{Path to the R package or a \code{docblock} object.}
 }
 \value{
 A character vector of function names

@@ -225,7 +225,7 @@ display_functions <- function(x) {
 #' [check_missing_returns()] identifies exported functions that do not declare a
 #' `@returns` tag.
 #'
-#' @param pkg_dir Path to the R package.
+#' @param x Path to the R package or a `docblock` object.
 #'
 #' @details
 #' The `@describeIn` tag is generally discouraged in modern roxygen2 workflows.
