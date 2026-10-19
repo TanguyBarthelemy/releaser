@@ -458,7 +458,7 @@ check_missing_returns.docblock <- function(x) {
 #' - Usage of deprecated `@return`
 #' - Missing `@returns`
 #'
-#' @inheritParams check
+#' @param pkg_dir Path to the R package.
 #' @param verbose Logical. If `TRUE`, prints a formatted summary.
 #' @param error_on_fail Logical. If `TRUE`, stops execution if any issue is
 #'   found.

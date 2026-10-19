@@ -7,6 +7,8 @@
 check_docs(pkg_dir = ".", verbose = interactive(), error_on_fail = FALSE)
 }
 \arguments{
+\item{pkg_dir}{Path to the R package.}
+
 \item{verbose}{Logical. If \code{TRUE}, prints a formatted summary.}
 
 \item{error_on_fail}{Logical. If \code{TRUE}, stops execution if any issue is
