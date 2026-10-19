@@ -3,24 +3,60 @@
 \name{check}
 \alias{check}
 \alias{check_missing_examples_tag}
+\alias{check_missing_examples_tag.character}
+\alias{check_missing_examples_tag.docblock}
 \alias{check_missing_examples_content}
+\alias{check_missing_examples_content.character}
+\alias{check_missing_examples_content.docblock}
 \alias{check_missing_title}
+\alias{check_missing_title.character}
+\alias{check_missing_title.docblock}
 \alias{check_describeIn_usage}
+\alias{check_describeIn_usage.character}
+\alias{check_describeIn_usage.docblock}
 \alias{check_return_tag_usage}
+\alias{check_return_tag_usage.character}
+\alias{check_return_tag_usage.docblock}
 \alias{check_missing_returns}
+\alias{check_missing_returns.character}
+\alias{check_missing_returns.docblock}
 \title{Check for missing or deprecated documentation tag}
 \usage{
-check_missing_examples_tag(pkg_dir)
+check_missing_examples_tag(x)
 
-check_missing_examples_content(pkg_dir)
+\method{check_missing_examples_tag}{character}(x)
 
-check_missing_title(pkg_dir)
+\method{check_missing_examples_tag}{docblock}(x)
 
-check_describeIn_usage(pkg_dir)
+check_missing_examples_content(x)
 
-check_return_tag_usage(pkg_dir)
+\method{check_missing_examples_content}{character}(x)
 
-check_missing_returns(pkg_dir)
+\method{check_missing_examples_content}{docblock}(x)
+
+check_missing_title(x)
+
+\method{check_missing_title}{character}(x)
+
+\method{check_missing_title}{docblock}(x)
+
+check_describeIn_usage(x)
+
+\method{check_describeIn_usage}{character}(x)
+
+\method{check_describeIn_usage}{docblock}(x)
+
+check_return_tag_usage(x)
+
+\method{check_return_tag_usage}{character}(x)
+
+\method{check_return_tag_usage}{docblock}(x)
+
+check_missing_returns(x)
+
+\method{check_missing_returns}{character}(x)
+
+\method{check_missing_returns}{docblock}(x)
 }
 \arguments{
 \item{pkg_dir}{Path to the R package.}

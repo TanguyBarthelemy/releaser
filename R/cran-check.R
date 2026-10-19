@@ -234,8 +234,6 @@ display_functions <- function(x) {
 #' @name check
 #' @returns A character vector of function names
 #'
-#' @export
-#'
 #' @examplesIf FALSE
 #' my_pkg_dir <- "path/to/my/package"
 #'
@@ -247,8 +245,30 @@ display_functions <- function(x) {
 #' check_missing_examples_content(my_pkg_dir)
 #' check_missing_title(my_pkg_dir)
 #'
-check_missing_examples_tag <- function(pkg_dir) {
-    blocks <- read_documentation(pkg_dir)
+NULL
+
+
+#' @rdname check
+#' @export
+check_missing_examples_tag <- function(x) {
+    UseMethod("check_missing_examples_tag", x)
+}
+
+#' @rdname check
+#' @exportS3Method check_missing_examples_tag character
+#' @method check_missing_examples_tag character
+#' @export
+check_missing_examples_tag.character <- function(x) {
+    blocks <- read_documentation(x)
+    return(check_missing_examples_tag(blocks))
+}
+
+#' @rdname check
+#' @exportS3Method check_missing_examples_tag docblock
+#' @method check_missing_examples_tag docblock
+#' @export
+check_missing_examples_tag.docblock <- function(x) {
+    blocks <- x
 
     list_funs <- blocks |>
         Filter(f = Negate(has_examples)) |>
@@ -263,10 +283,27 @@ check_missing_examples_tag <- function(pkg_dir) {
 
 #' @rdname check
 #' @export
-check_missing_examples_content <- function(pkg_dir) {
-    blocks <- read_documentation(pkg_dir)
+check_missing_examples_content <- function(x) {
+    UseMethod("check_missing_examples_content", x)
+}
 
-    missing_examples_tag <- check_missing_examples_tag(pkg_dir)
+#' @rdname check
+#' @exportS3Method check_missing_examples_content character
+#' @method check_missing_examples_content character
+#' @export
+check_missing_examples_content.character <- function(x) {
+    blocks <- read_documentation(x)
+    return(check_missing_examples_content(blocks))
+}
+
+#' @rdname check
+#' @exportS3Method check_missing_examples_content docblock
+#' @method check_missing_examples_content docblock
+#' @export
+check_missing_examples_content.docblock <- function(x) {
+    blocks <- x
+
+    missing_examples_tag <- check_missing_examples_tag(blocks)
 
     list_funs <- blocks |>
         Filter(f = \(x) {
@@ -283,8 +320,25 @@ check_missing_examples_content <- function(pkg_dir) {
 
 #' @rdname check
 #' @export
-check_missing_title <- function(pkg_dir) {
-    blocks <- read_documentation(pkg_dir)
+check_missing_title <- function(x) {
+    UseMethod("check_missing_title", x)
+}
+
+#' @rdname check
+#' @exportS3Method check_missing_title character
+#' @method check_missing_title character
+#' @export
+check_missing_title.character <- function(x) {
+    blocks <- read_documentation(x)
+    return(check_missing_title(blocks))
+}
+
+#' @rdname check
+#' @exportS3Method check_missing_title docblock
+#' @method check_missing_title docblock
+#' @export
+check_missing_title.docblock <- function(x) {
+    blocks <- x
 
     list_funs <- blocks |>
         Filter(f = Negate(has_title)) |>
@@ -299,8 +353,25 @@ check_missing_title <- function(pkg_dir) {
 
 #' @rdname check
 #' @export
-check_describeIn_usage <- function(pkg_dir) {
-    blocks <- read_documentation(pkg_dir)
+check_describeIn_usage <- function(x) {
+    UseMethod("check_describeIn_usage", x)
+}
+
+#' @rdname check
+#' @exportS3Method check_describeIn_usage character
+#' @method check_describeIn_usage character
+#' @export
+check_describeIn_usage.character <- function(x) {
+    blocks <- read_documentation(x)
+    return(check_describeIn_usage(blocks))
+}
+
+#' @rdname check
+#' @exportS3Method check_describeIn_usage docblock
+#' @method check_describeIn_usage docblock
+#' @export
+check_describeIn_usage.docblock <- function(x) {
+    blocks <- x
 
     list_funs <- blocks |>
         Filter(f = has_describeIn) |>
@@ -312,27 +383,65 @@ check_describeIn_usage <- function(pkg_dir) {
 
 #' @rdname check
 #' @export
-check_return_tag_usage <- function(pkg_dir) {
-    blocks <- read_documentation(pkg_dir)
+check_return_tag_usage <- function(x) {
+    UseMethod("check_return_tag_usage", x)
+}
 
-    blocks |>
+#' @rdname check
+#' @exportS3Method check_return_tag_usage character
+#' @method check_return_tag_usage character
+#' @export
+check_return_tag_usage.character <- function(x) {
+    blocks <- read_documentation(x)
+    return(check_return_tag_usage(blocks))
+}
+
+#' @rdname check
+#' @exportS3Method check_return_tag_usage docblock
+#' @method check_return_tag_usage docblock
+#' @export
+check_return_tag_usage.docblock <- function(x) {
+    blocks <- x
+
+    list_funs <- blocks |>
         Filter(f = has_return) |>
         Filter(f = is_call) |>
         get_topics()
+
+    return(list_funs)
 }
 
 #' @rdname check
 #' @export
-check_missing_returns <- function(pkg_dir) {
-    blocks <- read_documentation(pkg_dir)
+check_missing_returns <- function(x) {
+    UseMethod("check_missing_returns", x)
+}
 
-    blocks |>
+#' @rdname check
+#' @exportS3Method check_missing_returns character
+#' @method check_missing_returns character
+#' @export
+check_missing_returns.character <- function(x) {
+    blocks <- read_documentation(x)
+    return(check_missing_returns(blocks))
+}
+
+#' @rdname check
+#' @exportS3Method check_missing_returns docblock
+#' @method check_missing_returns docblock
+#' @export
+check_missing_returns.docblock <- function(x) {
+    blocks <- x
+
+    list_funs <- blocks |>
         Filter(f = is_exported) |>
         Filter(f = Negate(has_returns)) |>
         Filter(f = Negate(has_describeIn)) |>
         Filter(f = Negate(has_rdname)) |>
         Filter(f = is_call) |>
         get_topics()
+
+    return(list_funs)
 }
 
 #' @title Check R package documentation
@@ -370,14 +479,15 @@ check_docs <- function(
     if (!dir.exists(pkg_dir)) {
         stop("`pkg_dir` does not exist.", call. = FALSE)
     }
+    blocks <- read_documentation(pkg_dir)
 
     results <- list(
-        missing_examples_tag = check_missing_examples_tag(pkg_dir),
-        missing_examples_content = check_missing_examples_content(pkg_dir),
-        missing_title = check_missing_title(pkg_dir),
-        describeIn_usage = check_describeIn_usage(pkg_dir),
-        deprecated_return_tag = check_return_tag_usage(pkg_dir),
-        missing_returns = check_missing_returns(pkg_dir)
+        missing_examples_tag = check_missing_examples_tag(blocks),
+        missing_examples_content = check_missing_examples_content(blocks),
+        missing_title = check_missing_title(blocks),
+        describeIn_usage = check_describeIn_usage(blocks),
+        deprecated_return_tag = check_return_tag_usage(blocks),
+        missing_returns = check_missing_returns(blocks)
     )
 
     class(results) <- "releaser_doc_check"
