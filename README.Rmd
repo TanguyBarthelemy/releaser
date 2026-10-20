@@ -48,6 +48,6 @@ library("releaser")
 You can extract the latest version of a package on GitHub and display the different future version:
 
 ```{r get-latest-version}
-version <- get_latest_version("rjdverse/rjd3toolkit")
+version <- get_latest_version("r-lib/usethis")
 get_different_future_version(version)
 ```

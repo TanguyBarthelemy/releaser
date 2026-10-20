@@ -80,7 +80,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #' @noRd
 #'
 get_version_from_branch <- function(
-    gh_repo = file.path("rjdverse", "rjd3toolkit"),
+    gh_repo = file.path("r-lib", "usethis"),
     branch = "main",
     verbose = TRUE
 ) {
@@ -147,7 +147,7 @@ get_version_from_local <- function(path, verbose = TRUE) {
 #' @importFrom gh gh
 #' @export
 get_latest_version <- function(
-    gh_repo = file.path("rjdverse", "rjd3toolkit"),
+    gh_repo = file.path("r-lib", "usethis"),
     verbose = TRUE
 ) {
     release <- gh::gh(file.path("/repos", gh_repo, "releases", ref = "latest"))
@@ -217,7 +217,7 @@ get_branches <- function(gh_repo, verbose = FALSE) {
 #' @importFrom gh gh
 #' @export
 get_github_branches <- function(
-    gh_repo = file.path("rjdverse", "rjd3toolkit"),
+    gh_repo = file.path("r-lib", "usethis"),
     verbose = TRUE
 ) {
     .Deprecated("The heylogs project: https://github.com/nbbrd/heylogs")
