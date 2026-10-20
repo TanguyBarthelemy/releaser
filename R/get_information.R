@@ -157,7 +157,7 @@ get_latest_version <- function(
     }
 
     branches <- setdiff(
-        get_github_branches(gh_repo),
+        get_branches(gh_repo, verbose = verbose),
         "gh-pages"
     )
     for (branch in branches) {
@@ -172,6 +172,32 @@ get_latest_version <- function(
         })
     }
     return(version_release)
+}
+
+#' List GitHub repository branches
+#'
+#' Retrieve all branch names from a GitHub repository.
+#'
+#' @param gh_repo [\link[base]{character}] GitHub repository in the format
+#' `"owner/repo"`.
+#' @param verbose [\link[base]{logical}] Whether to print additional
+#' information (default: `FALSE`).
+#'
+#' @returns A character vector with branch names.
+#'
+#' @keywords internal
+#' @noRd
+#'
+get_branches <- function(gh_repo, verbose = FALSE) {
+    if (verbose) {
+        message("Fetching branches from repository: ", gh_repo)
+    }
+    res <- gh::gh("GET /repos/{repo}/branches", repo = gh_repo)
+    branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1L))
+    if (verbose) {
+        message("Found branches: ", toString(branches))
+    }
+    return(branches)
 }
 
 #' @title List GitHub repository branches
@@ -195,13 +221,5 @@ get_github_branches <- function(
     verbose = TRUE
 ) {
     .Deprecated("The heylogs project: https://github.com/nbbrd/heylogs")
-    if (verbose) {
-        message("Fetching branches from repository: ", gh_repo)
-    }
-    res <- gh::gh("GET /repos/{repo}/branches", repo = gh_repo)
-    branches <- vapply(res, function(x) x$name, FUN.VALUE = character(1L))
-    if (verbose) {
-        message("Found branches: ", toString(branches))
-    }
-    return(branches)
+    return(get_branches(gh_repo, verbose = verbose))
 }

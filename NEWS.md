@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 * User-facing messages are now written in English for consistency.
 
+### Fixed
+
+* `get_latest_version()` no longer emits a deprecation warning: it relies on an internal helper instead of the deprecated `get_github_branches()`.
+
 ## [1.2.1] - 2026-07-31
 
 ### Changed
