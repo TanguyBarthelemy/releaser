@@ -4,10 +4,7 @@
 \alias{get_latest_version}
 \title{Get latest GitHub release version}
 \usage{
-get_latest_version(
-  gh_repo = file.path("rjdverse", "rjd3toolkit"),
-  verbose = TRUE
-)
+get_latest_version(gh_repo = file.path("r-lib", "usethis"), verbose = TRUE)
 }
 \arguments{
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format

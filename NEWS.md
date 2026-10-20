@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+* Tests for the documentation checking functions (`check_docs()` and the `check_*()` family).
+
 ### Changed
 
 * User-facing messages are now written in English for consistency.
