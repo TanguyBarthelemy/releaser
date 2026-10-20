@@ -11,7 +11,7 @@ read_documentation <- function(pkg_dir) {
     return(blocks)
 }
 
-# Fonctions utiles
+# Utility functions
 `%ino%` <- function(x, table) {
     UseMethod("%ino%", table)
 }

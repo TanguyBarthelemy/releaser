@@ -45,29 +45,32 @@ the different future version:
 
 ``` r
 version <- get_latest_version("rjdverse/rjd3toolkit")
-#> Fetched DESCRIPTION from branch: v3.7.1
-#> Version found on branch v3.7.1: 3.7.1
-#> Dernière release : 3.7.1
+#> Fetched DESCRIPTION from branch: v3.9.0
+#> Version found on branch v3.9.0: 3.9.0
+#> Latest release: 3.9.0
+#> Warning in get_github_branches(gh_repo): 'get_github_branches' is deprecated.
+#> Use 'The heylogs project: https://github.com/nbbrd/heylogs' instead.
+#> See help("Deprecated")
 #> Fetching branches from repository: rjdverse/rjd3toolkit
 #> Found branches: develop, gh-pages, main, snapshot
 #> Fetched DESCRIPTION from branch: develop
-#> Version found on branch develop: 3.7.1.9100
-#> Version sur develop  : 3.7.1.9100
+#> Version found on branch develop: 3.9.0.9000
+#> Version on branch develop: 3.9.0.9000
 #> Fetched DESCRIPTION from branch: main
-#> Version found on branch main: 3.7.1
-#> Version sur main  : 3.7.1
+#> Version found on branch main: 3.9.0
+#> Version on branch main: 3.9.0
 #> Fetched DESCRIPTION from branch: snapshot
 #> Version found on branch snapshot: 3.6.0.9000
-#> Version sur snapshot  : 3.6.0.9000
+#> Version on branch snapshot: 3.6.0.9000
 get_different_future_version(version)
-#> Package version bumped from '3.7.1' to '3.7.2'
-#> Future patch version: 3.7.2
-#> Package version bumped from '3.7.2' to '3.8.0'
-#> Future minor version: 3.8.0
-#> Package version bumped from '3.8.0' to '4.0.0'
+#> Package version bumped from '3.9.0' to '3.9.1'
+#> Future patch version: 3.9.1
+#> Package version bumped from '3.9.1' to '3.10.0'
+#> Future minor version: 3.10.0
+#> Package version bumped from '3.10.0' to '4.0.0'
 #> Future major version: 4.0.0
 #> current_version.Version    future_patch_version    future_minor_version 
-#>                 "3.7.1"                 "3.7.2"                 "3.8.0" 
+#>                 "3.9.0"                 "3.9.1"                "3.10.0" 
 #>    future_major_version 
 #>                 "4.0.0"
 ```

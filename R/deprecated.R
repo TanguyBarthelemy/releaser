@@ -36,7 +36,7 @@ NULL
 #' update_news_md(path = path_rjd3workspace, version_number = "1.2.3")
 #' @rdname releaser-deprecated
 update_news_md <- function(path, version_number, verbose = TRUE) {
-    .Deprecated("Le projet heylogs : https://github.com/nbbrd/heylogs")
+    .Deprecated("The heylogs project: https://github.com/nbbrd/heylogs")
     if (verbose) {
         message("Updating NEWS.md for version: ", version_number)
     }
@@ -117,7 +117,7 @@ update_news_md <- function(path, version_number, verbose = TRUE) {
 #'
 #' @rdname releaser-deprecated
 get_changes <- function(path, version_number, verbose = TRUE) {
-    .Deprecated("Le projet heylogs : https://github.com/nbbrd/heylogs")
+    .Deprecated("The heylogs project: https://github.com/nbbrd/heylogs")
     path <- normalizePath(path, mustWork = TRUE)
     changelog <- readLines(con = file.path(path, "NEWS.md"))
     if (verbose) {

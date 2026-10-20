@@ -1,5 +1,3 @@
-# Why ?
+# Why?
 
-Because…
-
-Un petit document qui expliquent certains choix de développement faits.
+A small document explaining some of the development choices that were made.

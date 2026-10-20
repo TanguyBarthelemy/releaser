@@ -153,18 +153,21 @@ get_latest_version <- function(
     release <- gh::gh(file.path("/repos", gh_repo, "releases", ref = "latest"))
     version_release <- get_version_from_branch(gh_repo, release$tag_name)
     if (verbose) {
-        cat("Derni\u00e8re release :", version_release, "\n")
+        cat(paste0("Latest release: ", version_release), "\n")
     }
 
     branches <- setdiff(
         get_github_branches(gh_repo),
         "gh-pages"
     )
-    for (branche in branches) {
+    for (branch in branches) {
         try({
-            version_number <- get_version_from_branch(gh_repo, branche)
+            version_number <- get_version_from_branch(gh_repo, branch)
             if (verbose) {
-                cat("Version sur", branche, " :", version_number, "\n")
+                cat(
+                    paste0("Version on branch ", branch, ": ", version_number),
+                    "\n"
+                )
             }
         })
     }
@@ -191,7 +194,7 @@ get_github_branches <- function(
     gh_repo = file.path("rjdverse", "rjd3toolkit"),
     verbose = TRUE
 ) {
-    .Deprecated("Le projet heylogs : https://github.com/nbbrd/heylogs")
+    .Deprecated("The heylogs project: https://github.com/nbbrd/heylogs")
     if (verbose) {
         message("Fetching branches from repository: ", gh_repo)
     }
