@@ -2,12 +2,18 @@
 % Please edit documentation in R/update_description.R
 \name{set_rjdverse_remotes}
 \alias{set_rjdverse_remotes}
-\title{Set the rjdverse in the Remotes field}
+\title{Set organization remotes in the Remotes field}
 \usage{
-set_rjdverse_remotes(path, verbose = TRUE)
+set_rjdverse_remotes(path, org = "rjdverse", prefix = "rjd3", verbose = TRUE)
 }
 \arguments{
 \item{path}{Path to the root of the package.}
+
+\item{org}{GitHub organization that hosts the dependency repositories
+(default: \code{"rjdverse"}).}
+
+\item{prefix}{Prefix of the dependency package names to add as remotes
+(default: \code{"rjd3"}).}
 
 \item{verbose}{Logical. Should informative messages be displayed?}
 }
@@ -15,12 +21,13 @@ set_rjdverse_remotes(path, verbose = TRUE)
 Invisibly the current content of the \code{Remotes} field.
 }
 \description{
-Add or remove rjdverse packages from the Remotes field of the
-DESCRIPTION file.
+Add GitHub remotes to the \code{Remotes} field of the \code{DESCRIPTION} file
+for the dependencies of a given GitHub organization.
 }
 \details{
-All dependencies whose package name starts with "rjd3" (rjdverse packages)
-are added to the Remotes field as GitHub remotes.
+All dependencies whose package name starts with \code{prefix}
+(rjdverse packages by default) are added to the \code{Remotes} field as
+GitHub remotes of \code{org}.
 }
 \examples{
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")

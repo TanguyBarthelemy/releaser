@@ -78,6 +78,28 @@ test_that("check_missing_examples_content detects examples that do not use the f
     expect_identical(check_missing_examples_content(dir), "ghost_fun")
 })
 
+test_that("check_missing_examples_content requires the function to be called", {
+    lines <- c(
+        "#' @title Function whose name is a substring of another call",
+        "#' @returns A number.",
+        "#' @examples",
+        "#' check_docs(1)",
+        "#' @export",
+        "check <- function(x) x",
+        "",
+        "#' @title Another function",
+        "#' @returns A number.",
+        "#' @examples",
+        "#' check_docs(1)",
+        "#' @export",
+        "check_docs <- function(x) x"
+    )
+    dir <- new_fake_pkg(lines)
+    on.exit(unlink(dir, recursive = TRUE), add = TRUE)
+
+    expect_identical(check_missing_examples_content(dir), "check")
+})
+
 test_that("check_missing_title detects exported functions without a title", {
     dir <- new_fake_pkg(bad_pkg_lines)
     on.exit(unlink(dir, recursive = TRUE), add = TRUE)

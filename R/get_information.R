@@ -27,7 +27,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 
     tmp <- desc::description$new(text = paste0("Version: ", version_number))
 
-    tmp$bump_version(which = 3L) |> invisible()
+    suppressMessages(tmp$bump_version(which = 3L))
     all_versions <- c(
         all_versions,
         future_patch_version = tmp$get(keys = "Version") |> as.character()
@@ -36,7 +36,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
         message("Future patch version: ", all_versions["future_patch_version"])
     }
 
-    tmp$bump_version(which = 2L) |> invisible()
+    suppressMessages(tmp$bump_version(which = 2L))
     all_versions <- c(
         all_versions,
         future_minor_version = tmp$get(keys = "Version") |> as.character()
@@ -45,7 +45,7 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
         message("Future minor version: ", all_versions["future_minor_version"])
     }
 
-    tmp$bump_version(which = 1L) |> invisible()
+    suppressMessages(tmp$bump_version(which = 1L))
     all_versions <- c(
         all_versions,
         future_major_version = tmp$get(keys = "Version") |> as.character()
@@ -152,6 +152,9 @@ get_latest_release_tag <- function(gh_repo) {
 #'
 #' @param gh_repo [\link[base]{character}] GitHub repository in the format
 #' `"owner/repo"`.
+#' @param max_branches [\link[base]{integer}] Maximum number of branches to
+#'   inspect, to limit the number of GitHub API calls
+#'   (default: `50L`).
 #' @inheritParams change_remotes_field
 #'
 #' @returns A character string with the version of the latest release.
@@ -165,6 +168,7 @@ get_latest_release_tag <- function(gh_repo) {
 #' @export
 get_latest_version <- function(
     gh_repo = file.path("r-lib", "usethis"),
+    max_branches = 50L,
     verbose = TRUE
 ) {
     version_release <- get_version_from_branch(
@@ -179,6 +183,18 @@ get_latest_version <- function(
         get_branches(gh_repo, verbose = verbose),
         "gh-pages"
     )
+    if (length(branches) > max_branches) {
+        if (verbose) {
+            message(
+                "Limiting to the first ",
+                max_branches,
+                " of ",
+                length(branches),
+                " branches."
+            )
+        }
+        branches <- branches[seq_len(max_branches)]
+    }
     for (branch in branches) {
         version_number <- tryCatch(
             get_version_from_branch(gh_repo, branch),

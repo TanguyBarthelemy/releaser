@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 * Tests for the documentation checking functions (`check_docs()` and the `check_*()` family).
+* `get_latest_version()` gains a `max_branches` argument (default: `50L`) to limit the number of GitHub API calls on repositories with many branches.
+* `set_latest_deps_version()` and `set_rjdverse_remotes()` gain `org` and `prefix` arguments (defaults: `"rjdverse"` and `"rjd3"`), so they can be used with other GitHub organizations.
 
 ### Changed
 
@@ -16,12 +18,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 * The default `gh_repo` argument is now `r-lib/usethis` instead of `rjdverse/rjd3toolkit`.
 * `check_docs()` uses `verbose = TRUE` by default, consistently with the other functions.
 * User-facing diagnostic messages consistently use `message()`.
+* `get_different_future_version()` no longer forwards the `desc` version bump messages; only its own `verbose` messages are printed.
+* `check_missing_examples_content()` now detects a function in its examples only when it is actually called (e.g. `my_fun(...)`), instead of matching the bare name as a substring.
 
 ### Fixed
 
 * `get_latest_version()` no longer emits a deprecation warning: it relies on an internal helper instead of the deprecated `get_github_branches()`.
 * `get_latest_version()` reports branches whose `DESCRIPTION` cannot be read instead of silently swallowing the error.
 * `change_remotes_field()` now validates `target` with `match.arg()`, preventing a corrupted `Remotes` field when an invalid value is passed.
+* `change_remotes_field()` informs the user (when `verbose = TRUE`) that there is nothing to do when the package has no `Remotes` field, instead of returning silently.
+* The print method of `releaser_doc_check` now displays a proper check mark (`\u2713`) for passing checks instead of a stray space.
 
 ## [1.2.1] - 2026-07-31
 

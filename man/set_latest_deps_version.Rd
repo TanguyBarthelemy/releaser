@@ -2,23 +2,36 @@
 % Please edit documentation in R/update_description.R
 \name{set_latest_deps_version}
 \alias{set_latest_deps_version}
-\title{Set latest versions for \verb{rjd3*} dependencies}
+\title{Set latest versions for GitHub dependencies}
 \usage{
-set_latest_deps_version(path, verbose = TRUE)
+set_latest_deps_version(
+  path,
+  org = "rjdverse",
+  prefix = "rjd3",
+  verbose = TRUE
+)
 }
 \arguments{
 \item{path}{[\link[base]{character}] Path to the package root directory (or
 to the DESCRIPTION / NEWS.md file).}
 
+\item{org}{[\link[base]{character}] GitHub organization that hosts the
+dependency repositories (default: \code{"rjdverse"}).}
+
+\item{prefix}{[\link[base]{character}] Prefix of the dependency package
+names to update (default: \code{"rjd3"}).}
+
 \item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}
 }
 \value{
-Invisibly updates the \code{DESCRIPTION} file in place.
+Used for its side effect on the \code{DESCRIPTION} file
+(no return value).
 }
 \description{
 Update the \code{DESCRIPTION} file of a package so that all dependencies
-beginning with \code{"rjd3"} require the latest released version from GitHub.
+whose name starts with \code{prefix} require the latest released version
+from the given GitHub organization.
 }
 \examples{
 \dontshow{if (FALSE) withAutoprint(\{ # examplesIf}

@@ -6,8 +6,10 @@
 #' (`develop`, `snapshot`, or `main`).
 #'
 #' @inheritParams set_latest_deps_version
-#' @param target [\link[base]{character}] Target branch or type of remote:
-#' must be one of `"develop"`, `"snapshot"`, or `"main"`.
+#' @param target [\link[base]{character}] Remote reference to write after the
+#'   `@` separator: `"develop"` (branch `develop`), `"snapshot"`
+#'   (branch `snapshot`) or `"main"` (release tracking, written as
+#'   `*release` in the `Remotes` field).
 #'
 #' @returns Invisibly returns the new vector of remote specifications
 #' (character).
@@ -33,7 +35,10 @@ change_remotes_field <- function(
     target <- match.arg(arg = target)
     remotes <- desc::desc_get_remotes(path)
     if (length(remotes) == 0L) {
-        return(NULL)
+        if (verbose) {
+            message("No Remotes field found in DESCRIPTION; nothing to change.")
+        }
+        return(invisible(NULL))
     }
 
     basic_remotes <- remotes |>
@@ -68,18 +73,24 @@ change_remotes_field <- function(
     return(invisible(new_remotes))
 }
 
-#' @title Set latest versions for `rjd3*` dependencies
+#' @title Set latest versions for GitHub dependencies
 #'
 #' @description
 #' Update the `DESCRIPTION` file of a package so that all dependencies
-#' beginning with `"rjd3"` require the latest released version from GitHub.
+#' whose name starts with `prefix` require the latest released version
+#' from the given GitHub organization.
 #'
 #' @param path [\link[base]{character}] Path to the package root directory (or
 #'   to the DESCRIPTION / NEWS.md file).
+#' @param org [\link[base]{character}] GitHub organization that hosts the
+#'   dependency repositories (default: `"rjdverse"`).
+#' @param prefix [\link[base]{character}] Prefix of the dependency package
+#'   names to update (default: `"rjd3"`).
 #' @param verbose [\link[base]{logical}] Whether to print additional
 #'   information (default: `TRUE`).
 #'
-#' @returns Invisibly updates the `DESCRIPTION` file in place.
+#' @returns Used for its side effect on the `DESCRIPTION` file
+#' (no return value).
 #'
 #' @examplesIf FALSE
 #' \donttest{
@@ -95,36 +106,46 @@ change_remotes_field <- function(
 #'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep
-set_latest_deps_version <- function(path, verbose = TRUE) {
+set_latest_deps_version <- function(
+    path,
+    org = "rjdverse",
+    prefix = "rjd3",
+    verbose = TRUE
+) {
     cur_deps <- desc::desc_get_deps(path)
-    row_rjdverse <- grep(cur_deps$package, pattern = "^rjd3")
-    for (idx in row_rjdverse) {
+    row_deps <- which(startsWith(prefix = prefix, x = cur_deps$package))
+    for (idx in row_deps) {
         pkg <- cur_deps$package[idx]
         pkg_type <- cur_deps$type[idx]
         latest_version <- get_latest_version(
-            gh_repo = file.path("rjdverse", pkg)
+            gh_repo = file.path(org, pkg)
         )
         desc::desc_set_dep(
             package = pkg,
             version = paste(">=", latest_version),
             type = pkg_type,
-            file = file.path(path, "DESCRIPTION"),
+            file = path,
             normalize = TRUE
         )
     }
 }
 
-#' @title Set the rjdverse in the Remotes field
+#' @title Set organization remotes in the Remotes field
 #'
 #' @description
-#' Add or remove rjdverse packages from the Remotes field of the
-#' DESCRIPTION file.
+#' Add GitHub remotes to the `Remotes` field of the `DESCRIPTION` file
+#' for the dependencies of a given GitHub organization.
 #'
 #' @details
-#' All dependencies whose package name starts with "rjd3" (rjdverse packages)
-#' are added to the Remotes field as GitHub remotes.
+#' All dependencies whose package name starts with `prefix`
+#' (rjdverse packages by default) are added to the `Remotes` field as
+#' GitHub remotes of `org`.
 #'
 #' @param path Path to the root of the package.
+#' @param org GitHub organization that hosts the dependency repositories
+#'   (default: `"rjdverse"`).
+#' @param prefix Prefix of the dependency package names to add as remotes
+#'   (default: `"rjd3"`).
 #' @param verbose Logical. Should informative messages be displayed?
 #'
 #' @returns Invisibly the current content of the `Remotes` field.
@@ -140,12 +161,17 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
 #'
 #' set_rjdverse_remotes(path = path_rjd3workspace)
 #'
-set_rjdverse_remotes <- function(path, verbose = TRUE) {
+set_rjdverse_remotes <- function(
+    path,
+    org = "rjdverse",
+    prefix = "rjd3",
+    verbose = TRUE
+) {
     remotes <- desc::desc_get_remotes(path)
     cur_deps <- desc::desc_get_deps(path)
-    cond_rjdverse <- startsWith(prefix = "rjd3", x = cur_deps$package)
-    rjdverse <- cur_deps$package[cond_rjdverse]
-    new_remotes <- file.path("github::rjdverse", rjdverse)
+    cond_deps <- startsWith(prefix = prefix, x = cur_deps$package)
+    deps <- cur_deps$package[cond_deps]
+    new_remotes <- file.path(paste0("github::", org), deps)
 
     if (identical(sort(remotes), sort(new_remotes))) {
         if (verbose) {
@@ -157,7 +183,7 @@ set_rjdverse_remotes <- function(path, verbose = TRUE) {
 
     desc::desc_set_remotes(remotes = new_remotes, file = path)
     if (verbose) {
-        message("Enabled rjdverse remotes: ", toString(new_remotes))
+        message("Enabled remotes: ", toString(new_remotes))
     }
     invisible(new_remotes)
 }

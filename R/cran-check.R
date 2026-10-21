@@ -110,7 +110,13 @@ is_not_in_example.roxy_block <- function(x, all_examples) {
     if (is.null(topics)) {
         return(FALSE)
     }
-    !(grepl(pattern = topics, x = all_examples, fixed = TRUE) |> any())
+    calls <- paste0(topics, c("(", " ("))
+    in_examples <- vapply(
+        calls,
+        function(call) any(grepl(call, all_examples, fixed = TRUE)),
+        FUN.VALUE = logical(1L)
+    )
+    return(!any(in_examples))
 }
 
 #' @exportS3Method is_not_in_example docblock
@@ -526,7 +532,7 @@ print.releaser_doc_check <- function(x, ...) {
         issues <- x[[nm]]
         cat("*", nm, ":\n")
         if (length(issues) == 0L) {
-            cat("\U20 OK\n\n")
+            cat("\u2713 OK\n\n")
         } else {
             display_functions(issues)
             cat("\n")

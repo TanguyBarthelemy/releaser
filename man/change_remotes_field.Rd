@@ -14,8 +14,10 @@ change_remotes_field(
 \item{path}{[\link[base]{character}] Path to the package root directory (or
 to the DESCRIPTION / NEWS.md file).}
 
-\item{target}{[\link[base]{character}] Target branch or type of remote:
-must be one of \code{"develop"}, \code{"snapshot"}, or \code{"main"}.}
+\item{target}{[\link[base]{character}] Remote reference to write after the
+\code{@} separator: \code{"develop"} (branch \code{develop}), \code{"snapshot"}
+(branch \code{snapshot}) or \code{"main"} (release tracking, written as
+\verb{*release} in the \code{Remotes} field).}
 
 \item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}

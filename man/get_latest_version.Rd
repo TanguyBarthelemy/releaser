@@ -4,11 +4,19 @@
 \alias{get_latest_version}
 \title{Get latest GitHub release version}
 \usage{
-get_latest_version(gh_repo = file.path("r-lib", "usethis"), verbose = TRUE)
+get_latest_version(
+  gh_repo = file.path("r-lib", "usethis"),
+  max_branches = 50L,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format
 \code{"owner/repo"}.}
+
+\item{max_branches}{[\link[base]{integer}] Maximum number of branches to
+inspect, to limit the number of GitHub API calls
+(default: \code{50L}).}
 
 \item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}

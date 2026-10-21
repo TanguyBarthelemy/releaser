@@ -101,6 +101,29 @@ test_that("get_latest_version ignores the gh-pages branch", {
     expect_false(any(grepl("gh-pages", messages, fixed = TRUE)))
 })
 
+test_that("get_latest_version limits the number of inspected branches", {
+    local_mocked_bindings(
+        get_latest_release_tag = function(gh_repo) "v1.2.3",
+        get_branches = function(gh_repo, verbose = FALSE) {
+            c("main", "develop", "feat-a", "feat-b")
+        },
+        get_version_from_branch = function(
+            gh_repo,
+            branch = "main",
+            verbose = TRUE
+        ) "1.2.3"
+    )
+
+    expect_message(
+        get_latest_version(
+            gh_repo = "owner/repo",
+            max_branches = 2L,
+            verbose = TRUE
+        ),
+        "Limiting to the first 2 of 4 branches."
+    )
+})
+
 test_that("get_latest_version does not call the deprecated get_github_branches (#60)", {
     local_mocked_bindings(
         get_latest_release_tag = function(gh_repo) "v1.2.3",

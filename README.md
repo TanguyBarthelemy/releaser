@@ -44,51 +44,10 @@ You can extract the latest version of a package on GitHub and display
 the different future version:
 
 ``` r
-version <- get_latest_version("r-lib/usethis")
-#> Fetched DESCRIPTION from branch: v3.2.2
-#> Version found on branch v3.2.2: 3.2.2
-#> Latest release: 3.2.2
-#> Fetching branches from repository: r-lib/usethis
-#> Found branches: agent-prompt-detection, agents-update, claude-revdep, drop-base-imports, f-check-installed-later, feature/rhub-rchk, fork-cleanup, general-github-file, gh-pages, main, pkgdown-v3.1.0, shields-io-experiment
-#> Fetched DESCRIPTION from branch: agent-prompt-detection
-#> Version found on branch agent-prompt-detection: 3.2.2.9000
-#> Version on branch agent-prompt-detection: 3.2.2.9000
-#> Fetched DESCRIPTION from branch: agents-update
-#> Version found on branch agents-update: 3.2.1.9000
-#> Version on branch agents-update: 3.2.1.9000
-#> Fetched DESCRIPTION from branch: claude-revdep
-#> Version found on branch claude-revdep: 3.2.1.9000
-#> Version on branch claude-revdep: 3.2.1.9000
-#> Fetched DESCRIPTION from branch: drop-base-imports
-#> Version found on branch drop-base-imports: 3.2.1.9000
-#> Version on branch drop-base-imports: 3.2.1.9000
-#> Fetched DESCRIPTION from branch: f-check-installed-later
-#> Version found on branch f-check-installed-later: 2.2.2.9000
-#> Version on branch f-check-installed-later: 2.2.2.9000
-#> Fetched DESCRIPTION from branch: feature/rhub-rchk
-#> Version found on branch feature/rhub-rchk: 3.2.1.9000
-#> Version on branch feature/rhub-rchk: 3.2.1.9000
-#> Fetched DESCRIPTION from branch: fork-cleanup
-#> Version found on branch fork-cleanup: 3.2.1.9000
-#> Version on branch fork-cleanup: 3.2.1.9000
-#> Fetched DESCRIPTION from branch: general-github-file
-#> Version found on branch general-github-file: 3.2.2.9000
-#> Version on branch general-github-file: 3.2.2.9000
-#> Fetched DESCRIPTION from branch: main
-#> Version found on branch main: 3.2.2.9000
-#> Version on branch main: 3.2.2.9000
-#> Fetched DESCRIPTION from branch: pkgdown-v3.1.0
-#> Version found on branch pkgdown-v3.1.0: 3.1.0
-#> Version on branch pkgdown-v3.1.0: 3.1.0
-#> Fetched DESCRIPTION from branch: shields-io-experiment
-#> Version found on branch shields-io-experiment: 2.1.5.9000
-#> Version on branch shields-io-experiment: 2.1.5.9000
+version <- get_latest_version("r-lib/usethis", verbose = FALSE)
 get_different_future_version(version)
-#> Package version bumped from '3.2.2' to '3.2.3'
 #> Future patch version: 3.2.3
-#> Package version bumped from '3.2.3' to '3.3.0'
 #> Future minor version: 3.3.0
-#> Package version bumped from '3.3.0' to '4.0.0'
 #> Future major version: 4.0.0
 #> current_version.Version    future_patch_version    future_minor_version 
 #>                 "3.2.2"                 "3.2.3"                 "3.3.0" 
