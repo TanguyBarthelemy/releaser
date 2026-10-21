@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 * User-facing messages are now written in English for consistency.
 * The default `gh_repo` argument is now `r-lib/usethis` instead of `rjdverse/rjd3toolkit`.
+* `check_docs()` uses `verbose = TRUE` by default, consistently with the other functions.
+* User-facing diagnostic messages consistently use `message()`.
 
 ### Fixed
 

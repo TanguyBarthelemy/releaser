@@ -459,7 +459,8 @@ check_missing_returns.docblock <- function(x) {
 #' - Missing `@returns`
 #'
 #' @param pkg_dir Path to the R package.
-#' @param verbose Logical. If `TRUE`, prints a formatted summary.
+#' @param verbose Logical. Whether to print a formatted summary
+#'   (default: `TRUE`).
 #' @param error_on_fail Logical. If `TRUE`, stops execution if any issue is
 #'   found.
 #'
@@ -473,7 +474,7 @@ check_missing_returns.docblock <- function(x) {
 #' results <- check_docs(my_pkg_dir)
 check_docs <- function(
     pkg_dir = ".",
-    verbose = interactive(),
+    verbose = TRUE,
     error_on_fail = FALSE
 ) {
     if (!dir.exists(pkg_dir)) {

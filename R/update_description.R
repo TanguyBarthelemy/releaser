@@ -59,11 +59,10 @@ change_remotes_field <- function(
         return(invisible(remotes))
     }
     if (verbose) {
-        cat("Current remotes fields :\n")
-        cat(remotes, "\n")
-        cat("New remotes fields :\n")
-        cat(new_remotes, "\n")
-        cat("\n")
+        message("Current remotes fields:")
+        message(remotes)
+        message("New remotes fields:")
+        message(new_remotes)
     }
     desc::desc_set_remotes(remotes = new_remotes, file = path)
     return(invisible(new_remotes))
