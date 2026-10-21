@@ -70,6 +70,8 @@ change_remotes_field <- function(
         message(new_remotes)
     }
     desc::desc_set_remotes(remotes = new_remotes, file = path)
+    attachment::att_amend_desc(path = path, normalize = TRUE)
+    desc::desc_normalize(file = path)
     return(invisible(new_remotes))
 }
 
@@ -124,10 +126,11 @@ set_latest_deps_version <- function(
             package = pkg,
             version = paste(">=", latest_version),
             type = pkg_type,
-            file = path,
-            normalize = TRUE
+            file = path
         )
     }
+    attachment::att_amend_desc(path = path, normalize = TRUE)
+    desc::desc_normalize(file = path)
 }
 
 #' @title Set organization remotes in the Remotes field
@@ -185,5 +188,7 @@ set_rjdverse_remotes <- function(
     if (verbose) {
         message("Enabled remotes: ", toString(new_remotes))
     }
+    attachment::att_amend_desc(path = path, normalize = TRUE)
+    desc::desc_normalize(file = path)
     invisible(new_remotes)
 }

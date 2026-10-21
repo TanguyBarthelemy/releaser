@@ -57,3 +57,31 @@ test_that("change_remotes_field works", {
         expected = desc::desc_get_remotes(path_rjd3workspace)
     )
 })
+
+test_that("change_remotes_field normalizes the DESCRIPTION field order", {
+    dir <- tempfile("releaser-change-remotes-")
+    dir.create(dir)
+    on.exit(unlink(dir, recursive = TRUE), add = TRUE)
+    writeLines(
+        c(
+            "Package: normtest",
+            "Title: Normalization Test",
+            "Version: 1.0.0",
+            "Description: Test package for remotes normalization.",
+            "License: MIT + file LICENSE",
+            "Encoding: UTF-8",
+            "SystemRequirements: Java (>= 17)",
+            "Imports: stats",
+            "Remotes:",
+            "    github::rjdverse/rjd3toolkit",
+            "Config/testthat/edition: 3"
+        ),
+        con = file.path(dir, "DESCRIPTION")
+    )
+
+    change_remotes_field(path = dir, target = "develop", verbose = FALSE)
+
+    before <- readLines(file.path(dir, "DESCRIPTION"))
+    desc::desc_normalize(file = dir)
+    expect_identical(before, readLines(file.path(dir, "DESCRIPTION")))
+})

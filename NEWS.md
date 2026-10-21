@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 * Tests for the documentation checking functions (`check_docs()` and the `check_*()` family).
 * `get_latest_version()` gains a `max_branches` argument (default: `50L`) to limit the number of GitHub API calls on repositories with many branches.
 * `set_latest_deps_version()` and `set_rjdverse_remotes()` gain `org` and `prefix` arguments (defaults: `"rjdverse"` and `"rjd3"`), so they can be used with other GitHub organizations.
+* New function `amend_description()`, a wrapper around `attachment::att_amend_desc()` that aligns the `DESCRIPTION` dependencies with the packages used in the code. `attachment` is a Suggested package. Call it **before** `change_remotes_field()` / `set_latest_deps_version()`, since `att_amend_desc()` drops the remotes of packages it does not find in the code.
 
 ### Changed
 
@@ -20,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 * User-facing diagnostic messages consistently use `message()`.
 * `get_different_future_version()` no longer forwards the `desc` version bump messages; only its own `verbose` messages are printed.
 * `check_missing_examples_content()` now detects a function in its examples only when it is actually called (e.g. `my_fun(...)`), instead of matching the bare name as a substring.
+* `change_remotes_field()` and `set_latest_deps_version()` now normalize the field order of the `DESCRIPTION` file after modifying it (`desc::desc_normalize()`).
 
 ### Fixed
 

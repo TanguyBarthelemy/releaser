@@ -54,3 +54,22 @@ get_different_future_version(version)
 #>    future_major_version 
 #>                 "4.0.0"
 ```
+
+## Release workflow
+
+The recommended order when preparing a release is:
+
+``` r
+# 1. Align the dependencies with the package code (requires {attachment})
+amend_description(path = ".")
+
+# 2. Point the Remotes field to the desired branch
+change_remotes_field(path = ".", target = "develop")
+
+# 3. Bump the versions of the rjdverse dependencies
+set_latest_deps_version(path = ".")
+```
+
+`amend_description()` must be called **before** the remotes and version
+pin steps: `attachment::att_amend_desc()` keeps the remotes of the
+packages it finds in the code and drops the others.

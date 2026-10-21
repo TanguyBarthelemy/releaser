@@ -19,6 +19,7 @@ Imports:
     base64enc, 
     roxygen2
 Suggests:
+    attachment,
     rlang,
     spelling,
     testthat (>= 3.0.0)
