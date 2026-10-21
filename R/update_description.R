@@ -30,6 +30,7 @@ change_remotes_field <- function(
     target = c("develop", "snapshot", "main"),
     verbose = TRUE
 ) {
+    target <- match.arg(arg = target)
     remotes <- desc::desc_get_remotes(path)
     if (length(remotes) == 0L) {
         return(NULL)
@@ -43,7 +44,7 @@ change_remotes_field <- function(
         basic_remotes,
         "@",
         switch(
-            EXPR = target,
+            target,
             develop = "develop",
             main = "*release",
             snapshot = "snapshot"

@@ -1,3 +1,10 @@
+test_that("change_remotes_field rejects an invalid target", {
+    expect_error(
+        change_remotes_field(path = path_rjd3workspace, target = "bogus"),
+        "'arg' should be one of"
+    )
+})
+
 test_that("change_remotes_field works", {
     # develop
     new_remotes <- change_remotes_field(path = path_rjd3workspace,
