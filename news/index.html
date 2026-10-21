@@ -53,12 +53,33 @@
 <p>The format is based on <a href="https://keepachangelog.com/en/1.1.0/" class="external-link">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" class="external-link">Semantic Versioning</a>.</p>
 <div class="section level3">
 <h3 id="unreleased-1-2-1-9000"><a href="https://github.com/TanguyBarthelemy/releaser/compare/v1.2.1...HEAD" class="external-link">Unreleased</a><a class="anchor" aria-label="anchor" href="#unreleased-1-2-1-9000"></a></h3>
+<div class="section level4">
+<h4 id="added-1-2-1-9000">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000"></a></h4>
+<ul><li>Tests for the documentation checking functions (<code><a href="../reference/check_docs.html">check_docs()</a></code> and the <code>check_*()</code> family).</li>
+</ul></div>
+<div class="section level4">
+<h4 id="changed-1-2-1-9000">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000"></a></h4>
+<ul><li>User-facing messages are now written in English for consistency.</li>
+<li>The default <code>gh_repo</code> argument is now <code>r-lib/usethis</code> instead of <code>rjdverse/rjd3toolkit</code>.</li>
+<li>
+<code><a href="../reference/check_docs.html">check_docs()</a></code> uses <code>verbose = TRUE</code> by default, consistently with the other functions.</li>
+<li>User-facing diagnostic messages consistently use <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code>.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="fixed-1-2-1-9000">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000"></a></h4>
+<ul><li>
+<code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> no longer emits a deprecation warning: it relies on an internal helper instead of the deprecated <code><a href="../reference/get_github_branches.html">get_github_branches()</a></code>.</li>
+<li>
+<code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> reports branches whose <code>DESCRIPTION</code> cannot be read instead of silently swallowing the error.</li>
+<li>
+<code><a href="../reference/change_remotes_field.html">change_remotes_field()</a></code> now validates <code>target</code> with <code><a href="https://rdrr.io/r/base/match.arg.html" class="external-link">match.arg()</a></code>, preventing a corrupted <code>Remotes</code> field when an invalid value is passed.</li>
+</ul></div>
 </div>
 <div class="section level3">
 <h3 id="id_121---1-2-1-9000">
 <a href="https://github.com/TanguyBarthelemy/releaser/compare/v1.2.0...v1.2.1" class="external-link">1.2.1</a> - 2026-07-31<a class="anchor" aria-label="anchor" href="#id_121---1-2-1-9000"></a></h3>
 <div class="section level4">
-<h4 id="changed-1-2-1-9000">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000"></a></h4>
+<h4 id="changed-1-2-1-9000-1">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000-1"></a></h4>
 <ul><li>The argument <code>enabled</code> is removed from <code>set_rjdverse_remotes</code>. Now the function only enable the Remotes field.</li>
 </ul></div>
 <div class="section level4">
@@ -73,11 +94,11 @@
 <h3 id="id_120---1-2-1-9000">
 <a href="https://github.com/TanguyBarthelemy/releaser/compare/v1.1.0...v1.2.0" class="external-link">1.2.0</a> - 2026-07-02<a class="anchor" aria-label="anchor" href="#id_120---1-2-1-9000"></a></h3>
 <div class="section level4">
-<h4 id="added-1-2-1-9000">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000"></a></h4>
+<h4 id="added-1-2-1-9000-1">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000-1"></a></h4>
 <ul><li>New function <code><a href="../reference/set_rjdverse_remotes.html">set_rjdverse_remotes()</a></code> to clear the Remotes field from rjdverse packages or to add the rjdverse dependencies to the Remotes field.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="fixed-1-2-1-9000">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000"></a></h4>
+<h4 id="fixed-1-2-1-9000-1">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000-1"></a></h4>
 <ul><li>Remove examples tested if PAT not provided.</li>
 </ul></div>
 </div>
@@ -85,11 +106,11 @@
 <h3 id="id_110---1-2-1-9000">
 <a href="https://github.com/TanguyBarthelemy/releaser/compare/v1.0.0...v1.1.0" class="external-link">1.1.0</a> - 2026-03-11<a class="anchor" aria-label="anchor" href="#id_110---1-2-1-9000"></a></h3>
 <div class="section level4">
-<h4 id="added-1-2-1-9000-1">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000-1"></a></h4>
+<h4 id="added-1-2-1-9000-2">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000-2"></a></h4>
 <ul><li>New functions to check the documentation of a package R.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="fixed-1-2-1-9000-1">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000-1"></a></h4>
+<h4 id="fixed-1-2-1-9000-2">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000-2"></a></h4>
 <ul><li>url of GitHub repo with desc pkg.</li>
 </ul></div>
 </div>
@@ -97,7 +118,7 @@
 <h3 id="id_100---1-2-1-9000">
 <a href="https://github.com/TanguyBarthelemy/releaser/releases/tag/v1.0.0" class="external-link">1.0.0</a> - 2025-10-29<a class="anchor" aria-label="anchor" href="#id_100---1-2-1-9000"></a></h3>
 <div class="section level4">
-<h4 id="changed-1-2-1-9000-1">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000-1"></a></h4>
+<h4 id="changed-1-2-1-9000-2">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000-2"></a></h4>
 <ul><li>order of the argument</li>
 <li>Add {rjd3workspace} DESCRIPTION and NEWS.md as example</li>
 </ul></div>
@@ -107,7 +128,7 @@
 </li>
 </ul></div>
 <div class="section level4">
-<h4 id="added-1-2-1-9000-2">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000-2"></a></h4>
+<h4 id="added-1-2-1-9000-3">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000-3"></a></h4>
 <ul><li>Add files and function to extract information from description (based on {desc}).</li>
 <li>Add function to extract version from GitHub or from an R package.</li>
 <li>New functions to modify the DESCRIPTION and NEWS.md files for release</li>
