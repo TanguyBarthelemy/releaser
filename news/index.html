@@ -56,6 +56,10 @@
 <div class="section level4">
 <h4 id="added-1-2-1-9000">Added<a class="anchor" aria-label="anchor" href="#added-1-2-1-9000"></a></h4>
 <ul><li>Tests for the documentation checking functions (<code><a href="../reference/check_docs.html">check_docs()</a></code> and the <code>check_*()</code> family).</li>
+<li>
+<code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> gains a <code>max_branches</code> argument (default: <code>50L</code>) to limit the number of GitHub API calls on repositories with many branches.</li>
+<li>
+<code><a href="../reference/set_latest_deps_version.html">set_latest_deps_version()</a></code> and <code><a href="../reference/set_rjdverse_remotes.html">set_rjdverse_remotes()</a></code> gain <code>org</code> and <code>prefix</code> arguments (defaults: <code>"rjdverse"</code> and <code>"rjd3"</code>), so they can be used with other GitHub organizations.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="changed-1-2-1-9000">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000"></a></h4>
@@ -64,6 +68,10 @@
 <li>
 <code><a href="../reference/check_docs.html">check_docs()</a></code> uses <code>verbose = TRUE</code> by default, consistently with the other functions.</li>
 <li>User-facing diagnostic messages consistently use <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code>.</li>
+<li>
+<code><a href="../reference/get_different_future_version.html">get_different_future_version()</a></code> no longer forwards the <code>desc</code> version bump messages; only its own <code>verbose</code> messages are printed.</li>
+<li>
+<code><a href="../reference/check.html">check_missing_examples_content()</a></code> now detects a function in its examples only when it is actually called (e.g. <code>my_fun(...)</code>), instead of matching the bare name as a substring.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="fixed-1-2-1-9000">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000"></a></h4>
@@ -73,6 +81,9 @@
 <code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> reports branches whose <code>DESCRIPTION</code> cannot be read instead of silently swallowing the error.</li>
 <li>
 <code><a href="../reference/change_remotes_field.html">change_remotes_field()</a></code> now validates <code>target</code> with <code><a href="https://rdrr.io/r/base/match.arg.html" class="external-link">match.arg()</a></code>, preventing a corrupted <code>Remotes</code> field when an invalid value is passed.</li>
+<li>
+<code><a href="../reference/change_remotes_field.html">change_remotes_field()</a></code> informs the user (when <code>verbose = TRUE</code>) that there is nothing to do when the package has no <code>Remotes</code> field, instead of returning silently.</li>
+<li>The print method of <code>releaser_doc_check</code> now displays a proper check mark (<code>\u2713</code>) for passing checks instead of a stray space.</li>
 </ul></div>
 </div>
 <div class="section level3">
