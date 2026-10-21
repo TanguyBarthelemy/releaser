@@ -58,9 +58,7 @@
 <ul><li>Tests for the documentation checking functions (<code><a href="../reference/check_docs.html">check_docs()</a></code> and the <code>check_*()</code> family).</li>
 <li>
 <code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> gains a <code>max_branches</code> argument (default: <code>50L</code>) to limit the number of GitHub API calls on repositories with many branches.</li>
-<li>
-<code><a href="../reference/set_latest_deps_version.html">set_latest_deps_version()</a></code> and <code><a href="../reference/set_rjdverse_remotes.html">set_rjdverse_remotes()</a></code> gain <code>org</code> and <code>prefix</code> arguments (defaults: <code>"rjdverse"</code> and <code>"rjd3"</code>), so they can be used with other GitHub organizations.</li>
-<li>New function <code>amend_description()</code>, a wrapper around <code><a href="https://thinkr-open.github.io/attachment/reference/att_amend_desc.html" class="external-link">attachment::att_amend_desc()</a></code> that aligns the <code>DESCRIPTION</code> dependencies with the packages used in the code. <code>attachment</code> is a Suggested package. Call it <strong>before</strong> <code><a href="../reference/change_remotes_field.html">change_remotes_field()</a></code> / <code><a href="../reference/set_latest_deps_version.html">set_latest_deps_version()</a></code>, since <code>att_amend_desc()</code> drops the remotes of packages it does not find in the code.</li>
+<li>New function <code>amend_description()</code>, a wrapper around <code><a href="https://thinkr-open.github.io/attachment/reference/att_amend_desc.html" class="external-link">attachment::att_amend_desc()</a></code> that aligns the <code>DESCRIPTION</code> dependencies with the packages used in the code. <code>attachment</code> is a Suggested package. Call it <strong>before</strong> <code><a href="../reference/change_remotes_field.html">change_remotes_field()</a></code> / <code><a href="../reference/set_latest_rjdverse_version.html">set_latest_rjdverse_version()</a></code>, since <code>att_amend_desc()</code> drops the remotes of packages it does not find in the code.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="changed-1-2-1-9000">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000"></a></h4>
@@ -74,7 +72,7 @@
 <li>
 <code><a href="../reference/check.html">check_missing_examples_content()</a></code> now detects a function in its examples only when it is actually called (e.g. <code>my_fun(...)</code>), instead of matching the bare name as a substring.</li>
 <li>
-<code><a href="../reference/change_remotes_field.html">change_remotes_field()</a></code> and <code><a href="../reference/set_latest_deps_version.html">set_latest_deps_version()</a></code> now normalize the field order of the <code>DESCRIPTION</code> file after modifying it (<code><a href="https://desc.r-lib.org/reference/desc_normalize.html" class="external-link">desc::desc_normalize()</a></code>).</li>
+<code><a href="../reference/change_remotes_field.html">change_remotes_field()</a></code> and <code><a href="../reference/set_latest_rjdverse_version.html">set_latest_rjdverse_version()</a></code> now normalize the field order of the <code>DESCRIPTION</code> file after modifying it (<code><a href="https://desc.r-lib.org/reference/desc_normalize.html" class="external-link">desc::desc_normalize()</a></code>).</li>
 </ul></div>
 <div class="section level4">
 <h4 id="fixed-1-2-1-9000">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000"></a></h4>

@@ -55,7 +55,7 @@ for the dependencies of a given GitHub organization.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">set_rjdverse_remotes</span><span class="op">(</span><span class="va">path</span>, org <span class="op">=</span> <span class="st">"rjdverse"</span>, prefix <span class="op">=</span> <span class="st">"rjd3"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">set_rjdverse_remotes</span><span class="op">(</span><span class="va">path</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -64,16 +64,6 @@ for the dependencies of a given GitHub organization.</p>
 
 <dl><dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
 <dd><p>Path to the root of the package.</p></dd>
-
-
-<dt id="arg-org">org<a class="anchor" aria-label="anchor" href="#arg-org"></a></dt>
-<dd><p>GitHub organization that hosts the dependency repositories
-(default: <code>"rjdverse"</code>).</p></dd>
-
-
-<dt id="arg-prefix">prefix<a class="anchor" aria-label="anchor" href="#arg-prefix"></a></dt>
-<dd><p>Prefix of the dependency package names to add as remotes
-(default: <code>"rjd3"</code>).</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
@@ -86,9 +76,9 @@ for the dependencies of a given GitHub organization.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>All dependencies whose package name starts with <code>prefix</code>
+    <p>All dependencies whose package name starts with <code>rjd3</code>
 (rjdverse packages by default) are added to the <code>Remotes</code> field as
-GitHub remotes of <code>org</code>.</p>
+GitHub remotes of <code>rjdverse</code>.</p>
     </div>
 
     <div id="ref-examples">
