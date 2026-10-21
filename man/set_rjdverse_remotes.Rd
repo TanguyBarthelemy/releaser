@@ -4,16 +4,10 @@
 \alias{set_rjdverse_remotes}
 \title{Set organization remotes in the Remotes field}
 \usage{
-set_rjdverse_remotes(path, org = "rjdverse", prefix = "rjd3", verbose = TRUE)
+set_rjdverse_remotes(path, verbose = TRUE)
 }
 \arguments{
 \item{path}{Path to the root of the package.}
-
-\item{org}{GitHub organization that hosts the dependency repositories
-(default: \code{"rjdverse"}).}
-
-\item{prefix}{Prefix of the dependency package names to add as remotes
-(default: \code{"rjd3"}).}
 
 \item{verbose}{Logical. Should informative messages be displayed?}
 }
@@ -25,9 +19,9 @@ Add GitHub remotes to the \code{Remotes} field of the \code{DESCRIPTION} file
 for the dependencies of a given GitHub organization.
 }
 \details{
-All dependencies whose package name starts with \code{prefix}
+All dependencies whose package name starts with \code{rjd3}
 (rjdverse packages by default) are added to the \code{Remotes} field as
-GitHub remotes of \code{org}.
+GitHub remotes of \code{rjdverse}.
 }
 \examples{
 path_rjd3workspace <- file.path(tempdir(), "rjd3workspace")

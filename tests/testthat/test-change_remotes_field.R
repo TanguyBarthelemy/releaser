@@ -1,6 +1,6 @@
 test_that("change_remotes_field rejects an invalid target", {
     expect_error(
-        change_remotes_field(path = path_rjd3workspace, target = "bogus"),
+        change_remotes_field(path = path_rjd3workspace_test, target = "bogus"),
         "'arg' should be one of"
     )
 })
@@ -8,7 +8,7 @@ test_that("change_remotes_field rejects an invalid target", {
 test_that("change_remotes_field works", {
     # develop
     new_remotes <- change_remotes_field(
-        path = path_rjd3workspace,
+        path = path_rjd3workspace_test,
         target = "develop"
     )
     expect_identical(
@@ -22,12 +22,12 @@ test_that("change_remotes_field works", {
     )
     expect_identical(
         object = new_remotes,
-        expected = desc::desc_get_remotes(path_rjd3workspace)
+        expected = desc::desc_get_remotes(path_rjd3workspace_test)
     )
 
     # main
     new_remotes <- change_remotes_field(
-        path = path_rjd3workspace,
+        path = path_rjd3workspace_test,
         target = "main"
     )
     expect_identical(
@@ -41,12 +41,12 @@ test_that("change_remotes_field works", {
     )
     expect_identical(
         object = new_remotes,
-        expected = desc::desc_get_remotes(path_rjd3workspace)
+        expected = desc::desc_get_remotes(path_rjd3workspace_test)
     )
 
     # snapshot
     new_remotes <- change_remotes_field(
-        path = path_rjd3workspace,
+        path = path_rjd3workspace_test,
         target = "snapshot"
     )
     expect_identical(
@@ -60,7 +60,7 @@ test_that("change_remotes_field works", {
     )
     expect_identical(
         object = new_remotes,
-        expected = desc::desc_get_remotes(path_rjd3workspace)
+        expected = desc::desc_get_remotes(path_rjd3workspace_test)
     )
 })
 

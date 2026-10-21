@@ -25,14 +25,10 @@ Imports:
     rjd3providers (>= 3.5.1),
     rjd3toolkit (>= 3.5.1),
     rjd3tramoseats (>= 3.5.2),
-    rjd3x13 (>= 3.5.1),
-    tools,
-    utils
+    rjd3x13 (>= 3.5.1)
 Suggests: 
-    knitr,
-    rmarkdown,
     testthat (>= 3.0.0)
-Remotes:  
+Remotes: 
     github::rjdverse/rjd3providers,
     github::rjdverse/rjd3toolkit,
     github::rjdverse/rjd3tramoseats,

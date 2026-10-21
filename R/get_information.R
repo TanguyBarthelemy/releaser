@@ -105,7 +105,7 @@ get_version_from_branch <- function(
 #' @description
 #' Read the `Version` field from a local package DESCRIPTION file.
 #'
-#' @inheritParams set_latest_deps_version
+#' @inheritParams set_latest_rjdverse_version
 #'
 #' @returns A single character string with the package version.
 #'

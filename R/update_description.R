@@ -5,7 +5,7 @@
 #' dependencies point to specific development targets
 #' (`develop`, `snapshot`, or `main`).
 #'
-#' @inheritParams set_latest_deps_version
+#' @inheritParams set_latest_rjdverse_version
 #' @param target [\link[base]{character}] Remote reference to write after the
 #'   `@` separator: `"develop"` (branch `develop`), `"snapshot"`
 #'   (branch `snapshot`) or `"main"` (release tracking, written as
@@ -32,6 +32,7 @@ change_remotes_field <- function(
     target = c("develop", "snapshot", "main"),
     verbose = TRUE
 ) {
+    path <- normalizePath(path, mustWork = TRUE)
     target <- match.arg(arg = target)
     remotes <- desc::desc_get_remotes(path)
     if (length(remotes) == 0L) {
@@ -88,15 +89,11 @@ change_remotes_field <- function(
 #'
 #' @description
 #' Update the `DESCRIPTION` file of a package so that all dependencies
-#' whose name starts with `prefix` require the latest released version
-#' from the given GitHub organization.
+#' whose name starts with `rjd3` require the latest released version
+#' from the rjdverse.
 #'
 #' @param path [\link[base]{character}] Path to the package root directory (or
 #'   to the DESCRIPTION / NEWS.md file).
-#' @param org [\link[base]{character}] GitHub organization that hosts the
-#'   dependency repositories (default: `"rjdverse"`).
-#' @param prefix [\link[base]{character}] Prefix of the dependency package
-#'   names to update (default: `"rjd3"`).
 #' @param verbose [\link[base]{logical}] Whether to print additional
 #'   information (default: `TRUE`).
 #'
@@ -112,24 +109,23 @@ change_remotes_field <- function(
 #'     recursive = TRUE
 #' )
 #'
-#' set_latest_deps_version(path = path_rjd3workspace)
+#' set_latest_rjdverse_version(path = path_rjd3workspace)
 #' }
 #'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep
-set_latest_deps_version <- function(
+set_latest_rjdverse_version <- function(
     path,
-    org = "rjdverse",
-    prefix = "rjd3",
     verbose = TRUE
 ) {
+    path <- normalizePath(path, mustWork = TRUE)
     cur_deps <- desc::desc_get_deps(path)
-    row_deps <- which(startsWith(prefix = prefix, x = cur_deps$package))
+    row_deps <- which(startsWith(prefix = "rjd3", x = cur_deps$package))
     for (idx in row_deps) {
         pkg <- cur_deps$package[idx]
         pkg_type <- cur_deps$type[idx]
         latest_version <- get_latest_version(
-            gh_repo = file.path(org, pkg)
+            gh_repo = file.path("rjdverse", pkg)
         )
         desc::desc_set_dep(
             package = pkg,
@@ -144,7 +140,7 @@ set_latest_deps_version <- function(
         must.exist = FALSE,
         update.config = FALSE,
         use.config = FALSE,
-        document = FALSE
+        document = FALSE,
     )
     desc::desc_normalize(file = path)
 }
@@ -156,15 +152,11 @@ set_latest_deps_version <- function(
 #' for the dependencies of a given GitHub organization.
 #'
 #' @details
-#' All dependencies whose package name starts with `prefix`
+#' All dependencies whose package name starts with `rjd3`
 #' (rjdverse packages by default) are added to the `Remotes` field as
-#' GitHub remotes of `org`.
+#' GitHub remotes of `rjdverse`.
 #'
 #' @param path Path to the root of the package.
-#' @param org GitHub organization that hosts the dependency repositories
-#'   (default: `"rjdverse"`).
-#' @param prefix Prefix of the dependency package names to add as remotes
-#'   (default: `"rjd3"`).
 #' @param verbose Logical. Should informative messages be displayed?
 #'
 #' @returns Invisibly the current content of the `Remotes` field.
@@ -182,15 +174,14 @@ set_latest_deps_version <- function(
 #'
 set_rjdverse_remotes <- function(
     path,
-    org = "rjdverse",
-    prefix = "rjd3",
     verbose = TRUE
 ) {
+    path <- normalizePath(path)
     remotes <- desc::desc_get_remotes(path)
     cur_deps <- desc::desc_get_deps(path)
-    cond_deps <- startsWith(prefix = prefix, x = cur_deps$package)
+    cond_deps <- startsWith(prefix = "rjd3", x = cur_deps$package)
     deps <- cur_deps$package[cond_deps]
-    new_remotes <- file.path(paste0("github::", org), deps)
+    new_remotes <- file.path("github::rjdverse", deps)
 
     if (identical(sort(remotes), sort(new_remotes))) {
         if (verbose) {

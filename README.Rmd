@@ -64,7 +64,7 @@ amend_description(path = ".")
 change_remotes_field(path = ".", target = "develop")
 
 # 3. Bump the versions of the rjdverse dependencies
-set_latest_deps_version(path = ".")
+set_latest_rjdverse_version(path = ".")
 ```
 
 `amend_description()` must be called **before** the remotes and version
