@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Fixed
 
 * `get_latest_version()` no longer emits a deprecation warning: it relies on an internal helper instead of the deprecated `get_github_branches()`.
+* `get_latest_version()` reports branches whose `DESCRIPTION` cannot be read instead of silently swallowing the error.
 
 ## [1.2.1] - 2026-07-31
 

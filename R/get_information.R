@@ -127,6 +127,23 @@ get_version_from_local <- function(path, verbose = TRUE) {
     return(version_number)
 }
 
+#' Get the tag of the latest GitHub release
+#'
+#' Retrieve the tag name of the latest GitHub release of a repository.
+#'
+#' @param gh_repo [\link[base]{character}] GitHub repository in the format
+#' `"owner/repo"`.
+#'
+#' @returns A character string with the release tag name.
+#'
+#' @keywords internal
+#' @noRd
+#'
+get_latest_release_tag <- function(gh_repo) {
+    release <- gh::gh(file.path("/repos", gh_repo, "releases", "latest"))
+    return(release$tag_name)
+}
+
 #' @title Get latest GitHub release version
 #'
 #' @description
@@ -150,10 +167,12 @@ get_latest_version <- function(
     gh_repo = file.path("r-lib", "usethis"),
     verbose = TRUE
 ) {
-    release <- gh::gh(file.path("/repos", gh_repo, "releases", ref = "latest"))
-    version_release <- get_version_from_branch(gh_repo, release$tag_name)
+    version_release <- get_version_from_branch(
+        gh_repo,
+        get_latest_release_tag(gh_repo)
+    )
     if (verbose) {
-        cat(paste0("Latest release: ", version_release), "\n")
+        message("Latest release: ", version_release)
     }
 
     branches <- setdiff(
@@ -161,15 +180,23 @@ get_latest_version <- function(
         "gh-pages"
     )
     for (branch in branches) {
-        try({
-            version_number <- get_version_from_branch(gh_repo, branch)
+        version_number <- tryCatch(
+            get_version_from_branch(gh_repo, branch),
+            error = function(e) NULL
+        )
+        if (is.null(version_number)) {
             if (verbose) {
-                cat(
-                    paste0("Version on branch ", branch, ": ", version_number),
-                    "\n"
+                message(
+                    "Could not read the DESCRIPTION of branch ",
+                    branch,
+                    "."
                 )
             }
-        })
+            next
+        }
+        if (verbose) {
+            message("Version on branch ", branch, ": ", version_number)
+        }
     }
     return(version_release)
 }
