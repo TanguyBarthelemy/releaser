@@ -111,7 +111,9 @@ test_that("get_latest_version limits the number of inspected branches", {
             gh_repo,
             branch = "main",
             verbose = TRUE
-        ) "1.2.3"
+        ) {
+            "1.2.3"
+        }
     )
 
     expect_message(
@@ -132,7 +134,9 @@ test_that("get_latest_version does not call the deprecated get_github_branches (
             gh_repo,
             branch = "main",
             verbose = TRUE
-        ) "1.2.3",
+        ) {
+            "1.2.3"
+        },
         get_github_branches = function(...) {
             stop("get_github_branches should not be called")
         }

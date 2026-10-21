@@ -1,4 +1,3 @@
-
 #' @title Deprecated functions
 #'
 #' @description

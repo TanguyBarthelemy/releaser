@@ -58,8 +58,10 @@ change_remotes_field <- function(
 
     if (identical(sort(remotes), sort(new_remotes))) {
         if (verbose) {
-            message("The remote field is already up to date",
-                    " and will not be changed.")
+            message(
+                "The remote field is already up to date",
+                " and will not be changed."
+            )
         }
         return(invisible(remotes))
     }
@@ -70,7 +72,14 @@ change_remotes_field <- function(
         message(new_remotes)
     }
     desc::desc_set_remotes(remotes = new_remotes, file = path)
-    attachment::att_amend_desc(path = path, normalize = TRUE)
+    attachment::att_amend_desc(
+        path = path,
+        normalize = TRUE,
+        must.exist = FALSE,
+        update.config = FALSE,
+        use.config = FALSE,
+        document = FALSE
+    )
     desc::desc_normalize(file = path)
     return(invisible(new_remotes))
 }
@@ -129,7 +138,14 @@ set_latest_deps_version <- function(
             file = path
         )
     }
-    attachment::att_amend_desc(path = path, normalize = TRUE)
+    attachment::att_amend_desc(
+        path = path,
+        normalize = TRUE,
+        must.exist = FALSE,
+        update.config = FALSE,
+        use.config = FALSE,
+        document = FALSE
+    )
     desc::desc_normalize(file = path)
 }
 
@@ -178,8 +194,10 @@ set_rjdverse_remotes <- function(
 
     if (identical(sort(remotes), sort(new_remotes))) {
         if (verbose) {
-            message("The remote field is already up to date",
-                    " and will not be changed.")
+            message(
+                "The remote field is already up to date",
+                " and will not be changed."
+            )
         }
         return(invisible(remotes))
     }
@@ -188,7 +206,14 @@ set_rjdverse_remotes <- function(
     if (verbose) {
         message("Enabled remotes: ", toString(new_remotes))
     }
-    attachment::att_amend_desc(path = path, normalize = TRUE)
+    attachment::att_amend_desc(
+        path = path,
+        normalize = TRUE,
+        must.exist = FALSE,
+        update.config = FALSE,
+        use.config = FALSE,
+        document = FALSE
+    )
     desc::desc_normalize(file = path)
     invisible(new_remotes)
 }

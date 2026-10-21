@@ -7,8 +7,10 @@ test_that("change_remotes_field rejects an invalid target", {
 
 test_that("change_remotes_field works", {
     # develop
-    new_remotes <- change_remotes_field(path = path_rjd3workspace,
-                                        target = "develop")
+    new_remotes <- change_remotes_field(
+        path = path_rjd3workspace,
+        target = "develop"
+    )
     expect_identical(
         object = new_remotes,
         expected = c(
@@ -24,8 +26,10 @@ test_that("change_remotes_field works", {
     )
 
     # main
-    new_remotes <- change_remotes_field(path = path_rjd3workspace,
-                                        target = "main")
+    new_remotes <- change_remotes_field(
+        path = path_rjd3workspace,
+        target = "main"
+    )
     expect_identical(
         object = new_remotes,
         expected = c(
@@ -41,8 +45,10 @@ test_that("change_remotes_field works", {
     )
 
     # snapshot
-    new_remotes <- change_remotes_field(path = path_rjd3workspace,
-                                        target = "snapshot")
+    new_remotes <- change_remotes_field(
+        path = path_rjd3workspace,
+        target = "snapshot"
+    )
     expect_identical(
         object = new_remotes,
         expected = c(
