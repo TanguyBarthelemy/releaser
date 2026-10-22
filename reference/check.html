@@ -10,8 +10,9 @@ check_missing_title() identifies exported functions that do not define a
 check_describeIn_usage() lists all documented topics using the
 @describeIn tag.
 check_return_tag_usage() identifies functions still using @return.
-check_missing_returns() identifies exported functions that do not declare a
-@returns tag."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+check_missing_returns() identifies exported functions that declare neither
+a @returns nor a (deprecated) @return tag. Functions still using
+@return are reported by check_return_tag_usage() instead."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -72,8 +73,9 @@ example blocks.
 <code>check_describeIn_usage()</code> lists all documented topics using the
 <code>@describeIn</code> tag.
 <code>check_return_tag_usage()</code> identifies functions still using <code>@return</code>.
-<code>check_missing_returns()</code> identifies exported functions that do not declare a
-<code>@returns</code> tag.</p>
+<code>check_missing_returns()</code> identifies exported functions that declare neither
+a <code>@returns</code> nor a (deprecated) <code>@return</code> tag. Functions still using
+<code>@return</code> are reported by <code>check_return_tag_usage()</code> instead.</p>
     </div>
 
     <div id="ref-usage">
