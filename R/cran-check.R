@@ -228,8 +228,9 @@ display_functions <- function(x) {
 #' [check_describeIn_usage()] lists all documented topics using the
 #' `@describeIn` tag.
 #' [check_return_tag_usage()] identifies functions still using `@return`.
-#' [check_missing_returns()] identifies exported functions that do not declare a
-#' `@returns` tag.
+#' [check_missing_returns()] identifies exported functions that declare neither
+#' a `@returns` nor a (deprecated) `@return` tag. Functions still using
+#' `@return` are reported by [check_return_tag_usage()] instead.
 #'
 #' @param x Path to the R package or a `docblock` object.
 #'
@@ -442,6 +443,7 @@ check_missing_returns.docblock <- function(x) {
     list_funs <- blocks |>
         Filter(f = is_exported) |>
         Filter(f = Negate(has_returns)) |>
+        Filter(f = Negate(has_return)) |>
         Filter(f = Negate(has_describeIn)) |>
         Filter(f = Negate(has_rdname)) |>
         Filter(f = is_call) |>

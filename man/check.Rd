@@ -76,8 +76,9 @@ example blocks.
 \code{\link[=check_describeIn_usage]{check_describeIn_usage()}} lists all documented topics using the
 \verb{@describeIn} tag.
 \code{\link[=check_return_tag_usage]{check_return_tag_usage()}} identifies functions still using \verb{@return}.
-\code{\link[=check_missing_returns]{check_missing_returns()}} identifies exported functions that do not declare a
-\verb{@returns} tag.
+\code{\link[=check_missing_returns]{check_missing_returns()}} identifies exported functions that declare neither
+a \verb{@returns} nor a (deprecated) \verb{@return} tag. Functions still using
+\verb{@return} are reported by \code{\link[=check_return_tag_usage]{check_return_tag_usage()}} instead.
 }
 \details{
 The \verb{@describeIn} tag is generally discouraged in modern roxygen2 workflows.

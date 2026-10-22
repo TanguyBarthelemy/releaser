@@ -45,6 +45,30 @@ the different future version:
 
 ``` r
 version <- get_latest_version("r-lib/usethis", verbose = FALSE)
+#> Fetched DESCRIPTION from branch: v3.2.2
+#> Version found on branch v3.2.2: 3.2.2
+#> Fetched DESCRIPTION from branch: agent-prompt-detection
+#> Version found on branch agent-prompt-detection: 3.2.2.9000
+#> Fetched DESCRIPTION from branch: agents-update
+#> Version found on branch agents-update: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: claude-revdep
+#> Version found on branch claude-revdep: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: drop-base-imports
+#> Version found on branch drop-base-imports: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: f-check-installed-later
+#> Version found on branch f-check-installed-later: 2.2.2.9000
+#> Fetched DESCRIPTION from branch: feature/rhub-rchk
+#> Version found on branch feature/rhub-rchk: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: fork-cleanup
+#> Version found on branch fork-cleanup: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: general-github-file
+#> Version found on branch general-github-file: 3.2.2.9000
+#> Fetched DESCRIPTION from branch: main
+#> Version found on branch main: 3.2.2.9000
+#> Fetched DESCRIPTION from branch: pkgdown-v3.1.0
+#> Version found on branch pkgdown-v3.1.0: 3.1.0
+#> Fetched DESCRIPTION from branch: shields-io-experiment
+#> Version found on branch shields-io-experiment: 2.1.5.9000
 get_different_future_version(version)
 #> Future patch version: 3.2.3
 #> Future minor version: 3.3.0

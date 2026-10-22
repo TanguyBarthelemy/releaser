@@ -127,7 +127,7 @@ test_that("check_missing_returns detects exported functions without a returns ta
 
     expect_identical(
         check_missing_returns(dir),
-        c("bad_fun", "old_return_fun")
+        "bad_fun"
     )
 })
 
@@ -145,7 +145,7 @@ test_that("checks also accept a docblock object", {
     expect_identical(check_return_tag_usage(blocks), "old_return_fun")
     expect_identical(
         check_missing_returns(blocks),
-        c("bad_fun", "old_return_fun")
+        "bad_fun"
     )
 })
 
