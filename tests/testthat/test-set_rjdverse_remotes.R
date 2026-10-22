@@ -1,6 +1,6 @@
 test_that("set_rjdverse_remotes works", {
     tmp_path <- initiate_tmp_test_dir()
-    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+    on.exit(unlink(tmp_path, recursive = TRUE), add = TRUE)
 
     new_remotes <- set_rjdverse_remotes(path = tmp_path)
     expect_identical(
@@ -20,7 +20,7 @@ test_that("set_rjdverse_remotes works", {
 
 test_that("set_rjdverse_remotes honours the org and prefix arguments", {
     tmp_path <- initiate_tmp_test_dir()
-    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+    on.exit(unlink(tmp_path, recursive = TRUE), add = TRUE)
 
     remotes <- set_rjdverse_remotes(
         path = tmp_path,

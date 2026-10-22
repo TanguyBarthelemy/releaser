@@ -1,6 +1,6 @@
 test_that("change_remotes_field rejects an invalid target", {
     tmp_path <- initiate_tmp_test_dir()
-    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+    on.exit(unlink(tmp_path, recursive = TRUE), add = TRUE)
 
     expect_error(
         change_remotes_field(path = tmp_path, target = "bogus"),
@@ -10,7 +10,7 @@ test_that("change_remotes_field rejects an invalid target", {
 
 test_that("change_remotes_field works", {
     tmp_path <- initiate_tmp_test_dir()
-    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+    on.exit(unlink(tmp_path, recursive = TRUE), add = TRUE)
 
     # develop
     new_remotes <- change_remotes_field(
