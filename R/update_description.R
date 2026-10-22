@@ -140,7 +140,7 @@ set_latest_rjdverse_version <- function(
         must.exist = FALSE,
         update.config = FALSE,
         use.config = FALSE,
-        document = FALSE,
+        document = FALSE
     )
     desc::desc_normalize(file = path)
 }

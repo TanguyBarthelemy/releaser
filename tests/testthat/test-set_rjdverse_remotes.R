@@ -1,5 +1,8 @@
 test_that("set_rjdverse_remotes works", {
-    new_remotes <- set_rjdverse_remotes(path = path_rjd3workspace_test)
+    tmp_path <- initiate_tmp_test_dir()
+    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+
+    new_remotes <- set_rjdverse_remotes(path = tmp_path)
     expect_identical(
         object = new_remotes,
         expected = c(
@@ -11,19 +14,16 @@ test_that("set_rjdverse_remotes works", {
     )
     expect_identical(
         object = new_remotes,
-        expected = desc::desc_get_remotes(path_rjd3workspace_test)
+        expected = desc::desc_get_remotes(tmp_path)
     )
 })
 
 test_that("set_rjdverse_remotes honours the org and prefix arguments", {
-    src <- file.path(path_rjd3workspace_test, "DESCRIPTION")
-    tmp <- tempfile("releaser-desc-")
-    dir.create(tmp)
-    file.copy(src, file.path(tmp, "DESCRIPTION"))
+    tmp_path <- initiate_tmp_test_dir()
     on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
 
     remotes <- set_rjdverse_remotes(
-        path = file.path(tmp),
+        path = tmp_path,
         verbose = FALSE
     )
     expect_identical(
@@ -38,11 +38,8 @@ test_that("set_rjdverse_remotes honours the org and prefix arguments", {
 })
 
 test_that("set_latest_rjdverse_version honours the org and prefix arguments", {
-    src <- file.path(path_rjd3workspace_test, "DESCRIPTION")
-    tmp <- tempfile("releaser-desc-")
-    dir.create(tmp)
-    file.copy(src, file.path(tmp, "DESCRIPTION"))
-    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+    tmp_path <- initiate_tmp_test_dir()
+    on.exit(unlink(tmp_path, recursive = TRUE), add = TRUE)
 
     local_mocked_bindings(
         get_latest_version = function(
@@ -56,11 +53,11 @@ test_that("set_latest_rjdverse_version honours the org and prefix arguments", {
     )
 
     set_latest_rjdverse_version(
-        path = file.path(tmp),
+        path = tmp_path,
         verbose = FALSE
     )
 
-    deps <- desc::desc_get_deps(file.path(tmp))
+    deps <- desc::desc_get_deps(tmp_path)
     rjd_deps <- deps[
         deps$package %in%
             c("rjd3providers", "rjd3toolkit", "rjd3tramoseats", "rjd3x13"),

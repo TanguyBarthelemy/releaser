@@ -1,14 +1,20 @@
 test_that("change_remotes_field rejects an invalid target", {
+    tmp_path <- initiate_tmp_test_dir()
+    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+
     expect_error(
-        change_remotes_field(path = path_rjd3workspace_test, target = "bogus"),
+        change_remotes_field(path = tmp_path, target = "bogus"),
         "'arg' should be one of"
     )
 })
 
 test_that("change_remotes_field works", {
+    tmp_path <- initiate_tmp_test_dir()
+    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+
     # develop
     new_remotes <- change_remotes_field(
-        path = path_rjd3workspace_test,
+        path = tmp_path,
         target = "develop"
     )
     expect_identical(
@@ -22,12 +28,12 @@ test_that("change_remotes_field works", {
     )
     expect_identical(
         object = new_remotes,
-        expected = desc::desc_get_remotes(path_rjd3workspace_test)
+        expected = desc::desc_get_remotes(tmp_path)
     )
 
     # main
     new_remotes <- change_remotes_field(
-        path = path_rjd3workspace_test,
+        path = tmp_path,
         target = "main"
     )
     expect_identical(
@@ -41,12 +47,12 @@ test_that("change_remotes_field works", {
     )
     expect_identical(
         object = new_remotes,
-        expected = desc::desc_get_remotes(path_rjd3workspace_test)
+        expected = desc::desc_get_remotes(tmp_path)
     )
 
     # snapshot
     new_remotes <- change_remotes_field(
-        path = path_rjd3workspace_test,
+        path = tmp_path,
         target = "snapshot"
     )
     expect_identical(
@@ -60,14 +66,14 @@ test_that("change_remotes_field works", {
     )
     expect_identical(
         object = new_remotes,
-        expected = desc::desc_get_remotes(path_rjd3workspace_test)
+        expected = desc::desc_get_remotes(tmp_path)
     )
 })
 
 test_that("change_remotes_field normalizes the DESCRIPTION field order", {
-    dir <- tempfile("releaser-change-remotes-")
-    dir.create(dir)
-    on.exit(unlink(dir, recursive = TRUE), add = TRUE)
+    tmp_dir <- tempfile("releaser-change-remotes-")
+    dir.create(tmp_dir)
+    on.exit(unlink(tmp_dir, recursive = TRUE), add = TRUE)
     writeLines(
         c(
             "Package: normtest",
@@ -82,12 +88,12 @@ test_that("change_remotes_field normalizes the DESCRIPTION field order", {
             "    github::rjdverse/rjd3toolkit",
             "Config/testthat/edition: 3"
         ),
-        con = file.path(dir, "DESCRIPTION")
+        con = file.path(tmp_dir, "DESCRIPTION")
     )
 
-    change_remotes_field(path = dir, target = "develop", verbose = FALSE)
+    change_remotes_field(path = tmp_dir, target = "develop", verbose = FALSE)
 
-    before <- readLines(file.path(dir, "DESCRIPTION"))
-    desc::desc_normalize(file = dir)
-    expect_identical(before, readLines(file.path(dir, "DESCRIPTION")))
+    before <- readLines(file.path(tmp_dir, "DESCRIPTION"))
+    desc::desc_normalize(file = tmp_dir)
+    expect_identical(before, readLines(file.path(tmp_dir, "DESCRIPTION")))
 })
