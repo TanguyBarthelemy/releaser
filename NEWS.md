@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+* `get_version_from_branch()` now checks that the branch exists in the repository before fetching its `DESCRIPTION`, raising a clear error otherwise. Use `check_branch = FALSE` to skip the check.
 * User-facing messages are now written in English for consistency.
 * The default `gh_repo` argument is now `r-lib/usethis` instead of `rjdverse/rjd3toolkit`.
 * `check_docs()` uses `verbose = TRUE` by default, consistently with the other functions.
@@ -24,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+* `get_latest_version()` no longer fails when the repository has no release: it falls back to the version of the default branch.
 * `get_latest_version()` no longer emits a deprecation warning: it relies on an internal helper instead of the deprecated `get_github_branches()`.
 * `get_latest_version()` reports branches whose `DESCRIPTION` cannot be read instead of silently swallowing the error.
 * `change_remotes_field()` now validates `target` with `match.arg()`, preventing a corrupted `Remotes` field when an invalid value is passed.

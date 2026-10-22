@@ -65,6 +65,10 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 #'
 #' @inheritParams get_latest_version
 #' @param branch [\link[base]{character}] Branch name (default: `"main"`).
+#' @param check_branch [\link[base]{logical}] Whether to check that the
+#'   branch exists in the repository before fetching it (default: `TRUE`).
+#'   Set to `FALSE` when the branch is already known to exist, to avoid an
+#'   extra GitHub API call.
 #'
 #' @returns A single character string with the package version.
 #'
@@ -82,8 +86,19 @@ get_different_future_version <- function(version_number, verbose = TRUE) {
 get_version_from_branch <- function(
     gh_repo = file.path("r-lib", "usethis"),
     branch = "main",
-    verbose = TRUE
+    verbose = TRUE,
+    check_branch = TRUE
 ) {
+    if (check_branch && !branch %in% get_branches(gh_repo)) {
+        stop(
+            "Branch '",
+            branch,
+            "' does not exist in repository '",
+            gh_repo,
+            "'.",
+            call. = FALSE
+        )
+    }
     description <- gh::gh(
         file.path("/repos", gh_repo, "contents", "DESCRIPTION"),
         ref = branch
@@ -134,21 +149,47 @@ get_version_from_local <- function(path, verbose = TRUE) {
 #' @param gh_repo [\link[base]{character}] GitHub repository in the format
 #' `"owner/repo"`.
 #'
-#' @returns A character string with the release tag name.
+#' @returns A character string with the release tag name, or `NA` when the
+#' repository has no release.
 #'
 #' @keywords internal
 #' @noRd
 #'
 get_latest_release_tag <- function(gh_repo) {
-    release <- gh::gh(file.path("/repos", gh_repo, "releases", "latest"))
+    release <- tryCatch(
+        gh::gh(file.path("/repos", gh_repo, "releases", "latest")),
+        http_error_404 = function(e) NULL
+    )
+    if (is.null(release)) {
+        return(NA_character_)
+    }
     return(release$tag_name)
+}
+
+#' Get the default branch of a GitHub repository
+#'
+#' Retrieve the name of the default branch of a repository.
+#'
+#' @param gh_repo [\link[base]{character}] GitHub repository in the format
+#' `"owner/repo"`.
+#'
+#' @returns A character string with the default branch name.
+#'
+#' @keywords internal
+#' @noRd
+#'
+get_default_branch <- function(gh_repo) {
+    repo <- gh::gh(file.path("/repos", gh_repo))
+    return(repo$default_branch)
 }
 
 #' @title Get latest GitHub release version
 #'
 #' @description
 #' Retrieve the version number of the latest GitHub release for a repository
-#' and optionally print versions found across all branches.
+#' and optionally print versions found across all branches. When the
+#' repository has no release, the version of the default branch is returned
+#' instead.
 #'
 #' @param gh_repo [\link[base]{character}] GitHub repository in the format
 #' `"owner/repo"`.
@@ -157,7 +198,8 @@ get_latest_release_tag <- function(gh_repo) {
 #'   (default: `50L`).
 #' @inheritParams change_remotes_field
 #'
-#' @returns A character string with the version of the latest release.
+#' @returns A character string with the version of the latest release, or of
+#' the default branch when the repository has no release.
 #'
 #' @examplesIf FALSE
 #' \donttest{
@@ -171,17 +213,37 @@ get_latest_version <- function(
     max_branches = 50L,
     verbose = TRUE
 ) {
-    version_release <- get_version_from_branch(
-        gh_repo,
-        get_latest_release_tag(gh_repo)
-    )
-    if (verbose) {
-        message("Latest release: ", version_release)
+    release_tag <- get_latest_release_tag(gh_repo)
+    if (is.na(release_tag)) {
+        branch <- get_default_branch(gh_repo)
+        if (verbose) {
+            message(
+                "No release found; using the version from the default branch (",
+                branch,
+                ")."
+            )
+        }
+        version_release <- get_version_from_branch(
+            gh_repo,
+            branch,
+            verbose = verbose,
+            check_branch = FALSE
+        )
+    } else {
+        version_release <- get_version_from_branch(
+            gh_repo,
+            release_tag,
+            verbose = verbose,
+            check_branch = FALSE
+        )
+        if (verbose) {
+            message("Latest release: ", version_release)
+        }
     }
 
     branches <- setdiff(
         get_branches(gh_repo, verbose = verbose),
-        "gh-pages"
+        c("gh-pages", "badges")
     )
     if (length(branches) > max_branches) {
         if (verbose) {
@@ -197,7 +259,12 @@ get_latest_version <- function(
     }
     for (branch in branches) {
         version_number <- tryCatch(
-            get_version_from_branch(gh_repo, branch),
+            get_version_from_branch(
+                gh_repo,
+                branch,
+                verbose = verbose,
+                check_branch = FALSE
+            ),
             error = function(e) NULL
         )
         if (is.null(version_number)) {
@@ -263,6 +330,5 @@ get_github_branches <- function(
     gh_repo = file.path("r-lib", "usethis"),
     verbose = TRUE
 ) {
-    .Deprecated("The heylogs project: https://github.com/nbbrd/heylogs")
     return(get_branches(gh_repo, verbose = verbose))
 }

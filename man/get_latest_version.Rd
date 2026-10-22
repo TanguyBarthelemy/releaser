@@ -22,11 +22,14 @@ inspect, to limit the number of GitHub API calls
 information (default: \code{TRUE}).}
 }
 \value{
-A character string with the version of the latest release.
+A character string with the version of the latest release, or of
+the default branch when the repository has no release.
 }
 \description{
 Retrieve the version number of the latest GitHub release for a repository
-and optionally print versions found across all branches.
+and optionally print versions found across all branches. When the
+repository has no release, the version of the default branch is returned
+instead.
 }
 \examples{
 \dontshow{if (FALSE) withAutoprint(\{ # examplesIf}

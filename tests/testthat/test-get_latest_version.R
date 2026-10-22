@@ -5,7 +5,8 @@ test_that("get_latest_version returns the release version", {
         get_version_from_branch = function(
             gh_repo,
             branch = "main",
-            verbose = TRUE
+            verbose = TRUE,
+            check_branch = TRUE
         ) {
             if (branch == "v1.2.3") {
                 "1.2.3"
@@ -21,6 +22,32 @@ test_that("get_latest_version returns the release version", {
     expect_identical(version, "1.2.3")
 })
 
+test_that("get_latest_version falls back to the default branch when there is no release", {
+    local_mocked_bindings(
+        get_latest_release_tag = function(gh_repo) NA_character_,
+        get_default_branch = function(gh_repo) "main",
+        get_branches = function(gh_repo, verbose = FALSE) c("main"),
+        get_version_from_branch = function(
+            gh_repo,
+            branch = "main",
+            verbose = TRUE,
+            check_branch = TRUE
+        ) {
+            "1.0.0"
+        }
+    )
+
+    expect_message(
+        get_latest_version(gh_repo = "owner/repo", verbose = TRUE),
+        "No release found; using the version from the default branch (main).",
+        fixed = TRUE
+    )
+    version <- expect_silent(
+        get_latest_version(gh_repo = "owner/repo", verbose = FALSE)
+    )
+    expect_identical(version, "1.0.0")
+})
+
 test_that("get_latest_version reports the versions of all branches", {
     local_mocked_bindings(
         get_latest_release_tag = function(gh_repo) "v1.2.3",
@@ -28,7 +55,8 @@ test_that("get_latest_version reports the versions of all branches", {
         get_version_from_branch = function(
             gh_repo,
             branch = "main",
-            verbose = TRUE
+            verbose = TRUE,
+            check_branch = TRUE
         ) {
             if (branch == "v1.2.3") {
                 "1.2.3"
@@ -55,7 +83,8 @@ test_that("get_latest_version skips branches whose DESCRIPTION cannot be read", 
         get_version_from_branch = function(
             gh_repo,
             branch = "main",
-            verbose = TRUE
+            verbose = TRUE,
+            check_branch = TRUE
         ) {
             if (branch == "broken") {
                 stop("Not Found")
@@ -81,7 +110,8 @@ test_that("get_latest_version ignores the gh-pages branch", {
         get_version_from_branch = function(
             gh_repo,
             branch = "main",
-            verbose = TRUE
+            verbose = TRUE,
+            check_branch = TRUE
         ) {
             if (branch == "gh-pages") {
                 stop("Not Found")
@@ -110,7 +140,8 @@ test_that("get_latest_version limits the number of inspected branches", {
         get_version_from_branch = function(
             gh_repo,
             branch = "main",
-            verbose = TRUE
+            verbose = TRUE,
+            check_branch = TRUE
         ) {
             "1.2.3"
         }
@@ -133,7 +164,8 @@ test_that("get_latest_version does not call the deprecated get_github_branches (
         get_version_from_branch = function(
             gh_repo,
             branch = "main",
-            verbose = TRUE
+            verbose = TRUE,
+            check_branch = TRUE
         ) {
             "1.2.3"
         },
