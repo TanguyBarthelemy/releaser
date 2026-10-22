@@ -62,7 +62,9 @@
 </ul></div>
 <div class="section level4">
 <h4 id="changed-1-2-1-9000">Changed<a class="anchor" aria-label="anchor" href="#changed-1-2-1-9000"></a></h4>
-<ul><li>User-facing messages are now written in English for consistency.</li>
+<ul><li>
+<code>get_version_from_branch()</code> now checks that the branch exists in the repository before fetching its <code>DESCRIPTION</code>, raising a clear error otherwise. Use <code>check_branch = FALSE</code> to skip the check.</li>
+<li>User-facing messages are now written in English for consistency.</li>
 <li>The default <code>gh_repo</code> argument is now <code>r-lib/usethis</code> instead of <code>rjdverse/rjd3toolkit</code>.</li>
 <li>
 <code><a href="../reference/check_docs.html">check_docs()</a></code> uses <code>verbose = TRUE</code> by default, consistently with the other functions.</li>
@@ -77,6 +79,8 @@
 <div class="section level4">
 <h4 id="fixed-1-2-1-9000">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-2-1-9000"></a></h4>
 <ul><li>
+<code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> no longer fails when the repository has no release: it falls back to the version of the default branch.</li>
+<li>
 <code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> no longer emits a deprecation warning: it relies on an internal helper instead of the deprecated <code><a href="../reference/get_github_branches.html">get_github_branches()</a></code>.</li>
 <li>
 <code><a href="../reference/get_latest_version.html">get_latest_version()</a></code> reports branches whose <code>DESCRIPTION</code> cannot be read instead of silently swallowing the error.</li>
