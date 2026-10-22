@@ -107,7 +107,9 @@ get_version_from_branch <- function(
         message("Fetched DESCRIPTION from branch: ", branch)
     }
     content <- rawToChar(base64enc::base64decode(description$content))
-    nb_version <- read.dcf(textConnection(content))[, "Version"]
+    nb_version <- as.character(
+        desc::description$new(text = content)$get("Version")
+    )
     if (verbose) {
         message("Version found on branch ", branch, ": ", nb_version)
     }
