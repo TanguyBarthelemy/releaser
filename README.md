@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/releaser)](https://CRAN.R-project.org/package=releaser)
+status](https://www.r-pkg.org/badges/version/releaser)](https://cran.r-project.org/package=releaser)
 
 [![R-CMD-check](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml)
 [![Test
