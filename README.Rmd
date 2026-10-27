@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # {releaser}
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/releaser)](https://CRAN.R-project.org/package=releaser)
+[![CRAN status](https://www.r-pkg.org/badges/version/releaser)](https://cran.r-project.org/package=releaser)
 
 [![R-CMD-check](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml)
 [![Test coverage](https://codecov.io/gh/TanguyBarthelemy/releaser/branch/main/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/releaser?branch=main)
@@ -48,6 +48,25 @@ library("releaser")
 You can extract the latest version of a package on GitHub and display the different future version:
 
 ```{r get-latest-version}
-version <- get_latest_version("rjdverse/rjd3toolkit")
+version <- get_latest_version("r-lib/usethis", verbose = FALSE)
 get_different_future_version(version)
 ```
+
+## Release workflow
+
+The recommended order when preparing a release is:
+
+``` r
+# 1. Align the dependencies with the package code (requires {attachment})
+amend_description(path = ".")
+
+# 2. Point the Remotes field to the desired branch
+change_remotes_field(path = ".", target = "develop")
+
+# 3. Bump the versions of the rjdverse dependencies
+set_latest_rjdverse_version(path = ".")
+```
+
+`amend_description()` must be called **before** the remotes and version
+pin steps: `attachment::att_amend_desc()` keeps the remotes of the
+packages it finds in the code and drops the others.

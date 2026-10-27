@@ -5,7 +5,8 @@
 \title{Get latest GitHub release version}
 \usage{
 get_latest_version(
-  gh_repo = file.path("rjdverse", "rjd3toolkit"),
+  gh_repo = file.path("r-lib", "usethis"),
+  max_branches = 50L,
   verbose = TRUE
 )
 }
@@ -13,15 +14,22 @@ get_latest_version(
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format
 \code{"owner/repo"}.}
 
+\item{max_branches}{[\link[base]{integer}] Maximum number of branches to
+inspect, to limit the number of GitHub API calls
+(default: \code{50L}).}
+
 \item{verbose}{[\link[base]{logical}] Whether to print additional
 information (default: \code{TRUE}).}
 }
 \value{
-A character string with the version of the latest release.
+A character string with the version of the latest release, or of
+the default branch when the repository has no release.
 }
 \description{
 Retrieve the version number of the latest GitHub release for a repository
-and optionally print versions found across all branches.
+and optionally print versions found across all branches. When the
+repository has no release, the version of the default branch is returned
+instead.
 }
 \examples{
 \dontshow{if (FALSE) withAutoprint(\{ # examplesIf}

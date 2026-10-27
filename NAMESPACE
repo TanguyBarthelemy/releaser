@@ -3,6 +3,18 @@
 S3method(`%ino%`,default)
 S3method(`%ino%`,list)
 S3method(`[`,docblock)
+S3method(check_describeIn_usage,character)
+S3method(check_describeIn_usage,docblock)
+S3method(check_missing_examples_content,character)
+S3method(check_missing_examples_content,docblock)
+S3method(check_missing_examples_tag,character)
+S3method(check_missing_examples_tag,docblock)
+S3method(check_missing_returns,character)
+S3method(check_missing_returns,docblock)
+S3method(check_missing_title,character)
+S3method(check_missing_title,docblock)
+S3method(check_return_tag_usage,character)
+S3method(check_return_tag_usage,docblock)
 S3method(get_examples,docblock)
 S3method(get_examples,roxy_block)
 S3method(get_tag,docblock)
@@ -28,15 +40,17 @@ export(get_changes)
 export(get_different_future_version)
 export(get_github_branches)
 export(get_latest_version)
-export(set_latest_deps_version)
+export(set_latest_rjdverse_version)
 export(set_rjdverse_remotes)
 export(update_news_md)
 importFrom(base64enc,base64decode)
-importFrom(desc,desc_get_deps)
-importFrom(desc,desc_get_remotes)
-importFrom(desc,desc_get_urls)
-importFrom(desc,desc_get_version)
-importFrom(desc,desc_set_dep)
-importFrom(desc,desc_set_remotes)
-importFrom(desc,description)
+importFrom(desc,
+  desc_get_deps,
+  desc_get_remotes,
+  desc_get_urls,
+  desc_get_version,
+  desc_set_dep,
+  desc_set_remotes,
+  description
+)
 importFrom(gh,gh)

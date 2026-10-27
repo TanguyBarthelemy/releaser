@@ -21,18 +21,14 @@ BugReports: https://github.com/rjdverse/rjd3workspace/issues
 Depends:
     R (>= 4.1.0)
 Imports:
-    rJava (>= 1.0-6),
-    rjd3providers (>= 3.5.1),
-    rjd3toolkit (>= 3.5.1),
-    rjd3tramoseats (>= 3.5.2),
-    rjd3x13 (>= 3.5.1),
-    tools,
-    utils
+    rJava,
+    rjd3providers,
+    rjd3toolkit,
+    rjd3tramoseats,
+    rjd3x13
 Suggests: 
-    knitr,
-    rmarkdown,
     testthat (>= 3.0.0)
-Remotes:  
+Remotes: 
     github::rjdverse/rjd3providers,
     github::rjdverse/rjd3toolkit,
     github::rjdverse/rjd3tramoseats,

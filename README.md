@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/releaser)](https://CRAN.R-project.org/package=releaser)
+status](https://www.r-pkg.org/badges/version/releaser)](https://cran.r-project.org/package=releaser)
 
 [![R-CMD-check](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/releaser/actions/workflows/R-CMD-check.yaml)
 [![Test
@@ -44,30 +44,56 @@ You can extract the latest version of a package on GitHub and display
 the different future version:
 
 ``` r
-version <- get_latest_version("rjdverse/rjd3toolkit")
-#> Fetched DESCRIPTION from branch: v3.7.1
-#> Version found on branch v3.7.1: 3.7.1
-#> Dernière release : 3.7.1
-#> Fetching branches from repository: rjdverse/rjd3toolkit
-#> Found branches: develop, gh-pages, main, snapshot
-#> Fetched DESCRIPTION from branch: develop
-#> Version found on branch develop: 3.7.1.9100
-#> Version sur develop  : 3.7.1.9100
+version <- get_latest_version("r-lib/usethis", verbose = FALSE)
+#> Fetched DESCRIPTION from branch: v3.2.2
+#> Version found on branch v3.2.2: 3.2.2
+#> Fetched DESCRIPTION from branch: agent-prompt-detection
+#> Version found on branch agent-prompt-detection: 3.2.2.9000
+#> Fetched DESCRIPTION from branch: agents-update
+#> Version found on branch agents-update: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: claude-revdep
+#> Version found on branch claude-revdep: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: drop-base-imports
+#> Version found on branch drop-base-imports: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: f-check-installed-later
+#> Version found on branch f-check-installed-later: 2.2.2.9000
+#> Fetched DESCRIPTION from branch: feature/rhub-rchk
+#> Version found on branch feature/rhub-rchk: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: fork-cleanup
+#> Version found on branch fork-cleanup: 3.2.1.9000
+#> Fetched DESCRIPTION from branch: general-github-file
+#> Version found on branch general-github-file: 3.2.2.9000
 #> Fetched DESCRIPTION from branch: main
-#> Version found on branch main: 3.7.1
-#> Version sur main  : 3.7.1
-#> Fetched DESCRIPTION from branch: snapshot
-#> Version found on branch snapshot: 3.6.0.9000
-#> Version sur snapshot  : 3.6.0.9000
+#> Version found on branch main: 3.2.2.9000
+#> Fetched DESCRIPTION from branch: pkgdown-v3.1.0
+#> Version found on branch pkgdown-v3.1.0: 3.1.0
+#> Fetched DESCRIPTION from branch: shields-io-experiment
+#> Version found on branch shields-io-experiment: 2.1.5.9000
 get_different_future_version(version)
-#> Package version bumped from '3.7.1' to '3.7.2'
-#> Future patch version: 3.7.2
-#> Package version bumped from '3.7.2' to '3.8.0'
-#> Future minor version: 3.8.0
-#> Package version bumped from '3.8.0' to '4.0.0'
+#> Future patch version: 3.2.3
+#> Future minor version: 3.3.0
 #> Future major version: 4.0.0
 #> current_version.Version    future_patch_version    future_minor_version 
-#>                 "3.7.1"                 "3.7.2"                 "3.8.0" 
+#>                 "3.2.2"                 "3.2.3"                 "3.3.0" 
 #>    future_major_version 
 #>                 "4.0.0"
 ```
+
+## Release workflow
+
+The recommended order when preparing a release is:
+
+``` r
+# 1. Align the dependencies with the package code (requires {attachment})
+amend_description(path = ".")
+
+# 2. Point the Remotes field to the desired branch
+change_remotes_field(path = ".", target = "develop")
+
+# 3. Bump the versions of the rjdverse dependencies
+set_latest_rjdverse_version(path = ".")
+```
+
+`amend_description()` must be called **before** the remotes and version
+pin steps: `attachment::att_amend_desc()` keeps the remotes of the
+packages it finds in the code and drops the others.

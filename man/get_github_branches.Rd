@@ -4,10 +4,7 @@
 \alias{get_github_branches}
 \title{List GitHub repository branches}
 \usage{
-get_github_branches(
-  gh_repo = file.path("rjdverse", "rjd3toolkit"),
-  verbose = TRUE
-)
+get_github_branches(gh_repo = file.path("r-lib", "usethis"), verbose = TRUE)
 }
 \arguments{
 \item{gh_repo}{[\link[base]{character}] GitHub repository in the format

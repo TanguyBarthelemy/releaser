@@ -48,7 +48,7 @@ jobs:
             muttest::index_mutations()
           ))
 
-          score <- muttest::muttest(plan)
+          score <- muttest::muttest(plan, workers = 10)
 
           rgb <- round(
             colorRamp(c("#D61F1F", "#FFD301", "#006B3D"))(score)

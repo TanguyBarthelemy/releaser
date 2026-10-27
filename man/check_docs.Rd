@@ -4,12 +4,13 @@
 \alias{check_docs}
 \title{Check R package documentation}
 \usage{
-check_docs(pkg_dir = ".", verbose = interactive(), error_on_fail = FALSE)
+check_docs(pkg_dir = ".", verbose = TRUE, error_on_fail = FALSE)
 }
 \arguments{
 \item{pkg_dir}{Path to the R package.}
 
-\item{verbose}{Logical. If \code{TRUE}, prints a formatted summary.}
+\item{verbose}{Logical. Whether to print a formatted summary
+(default: \code{TRUE}).}
 
 \item{error_on_fail}{Logical. If \code{TRUE}, stops execution if any issue is
 found.}

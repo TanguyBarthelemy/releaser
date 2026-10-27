@@ -5,9 +5,11 @@
 #' dependencies point to specific development targets
 #' (`develop`, `snapshot`, or `main`).
 #'
-#' @inheritParams set_latest_deps_version
-#' @param target [\link[base]{character}] Target branch or type of remote:
-#' must be one of `"develop"`, `"snapshot"`, or `"main"`.
+#' @inheritParams set_latest_rjdverse_version
+#' @param target [\link[base]{character}] Remote reference to write after the
+#'   `@` separator: `"develop"` (branch `develop`), `"snapshot"`
+#'   (branch `snapshot`) or `"main"` (release tracking, written as
+#'   `*release` in the `Remotes` field).
 #'
 #' @returns Invisibly returns the new vector of remote specifications
 #' (character).
@@ -30,9 +32,14 @@ change_remotes_field <- function(
     target = c("develop", "snapshot", "main"),
     verbose = TRUE
 ) {
+    path <- normalizePath(path, mustWork = TRUE)
+    target <- match.arg(arg = target)
     remotes <- desc::desc_get_remotes(path)
     if (length(remotes) == 0L) {
-        return(NULL)
+        if (verbose) {
+            message("No Remotes field found in DESCRIPTION; nothing to change.")
+        }
+        return(invisible(NULL))
     }
 
     basic_remotes <- remotes |>
@@ -43,7 +50,7 @@ change_remotes_field <- function(
         basic_remotes,
         "@",
         switch(
-            EXPR = target,
+            target,
             develop = "develop",
             main = "*release",
             snapshot = "snapshot"
@@ -52,34 +59,46 @@ change_remotes_field <- function(
 
     if (identical(sort(remotes), sort(new_remotes))) {
         if (verbose) {
-            message("The remote field is already up to date",
-                    " and will not be changed.")
+            message(
+                "The remote field is already up to date",
+                " and will not be changed."
+            )
         }
         return(invisible(remotes))
     }
     if (verbose) {
-        cat("Current remotes fields :\n")
-        cat(remotes, "\n")
-        cat("New remotes fields :\n")
-        cat(new_remotes, "\n")
-        cat("\n")
+        message("Current remotes fields:")
+        message(remotes)
+        message("New remotes fields:")
+        message(new_remotes)
     }
     desc::desc_set_remotes(remotes = new_remotes, file = path)
+    attachment::att_amend_desc(
+        path = path,
+        normalize = TRUE,
+        must.exist = FALSE,
+        update.config = FALSE,
+        use.config = FALSE,
+        document = FALSE
+    )
+    desc::desc_normalize(file = path)
     return(invisible(new_remotes))
 }
 
-#' @title Set latest versions for `rjd3*` dependencies
+#' @title Set latest versions for GitHub dependencies
 #'
 #' @description
 #' Update the `DESCRIPTION` file of a package so that all dependencies
-#' beginning with `"rjd3"` require the latest released version from GitHub.
+#' whose name starts with `rjd3` require the latest released version
+#' from the rjdverse.
 #'
 #' @param path [\link[base]{character}] Path to the package root directory (or
 #'   to the DESCRIPTION / NEWS.md file).
 #' @param verbose [\link[base]{logical}] Whether to print additional
 #'   information (default: `TRUE`).
 #'
-#' @returns Invisibly updates the `DESCRIPTION` file in place.
+#' @returns Used for its side effect on the `DESCRIPTION` file
+#' (no return value).
 #'
 #' @examplesIf FALSE
 #' \donttest{
@@ -90,15 +109,19 @@ change_remotes_field <- function(
 #'     recursive = TRUE
 #' )
 #'
-#' set_latest_deps_version(path = path_rjd3workspace)
+#' set_latest_rjdverse_version(path = path_rjd3workspace)
 #' }
 #'
 #' @export
 #' @importFrom desc desc_get_deps desc_set_dep
-set_latest_deps_version <- function(path, verbose = TRUE) {
+set_latest_rjdverse_version <- function(
+    path,
+    verbose = TRUE
+) {
+    path <- normalizePath(path, mustWork = TRUE)
     cur_deps <- desc::desc_get_deps(path)
-    row_rjdverse <- grep(cur_deps$package, pattern = "^rjd3")
-    for (idx in row_rjdverse) {
+    row_deps <- which(startsWith(prefix = "rjd3", x = cur_deps$package))
+    for (idx in row_deps) {
         pkg <- cur_deps$package[idx]
         pkg_type <- cur_deps$type[idx]
         latest_version <- get_latest_version(
@@ -108,21 +131,30 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
             package = pkg,
             version = paste(">=", latest_version),
             type = pkg_type,
-            file = file.path(path, "DESCRIPTION"),
-            normalize = TRUE
+            file = path
         )
     }
+    attachment::att_amend_desc(
+        path = path,
+        normalize = TRUE,
+        must.exist = FALSE,
+        update.config = FALSE,
+        use.config = FALSE,
+        document = FALSE
+    )
+    desc::desc_normalize(file = path)
 }
 
-#' @title Set the rjdverse in the Remotes field
+#' @title Set organization remotes in the Remotes field
 #'
 #' @description
-#' Add or remove rjdverse packages from the Remotes field of the
-#' DESCRIPTION file.
+#' Add GitHub remotes to the `Remotes` field of the `DESCRIPTION` file
+#' for the dependencies of a given GitHub organization.
 #'
 #' @details
-#' All dependencies whose package name starts with "rjd3" (rjdverse packages)
-#' are added to the Remotes field as GitHub remotes.
+#' All dependencies whose package name starts with `rjd3`
+#' (rjdverse packages by default) are added to the `Remotes` field as
+#' GitHub remotes of `rjdverse`.
 #'
 #' @param path Path to the root of the package.
 #' @param verbose Logical. Should informative messages be displayed?
@@ -140,24 +172,39 @@ set_latest_deps_version <- function(path, verbose = TRUE) {
 #'
 #' set_rjdverse_remotes(path = path_rjd3workspace)
 #'
-set_rjdverse_remotes <- function(path, verbose = TRUE) {
+set_rjdverse_remotes <- function(
+    path,
+    verbose = TRUE
+) {
+    path <- normalizePath(path)
     remotes <- desc::desc_get_remotes(path)
     cur_deps <- desc::desc_get_deps(path)
-    cond_rjdverse <- startsWith(prefix = "rjd3", x = cur_deps$package)
-    rjdverse <- cur_deps$package[cond_rjdverse]
-    new_remotes <- file.path("github::rjdverse", rjdverse)
+    cond_deps <- startsWith(prefix = "rjd3", x = cur_deps$package)
+    deps <- cur_deps$package[cond_deps]
+    new_remotes <- file.path("github::rjdverse", deps)
 
     if (identical(sort(remotes), sort(new_remotes))) {
         if (verbose) {
-            message("The remote field is already up to date",
-                    " and will not be changed.")
+            message(
+                "The remote field is already up to date",
+                " and will not be changed."
+            )
         }
         return(invisible(remotes))
     }
 
     desc::desc_set_remotes(remotes = new_remotes, file = path)
     if (verbose) {
-        message("Enabled rjdverse remotes: ", toString(new_remotes))
+        message("Enabled remotes: ", toString(new_remotes))
     }
+    attachment::att_amend_desc(
+        path = path,
+        normalize = TRUE,
+        must.exist = FALSE,
+        update.config = FALSE,
+        use.config = FALSE,
+        document = FALSE
+    )
+    desc::desc_normalize(file = path)
     invisible(new_remotes)
 }

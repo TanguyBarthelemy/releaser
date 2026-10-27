@@ -3,27 +3,63 @@
 \name{check}
 \alias{check}
 \alias{check_missing_examples_tag}
+\alias{check_missing_examples_tag.character}
+\alias{check_missing_examples_tag.docblock}
 \alias{check_missing_examples_content}
+\alias{check_missing_examples_content.character}
+\alias{check_missing_examples_content.docblock}
 \alias{check_missing_title}
+\alias{check_missing_title.character}
+\alias{check_missing_title.docblock}
 \alias{check_describeIn_usage}
+\alias{check_describeIn_usage.character}
+\alias{check_describeIn_usage.docblock}
 \alias{check_return_tag_usage}
+\alias{check_return_tag_usage.character}
+\alias{check_return_tag_usage.docblock}
 \alias{check_missing_returns}
+\alias{check_missing_returns.character}
+\alias{check_missing_returns.docblock}
 \title{Check for missing or deprecated documentation tag}
 \usage{
-check_missing_examples_tag(pkg_dir)
+check_missing_examples_tag(x)
 
-check_missing_examples_content(pkg_dir)
+\method{check_missing_examples_tag}{character}(x)
 
-check_missing_title(pkg_dir)
+\method{check_missing_examples_tag}{docblock}(x)
 
-check_describeIn_usage(pkg_dir)
+check_missing_examples_content(x)
 
-check_return_tag_usage(pkg_dir)
+\method{check_missing_examples_content}{character}(x)
 
-check_missing_returns(pkg_dir)
+\method{check_missing_examples_content}{docblock}(x)
+
+check_missing_title(x)
+
+\method{check_missing_title}{character}(x)
+
+\method{check_missing_title}{docblock}(x)
+
+check_describeIn_usage(x)
+
+\method{check_describeIn_usage}{character}(x)
+
+\method{check_describeIn_usage}{docblock}(x)
+
+check_return_tag_usage(x)
+
+\method{check_return_tag_usage}{character}(x)
+
+\method{check_return_tag_usage}{docblock}(x)
+
+check_missing_returns(x)
+
+\method{check_missing_returns}{character}(x)
+
+\method{check_missing_returns}{docblock}(x)
 }
 \arguments{
-\item{pkg_dir}{Path to the R package.}
+\item{x}{Path to the R package or a \code{docblock} object.}
 }
 \value{
 A character vector of function names
@@ -40,8 +76,9 @@ example blocks.
 \code{\link[=check_describeIn_usage]{check_describeIn_usage()}} lists all documented topics using the
 \verb{@describeIn} tag.
 \code{\link[=check_return_tag_usage]{check_return_tag_usage()}} identifies functions still using \verb{@return}.
-\code{\link[=check_missing_returns]{check_missing_returns()}} identifies exported functions that do not declare a
-\verb{@returns} tag.
+\code{\link[=check_missing_returns]{check_missing_returns()}} identifies exported functions that declare neither
+a \verb{@returns} nor a (deprecated) \verb{@return} tag. Functions still using
+\verb{@return} are reported by \code{\link[=check_return_tag_usage]{check_return_tag_usage()}} instead.
 }
 \details{
 The \verb{@describeIn} tag is generally discouraged in modern roxygen2 workflows.
